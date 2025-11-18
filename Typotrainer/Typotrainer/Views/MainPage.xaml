@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Typotrainer.Views.MainPage"
+             xmlns:ContentView="clr-namespace:Typotrainer.Views"
+             Title="TypoTrainer">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Pagina 1"
+                     Clicked="OnPage1Clicked" />
+        <ToolbarItem Text="Pagina 2"
+             Clicked="OnPage2Clicked" />
+    </ContentPage.ToolbarItems>
+    <VerticalStackLayout>
+        <Label 
+            Text="Dit is de hoofdpagina, de geselecteerde pagina zal hieronder weergeven."
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />   
+        <ContentView x:Name="SubPage"/>
+    </VerticalStackLayout>
+</ContentPage>

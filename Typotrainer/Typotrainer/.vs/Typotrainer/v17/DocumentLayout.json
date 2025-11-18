@@ -1,0 +1,77 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\timde\\source\\repos\\Typotrainer\\Typotrainer\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer.csproj|c:\\users\\timde\\source\\repos\\typotrainer\\typotrainer\\views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer.csproj|solutionrelative:views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer.csproj|c:\\users\\timde\\source\\repos\\typotrainer\\typotrainer\\views\\page2.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer.csproj|solutionrelative:views\\page2.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer.csproj|c:\\users\\timde\\source\\repos\\typotrainer\\typotrainer\\views\\page1.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer.csproj|solutionrelative:views\\page1.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Page2.xaml",
+              "DocumentMoniker": "C:\\Users\\timde\\source\\repos\\Typotrainer\\Typotrainer\\Views\\Page2.xaml",
+              "RelativeDocumentMoniker": "Views\\Page2.xaml",
+              "ToolTip": "C:\\Users\\timde\\source\\repos\\Typotrainer\\Typotrainer\\Views\\Page2.xaml",
+              "RelativeToolTip": "Views\\Page2.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-18T13:17:44.153Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Page1.xaml",
+              "DocumentMoniker": "C:\\Users\\timde\\source\\repos\\Typotrainer\\Typotrainer\\Views\\Page1.xaml",
+              "RelativeDocumentMoniker": "Views\\Page1.xaml",
+              "ToolTip": "C:\\Users\\timde\\source\\repos\\Typotrainer\\Typotrainer\\Views\\Page1.xaml",
+              "RelativeToolTip": "Views\\Page1.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-18T13:17:42.709Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainPage.xaml",
+              "DocumentMoniker": "C:\\Users\\timde\\source\\repos\\Typotrainer\\Typotrainer\\Views\\MainPage.xaml",
+              "RelativeDocumentMoniker": "Views\\MainPage.xaml",
+              "ToolTip": "C:\\Users\\timde\\source\\repos\\Typotrainer\\Typotrainer\\Views\\MainPage.xaml",
+              "RelativeToolTip": "Views\\MainPage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-18T13:12:36.147Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
