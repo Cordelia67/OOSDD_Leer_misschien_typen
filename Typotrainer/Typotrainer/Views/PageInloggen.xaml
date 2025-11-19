@@ -49,7 +49,7 @@
                             HasShadow="False">
                             <Entry 
                                 x:Name="EmailEntry"
-                                Text="jan@voorbeeld.nl"
+                                Text="test@test.nl"
                                 Keyboard="Email"
                                 BackgroundColor="Transparent"
                                 TextColor="#333333" />
@@ -71,7 +71,7 @@
                             HasShadow="False">
                             <Entry 
                                 x:Name="PasswordEntry"
-                                Text="wachtwoord123"
+                                Text="test1234"
                                 IsPassword="True"
                                 BackgroundColor="Transparent"
                                 TextColor="#333333" />
@@ -120,12 +120,12 @@
                             TextColor="#666666"
                             HorizontalTextAlignment="Center" />
                         <Label 
-                            Text="jan@voorbeeld.nl / wachtwoord123"
+                            Text="test@test.nl / test1234"
                             FontSize="11"
                             TextColor="#999999"
                             HorizontalTextAlignment="Center" />
                         <Label 
-                            Text="marie@voorbeeld.nl / demo1234"
+                            Text="admin@typotrainer.nl / admin123"
                             FontSize="11"
                             TextColor="#999999"
                             HorizontalTextAlignment="Center" />
