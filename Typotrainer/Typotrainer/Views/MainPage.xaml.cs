@@ -7,12 +7,32 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 
     }
-		void OnPage1Clicked(object sender, EventArgs e)
+		void PageInloggenClicked(object sender, EventArgs e)
 		{
-			SubPage.Content = new Page1();
+			SubPage.Content = new PageInloggen();
 		}
-        void OnPage2Clicked(object sender, EventArgs e)
+        void PageAanmeldenClicked(object sender, EventArgs e)
         {
-            SubPage.Content = new Page2();
+            SubPage.Content = new PageAanmelden();
+        }
+		void PageDashboardClicked(object sender, EventArgs e)
+		{
+			SubPage.Content = new PageDashboard();
+		}
+        void PageOefeningClicked(object sender, EventArgs e)
+        {
+            SubPage.Content = new PageOefening();
+        }
+		void PageAdaptieveOefeningClicked(object sender, EventArgs e)
+		{
+			SubPage.Content = new PageAdaptieveOefening();
+		}
+        void PageResultatenClicked(object sender, EventArgs e)
+        {
+            SubPage.Content = new PageResultaten();
+        }
+		void PageInstellingenClicked(object sender, EventArgs e)
+        {
+            SubPage.Content = new PageInstellingen();
         }
 }

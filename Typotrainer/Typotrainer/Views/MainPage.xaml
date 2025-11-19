@@ -5,10 +5,20 @@
              xmlns:ContentView="clr-namespace:Typotrainer.Views"
              Title="TypoTrainer">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Pagina 1"
-                     Clicked="OnPage1Clicked" />
-        <ToolbarItem Text="Pagina 2"
-             Clicked="OnPage2Clicked" />
+        <ToolbarItem Text="Inloggen"
+            Clicked="PageInloggenClicked" />
+        <ToolbarItem Text="Aanmelden"
+            Clicked="PageAanmeldenClicked" />
+        <ToolbarItem Text="Dashboard"
+            Clicked="PageDashboardClicked" />
+        <ToolbarItem Text="Oefening starten"
+            Clicked="PageOefeningClicked" />
+        <ToolbarItem Text="Adaptieve oefening"
+            Clicked="PageAdaptieveOefeningClicked" />
+        <ToolbarItem Text="Resultaten en voortgang"
+            Clicked="PageResultatenClicked" />
+        <ToolbarItem Text="Instellingen"
+            Clicked="PageInstellingenClicked" />
     </ContentPage.ToolbarItems>
     <VerticalStackLayout>
         <Label 
