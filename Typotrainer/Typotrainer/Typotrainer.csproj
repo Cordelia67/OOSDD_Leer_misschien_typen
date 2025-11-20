@@ -57,6 +57,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Icons\settings.png" />
+	  <None Remove="Resources\Icons\sparkles.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\Icons\chart_column_increasing.png" />
+	  <MauiImage Include="Resources\Icons\settings.png" />
+	  <MauiImage Include="Resources\Icons\sparkles.png" />
+	  <MauiImage Include="Resources\Icons\square_play.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
