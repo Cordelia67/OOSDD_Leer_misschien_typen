@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Typotrainer.Views.PageDashboard">
+             x:Class="Typotrainer.Views.PageDashboard"
+             BackgroundColor="#eaf1ff">
     <Grid Padding="20" RowSpacing="20" ColumnSpacing="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -13,43 +17,65 @@
         </Grid.ColumnDefinitions>
 
         <!-- Linksboven: Oefening starten -->
-        <Button Grid.Row="0" Grid.Column="0"
+        <Button Grid.Row="1" Grid.Column="0"
                 Text="Oefening starten"
-                FontSize="24"
+                FontSize="28"
                 FontAttributes="Bold"
-                BackgroundColor="#4CAF50"
-                TextColor="White"
+                BackgroundColor="white"
+                TextColor="black"
                 CornerRadius="15"
+                HeightRequest="200"
+                Margin="0,0,0,10"
                 Clicked="PageOefeningClicked"/>
 
         <!-- Rechtsboven: Resultaten en voortgang -->
-        <Button Grid.Row="0" Grid.Column="1"
+        <Button Grid.Row="1" Grid.Column="1"
                 Text="Resultaten en voortgang"
-                FontSize="24"
+                FontSize="28"
                 FontAttributes="Bold"
-                BackgroundColor="#2196F3"
-                TextColor="White"
+                BackgroundColor="white"
+                TextColor="black"
                 CornerRadius="15"
+                HeightRequest="200"
+                Margin="0,0,0,10"
                 Clicked="PageResultatenClicked"/>
 
         <!-- Linksonder: Adaptieve oefening -->
-        <Button Grid.Row="1" Grid.Column="0"
+        <Button Grid.Row="2" Grid.Column="0"
                 Text="Adaptieve oefening"
-                FontSize="24"
+                FontSize="28"
                 FontAttributes="Bold"
-                BackgroundColor="#FF9800"
-                TextColor="White"
+                BackgroundColor="white"
+                TextColor="black"
                 CornerRadius="15"
+                HeightRequest="200"
+                Margin="0,0,0,10"
                 Clicked="PageAdaptieveOefeningClicked"/>
 
         <!-- Rechtsonder: Instellingen -->
-        <Button Grid.Row="1" Grid.Column="1"
+        <Button Grid.Row="2" Grid.Column="1"
                 Text="Instellingen"
-                FontSize="24"
+                FontSize="28"
                 FontAttributes="Bold"
-                BackgroundColor="#9C27B0"
-                TextColor="White"
+                BackgroundColor="white"
+                TextColor="black"
                 CornerRadius="15"
+                HeightRequest="200"
+                Margin="0,0,0,10"
                 Clicked="PageInstellingenClicked"/>
+
+        <!-- Welkomsttekst onderaan -->
+        <Frame Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+               BackgroundColor="#eef2ff"
+               BorderColor="#E0E0E0"
+               CornerRadius="10"
+               Padding="20"
+               Margin="0,20,0,0">
+            <Label Text="Welkom terug! Kies een optie hierboven om te beginnen met oefenen of om je voortgang te bekijken."
+                   FontSize="18"
+                   TextColor="#333333"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"/>
+        </Frame>
     </Grid>
 </ContentView>
