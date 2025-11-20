@@ -13,43 +13,43 @@
         </Grid.ColumnDefinitions>
 
         <!-- Linksboven: Oefening starten -->
-        <Button x:Name="BtnOefening"
-                Grid.Row="0" Grid.Column="0"
+        <Button Grid.Row="0" Grid.Column="0"
                 Text="Oefening starten"
                 FontSize="24"
                 FontAttributes="Bold"
                 BackgroundColor="#4CAF50"
                 TextColor="White"
-                CornerRadius="15"/>
+                CornerRadius="15"
+                Clicked="PageOefeningClicked"/>
 
         <!-- Rechtsboven: Resultaten en voortgang -->
-        <Button x:Name="BtnResultaten"
-                Grid.Row="0" Grid.Column="1"
+        <Button Grid.Row="0" Grid.Column="1"
                 Text="Resultaten en voortgang"
                 FontSize="24"
                 FontAttributes="Bold"
                 BackgroundColor="#2196F3"
                 TextColor="White"
-                CornerRadius="15"/>
+                CornerRadius="15"
+                Clicked="PageResultatenClicked"/>
 
         <!-- Linksonder: Adaptieve oefening -->
-        <Button x:Name="BtnAdaptief"
-                Grid.Row="1" Grid.Column="0"
+        <Button Grid.Row="1" Grid.Column="0"
                 Text="Adaptieve oefening"
                 FontSize="24"
                 FontAttributes="Bold"
                 BackgroundColor="#FF9800"
                 TextColor="White"
-                CornerRadius="15"/>
+                CornerRadius="15"
+                Clicked="PageAdaptieveOefeningClicked"/>
 
         <!-- Rechtsonder: Instellingen -->
-        <Button x:Name="BtnInstellingen"
-                Grid.Row="1" Grid.Column="1"
+        <Button Grid.Row="1" Grid.Column="1"
                 Text="Instellingen"
                 FontSize="24"
                 FontAttributes="Bold"
                 BackgroundColor="#9C27B0"
                 TextColor="White"
-                CornerRadius="15"/>
+                CornerRadius="15"
+                Clicked="PageInstellingenClicked"/>
     </Grid>
 </ContentView>
