@@ -56,7 +56,7 @@ public partial class MainPage : ContentPage
         string result = await _db.DatabaseTest();
         DBLabel.Text = result;
     }
-}
+
     // Publieke methodes voor navigatie vanuit andere pagina's
     public void ShowDashboard()
     {
