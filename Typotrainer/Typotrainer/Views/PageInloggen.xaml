@@ -5,6 +5,7 @@
              BackgroundColor="#E8EAF6">
     <ScrollView>
         <VerticalStackLayout 
+            WidthRequest="750"
             Padding="40"
             Spacing="20"
             VerticalOptions="Center"

@@ -1,18 +1,10 @@
 using System.Text.RegularExpressions;
+using Typotrainer.Services;
 
 namespace Typotrainer.Views;
 
 public partial class PageInloggen : ContentView
 {
-    // Demo gebruikers database (in een echte app zou dit in een database of via API zijn)
-    private static readonly Dictionary<string, string> DemoUsers = new()
-    {
-        { "test@test.nl", "test1234" },
-        { "admin@typotrainer.nl", "admin123" },
-        { "user@example.com", "password" },
-        { "demo@demo.nl", "demo2024" }
-    };
-
     public PageInloggen()
     {
         InitializeComponent();
@@ -67,8 +59,8 @@ public partial class PageInloggen : ContentView
         // Simuleer API call (2 seconden zoals in NFR1)
         await Task.Delay(2000);
 
-        // Valideer login met demo gebruikers
-        bool loginSuccess = await ValidateLogin(email, password);
+        // Valideer login met UserService
+        bool loginSuccess = UserService.ValidateLogin(email, password);
 
         if (loginSuccess)
         {
@@ -76,32 +68,22 @@ public partial class PageInloggen : ContentView
             await ShowSuccessMessage();
 
             // Navigeer naar dashboard
-            if (Parent is ContentView parentView &&
-                parentView.Parent is VerticalStackLayout stack &&
-                stack.Parent is ContentPage page)
-            {
-                var mainPage = page as MainPage;
-                mainPage?.ShowDashboard();
-            }
+            var mainPage = GetMainPage();
+            mainPage?.ShowDashboard();
         }
         else
         {
             ShowError("Ongeldige inloggegevens. Controleer je e-mail en wachtwoord.");
             LoginButton.IsEnabled = true;
-            LoginButton.Text = "Inloggen";
+            LoginButton.Text = "?  Inloggen";
         }
     }
 
     private void OnRegisterClicked(object sender, EventArgs e)
     {
         // Navigeer naar aanmeldpagina
-        if (Parent is ContentView parentView &&
-            parentView.Parent is VerticalStackLayout stack &&
-            stack.Parent is ContentPage page)
-        {
-            var mainPage = page as MainPage;
-            mainPage?.ShowRegister();
-        }
+        var mainPage = GetMainPage();
+        mainPage?.ShowRegister();
     }
 
     private bool IsValidEmail(string email)
@@ -151,23 +133,15 @@ public partial class PageInloggen : ContentView
         await Task.Delay(1000);
     }
 
-    private async Task<bool> ValidateLogin(string email, string password)
+    private MainPage? GetMainPage()
     {
-        // Simuleer authenticatie
-        await Task.Delay(100);
-
-        // Controleer of e-mail en wachtwoord geldig zijn (format)
-        if (!IsValidEmail(email) || !IsValidPassword(password))
-            return false;
-
-        // Controleer of gebruiker bestaat en wachtwoord klopt
-        if (DemoUsers.TryGetValue(email.ToLower(), out string correctPassword))
+        Element? current = this.Parent;
+        while (current != null)
         {
-            // Vergelijk wachtwoord (case-sensitive)
-            return password == correctPassword;
+            if (current is MainPage mainPage)
+                return mainPage;
+            current = current.Parent;
         }
-
-        // Gebruiker niet gevonden
-        return false;
+        return null;
     }
 }

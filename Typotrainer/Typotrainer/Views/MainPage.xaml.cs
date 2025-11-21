@@ -5,7 +5,6 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
-
     }
 
     void PageInloggenClicked(object sender, EventArgs e)
@@ -52,5 +51,10 @@ public partial class MainPage : ContentPage
     public void ShowRegister()
     {
         SubPage.Content = new PageAanmelden();
+    }
+
+    public void ShowLogin()
+    {
+        SubPage.Content = new PageInloggen();
     }
 }
