@@ -22,6 +22,11 @@
     </ContentPage.ToolbarItems>
     <VerticalStackLayout>
         <Label 
+            x:Name="DBLabel" 
+            Text="Database checken.."
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Label 
             Text="Dit is de hoofdpagina, de geselecteerde pagina zal hieronder weergeven."
             VerticalOptions="Center" 
             HorizontalOptions="Center" />   
