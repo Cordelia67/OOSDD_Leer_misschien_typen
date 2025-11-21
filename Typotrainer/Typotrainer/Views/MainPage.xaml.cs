@@ -12,37 +12,37 @@ public partial class MainPage : ContentPage
     }
 
     // existing navigation handlers
-    void PageInloggenClicked(object sender, EventArgs e)
+    public void PageInloggenClicked(object sender, EventArgs e)
     {
         SubPage.Content = new PageInloggen();
     }
 
-    void PageAanmeldenClicked(object sender, EventArgs e)
+    public void PageAanmeldenClicked(object sender, EventArgs e)
     {
         SubPage.Content = new PageAanmelden();
     }
 
-    void PageDashboardClicked(object sender, EventArgs e)
+    public void PageDashboardClicked(object sender, EventArgs e)
     {
         SubPage.Content = new PageDashboard();
     }
 
-    void PageOefeningClicked(object sender, EventArgs e)
+    public void PageOefeningClicked(object sender, EventArgs e)
     {
         SubPage.Content = new PageOefening();
     }
 
-    void PageAdaptieveOefeningClicked(object sender, EventArgs e)
+    public void PageAdaptieveOefeningClicked(object sender, EventArgs e)
     {
         SubPage.Content = new PageAdaptieveOefening();
     }
 
-    void PageResultatenClicked(object sender, EventArgs e)
+    public void PageResultatenClicked(object sender, EventArgs e)
     {
         SubPage.Content = new PageResultaten();
     }
 
-    void PageInstellingenClicked(object sender, EventArgs e)
+    public void PageInstellingenClicked(object sender, EventArgs e)
     {
         SubPage.Content = new PageInstellingen();
     }
