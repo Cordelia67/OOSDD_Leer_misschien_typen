@@ -1,11 +1,135 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Typotrainer.Views.PageInloggen">
-    <VerticalStackLayout>
-        <Label 
-            Text="Pagina voor inloggen"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="Typotrainer.Views.PageInloggen"
+             BackgroundColor="#E8EAF6">
+    <ScrollView>
+        <VerticalStackLayout 
+            WidthRequest="750"
+            Padding="40"
+            Spacing="20"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            MaximumWidthRequest="750">
+
+            <!-- Logo en Titel -->
+            <VerticalStackLayout Spacing="5" Margin="0,0,0,5">
+                <Label 
+                    Text="TypoTrainer"
+                    FontSize="36"
+                    FontAttributes="Bold"
+                    TextColor="#1A237E"
+                    HorizontalOptions="Center" />
+                <Label 
+                    Text="Log in om te beginnen"
+                    FontSize="16"
+                    TextColor="#5E6C84"
+                    HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <!-- Inlog Formulier -->
+            <Frame 
+                BackgroundColor="White"
+                CornerRadius="16"
+                HasShadow="True"
+                Padding="40"
+                Margin="0">
+                <VerticalStackLayout Spacing="24">
+
+                    <!-- E-mailadres -->
+                    <VerticalStackLayout Spacing="8">
+                        <Label 
+                            Text="E-mailadres"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            TextColor="#172B4D" />
+                        <Frame 
+                            BackgroundColor="#F4F5F7"
+                            BorderColor="Transparent"
+                            CornerRadius="8"
+                            Padding="0,0"
+                            HasShadow="False">
+                            <Entry 
+                                x:Name="EmailEntry"
+                                Placeholder="naam@voorbeeld.nl"
+                                Keyboard="Email"
+                                BackgroundColor="Transparent"
+                                TextColor="#172B4D"
+                                PlaceholderColor="#A5ADBA" />
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- Wachtwoord -->
+                    <VerticalStackLayout Spacing="8">
+                        <Label 
+                            Text="Wachtwoord"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            TextColor="#172B4D" />
+                        <Frame 
+                            BackgroundColor="#F4F5F7"
+                            BorderColor="Transparent"
+                            CornerRadius="8"
+                            Padding="0,0"
+                            HasShadow="False">
+                            <Entry 
+                                x:Name="PasswordEntry"
+                                Placeholder="••••••••"
+                                IsPassword="True"
+                                BackgroundColor="Transparent"
+                                TextColor="#172B4D"
+                                PlaceholderColor="#A5ADBA" />
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- Foutmelding -->
+                    <Label 
+                        x:Name="ErrorLabel"
+                        IsVisible="False"
+                        TextColor="#DE350B"
+                        FontSize="13"
+                        HorizontalTextAlignment="Center"
+                        Margin="0,0,0,0" />
+
+                    <!-- Inloggen Button -->
+                    <Button 
+                        x:Name="LoginButton"
+                        Text="→  Inloggen"
+                        BackgroundColor="#0D0D0D"
+                        TextColor="White"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        CornerRadius="8"
+                        HeightRequest="52"
+                        Margin="0,8,0,0"
+                        Clicked="OnLoginClicked" />
+
+                    <!-- Nieuw account aanmaken Button -->
+                    <Button 
+                        x:Name="RegisterButton"
+                        Text="👤  Nieuw account aanmaken"
+                        BackgroundColor="Transparent"
+                        TextColor="#5E6C84"
+                        BorderColor="#DFE1E6"
+                        BorderWidth="1.5"
+                        FontSize="15"
+                        CornerRadius="8"
+                        HeightRequest="48"
+                        Margin="0,0,0,12"
+                        Clicked="OnRegisterClicked" />
+
+                    <!-- Demo instructie -->
+                    <Label 
+                        Text="Demo: gebruik elk e-mailadres en minimaal 4 tekens als wachtwoord, of maak een account aan"
+                        FontSize="17"
+                        TextColor="#6B778C"
+                        HorizontalTextAlignment="Center"
+                        LineBreakMode="WordWrap"
+                        Margin="0,0,0,0" />
+
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentView>

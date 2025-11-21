@@ -1,11 +1,213 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Typotrainer.Views.PageDashboard">
-    <VerticalStackLayout>
-        <Label 
-            Text="Pagina voor dashboard"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="Typotrainer.Views.PageDashboard"
+             BackgroundColor="#eaf1ff">
+    <Grid Padding="20" RowSpacing="20" ColumnSpacing="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Linksboven: Oefening starten -->
+        <Frame Grid.Row="1" Grid.Column="0"
+               BackgroundColor="White"
+               CornerRadius="15"
+               Padding="15"
+               HeightRequest="200"
+               HasShadow="True">
+            <Grid RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" ColumnSpacing="15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0"
+                           Source="square_play.png"
+                           WidthRequest="40"
+                           HeightRequest="40"
+                           VerticalOptions="Center"/>
+                    <Button Grid.Column="1"
+                            BackgroundColor="Transparent"
+                            Text="Oefening starten"
+                            FontSize="24"
+                            FontAttributes="Bold"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start"
+                            Clicked="PageOefeningClicked"/>
+                </Grid>
+                <Label Grid.Row="1"
+                       Text="Begin met een standaard typ oefening."
+                       FontSize="14"
+                       TextColor="#666666"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Start"
+                       Margin="40,0,0,0"/>
+            </Grid>
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="PageOefeningClicked"/>
+            </Frame.GestureRecognizers>
+        </Frame>
+
+        <!-- Rechtsboven: Resultaten en voortgang -->
+        <Frame Grid.Row="1" Grid.Column="1"
+               BackgroundColor="White"
+               CornerRadius="15"
+               Padding="15"
+               HeightRequest="200"
+               HasShadow="True">
+            <Grid RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" ColumnSpacing="15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0"
+                           Source="chart_column_increasing.png"
+                           WidthRequest="40"
+                           HeightRequest="40"
+                           VerticalOptions="Center"/>
+                    <Button Grid.Column="1"
+                            BackgroundColor="Transparent"
+                            Text="Resultaten en voortgang"
+                            FontSize="24"
+                            FontAttributes="Bold"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start"
+                            Clicked="PageResultatenClicked"/>
+                </Grid>
+                <Label Grid.Row="1"
+                       Text="Bekijk je statistieken en prestaties."
+                       FontSize="14"
+                       TextColor="#666666"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Start"
+                       Margin="40,0,0,0"/>
+            </Grid>
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="PageResultatenClicked"/>
+            </Frame.GestureRecognizers>
+        </Frame>
+
+        <!-- Linksonder: Adaptieve oefening -->
+        <Frame Grid.Row="2" Grid.Column="0"
+               BackgroundColor="White"
+               CornerRadius="15"
+               Padding="15"
+               HeightRequest="200"
+               HasShadow="True">
+            <Grid RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" ColumnSpacing="15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0"
+                           Source="sparkles.png"
+                           WidthRequest="40"
+                           HeightRequest="40"
+                           VerticalOptions="Center"/>
+                    <Button Grid.Column="1"
+                            BackgroundColor="Transparent"
+                            Text="Adaptieve oefening"
+                            FontSize="24"
+                            FontAttributes="Bold"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start"
+                            Clicked="PageAdaptieveOefeningClicked"/>
+                </Grid>
+                <Label Grid.Row="1"
+                       Text="Genereer een oefening op basis van je niveau."
+                       FontSize="14"
+                       TextColor="#666666"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Start"
+                       Margin="40,0,0,0"/>
+            </Grid>
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="PageAdaptieveOefeningClicked"/>
+            </Frame.GestureRecognizers>
+        </Frame>
+
+        <!-- Rechtsonder: Instellingen -->
+        <Frame Grid.Row="2" Grid.Column="1"
+               BackgroundColor="White"
+               CornerRadius="15"
+               Padding="15"
+               HeightRequest="200"
+               HasShadow="True">
+            <Grid RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" ColumnSpacing="15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0"
+                           Source="settings.png"
+                           WidthRequest="40"
+                           HeightRequest="40"
+                           VerticalOptions="Center"/>
+                    <Button Grid.Column="1"
+                            BackgroundColor="Transparent"
+                            Text="Instellingen"
+                            FontSize="24"
+                            FontAttributes="Bold"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start"
+                            Clicked="PageInstellingenClicked"/>
+                </Grid>
+                <Label Grid.Row="1"
+                       Text="Pas je voorkeuren aan."
+                       FontSize="14"
+                       TextColor="#666666"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Start"
+                       Margin="40,0,0,0"/>
+            </Grid>
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="PageInstellingenClicked"/>
+            </Frame.GestureRecognizers>
+        </Frame>
+
+        <!-- Welkomsttekst onderaan -->
+        <Frame Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+               BackgroundColor="#eef2ff"
+               BorderColor="#E0E0E0"
+               CornerRadius="10"
+               Padding="20"
+               Margin="0,20,0,0">
+            <Label Text="Welkom terug! Kies een optie hierboven om te beginnen met oefenen of om je voortgang te bekijken."
+                   FontSize="18"
+                   TextColor="#333333"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"/>
+        </Frame>
+    </Grid>
 </ContentView>
