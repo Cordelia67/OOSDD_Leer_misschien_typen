@@ -16,26 +16,32 @@ public partial class MainPage : ContentPage
     {
         SubPage.Content = new PageInloggen();
     }
+
     void PageAanmeldenClicked(object sender, EventArgs e)
     {
         SubPage.Content = new PageAanmelden();
     }
+
     void PageDashboardClicked(object sender, EventArgs e)
     {
         SubPage.Content = new PageDashboard();
     }
+
     void PageOefeningClicked(object sender, EventArgs e)
     {
         SubPage.Content = new PageOefening();
     }
+
     void PageAdaptieveOefeningClicked(object sender, EventArgs e)
     {
         SubPage.Content = new PageAdaptieveOefening();
     }
+
     void PageResultatenClicked(object sender, EventArgs e)
     {
         SubPage.Content = new PageResultaten();
     }
+
     void PageInstellingenClicked(object sender, EventArgs e)
     {
         SubPage.Content = new PageInstellingen();
@@ -49,5 +55,21 @@ public partial class MainPage : ContentPage
         DBLabel.Text = "Testing...";
         string result = await _db.DatabaseTest();
         DBLabel.Text = result;
+    }
+}
+    // Publieke methodes voor navigatie vanuit andere pagina's
+    public void ShowDashboard()
+    {
+        SubPage.Content = new PageDashboard();
+    }
+
+    public void ShowRegister()
+    {
+        SubPage.Content = new PageAanmelden();
+    }
+
+    public void ShowLogin()
+    {
+        SubPage.Content = new PageInloggen();
     }
 }

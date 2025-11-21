@@ -1,11 +1,203 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Typotrainer.Views.PageAanmelden">
-    <VerticalStackLayout>
-        <Label 
-            Text="Pagina voor aanmelden"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="Typotrainer.Views.PageAanmelden"
+             BackgroundColor="#E8EAF6">
+    <ScrollView>
+        <VerticalStackLayout 
+            WidthRequest="750"
+            Padding="40"
+            Spacing="20"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            MaximumWidthRequest="750">
+
+            <!-- Logo en Titel -->
+            <VerticalStackLayout Spacing="5" Margin="0,0,0,5">
+                <Label 
+                    Text="TypoTrainer"
+                    FontSize="36"
+                    FontAttributes="Bold"
+                    TextColor="#1A237E"
+                    HorizontalOptions="Center" />
+                <Label 
+                    Text="Maak een nieuw account aan"
+                    FontSize="16"
+                    TextColor="#5E6C84"
+                    HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <!-- Registratie Formulier -->
+            <Frame 
+                x:Name="RegisterFrame"
+                BackgroundColor="White"
+                CornerRadius="16"
+                HasShadow="True"
+                Padding="40"
+                Margin="0">
+                <VerticalStackLayout Spacing="24">
+
+                    <!-- E-mailadres -->
+                    <VerticalStackLayout Spacing="8">
+                        <Label 
+                            Text="E-mailadres"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            TextColor="#172B4D" />
+                        <Frame 
+                            BackgroundColor="#F4F5F7"
+                            BorderColor="Transparent"
+                            CornerRadius="8"
+                            Padding="0,0"
+                            HasShadow="False">
+                            <Entry 
+                                x:Name="EmailEntry"
+                                Placeholder="naam@voorbeeld.nl"
+                                Keyboard="Email"
+                                BackgroundColor="Transparent"
+                                TextColor="#172B4D"
+                                TextChanged="OnEmailChanged" />
+                        </Frame>
+                        <!-- Email validatie feedback -->
+                        <Label 
+                            x:Name="EmailErrorLabel"
+                            IsVisible="False"
+                            TextColor="Red"
+                            FontSize="11"
+                            Margin="4,0,0,0" />
+                    </VerticalStackLayout>
+
+                    <!-- Wachtwoord -->
+                    <VerticalStackLayout Spacing="8">
+                        <Label 
+                            Text="Wachtwoord"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            TextColor="#172B4D" />
+                        <Frame 
+                            BackgroundColor="#F4F5F7"
+                            BorderColor="Transparent"
+                            CornerRadius="8"
+                            Padding="0,0"
+                            HasShadow="False">
+                            <Entry 
+                                x:Name="PasswordEntry"
+                                Placeholder="Minimaal 4 tekens"
+                                IsPassword="True"
+                                BackgroundColor="Transparent"
+                                TextColor="#172B4D"
+                                FontSize="14"
+                                TextChanged="OnPasswordChanged" />
+                        </Frame>
+                        <!-- Wachtwoord validatie feedback -->
+                        <Label 
+                            x:Name="PasswordErrorLabel"
+                            IsVisible="False"
+                            TextColor="#DE350B"
+                            FontSize="13"
+                            Margin="0,0,0,0" />
+                    </VerticalStackLayout>
+
+                    <!-- Algemene foutmelding -->
+                    <Label 
+                        x:Name="ErrorLabel"
+                        IsVisible="False"
+                        TextColor="#DE350B"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Center"
+                        Margin="0,0,0,0" />
+
+                    <!-- Account aanmaken Button -->
+                    <Button 
+                        x:Name="RegisterButton"
+                        Text="Account aanmaken"
+                        BackgroundColor="#0D0D0D"
+                        TextColor="White"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        CornerRadius="8"
+                        HeightRequest="52"
+                        Margin="0,8,0,0"
+                        Clicked="OnRegisterClicked" />
+
+                    <!-- Terug naar inloggen Button -->
+                    <Button 
+                        x:Name="BackToLoginButton"
+                        Text="← Terug naar inloggen"
+                        BackgroundColor="White"
+                        TextColor="#5E6C84"
+                        BorderColor="#DFE1E6"
+                        BorderWidth="1.5"
+                        FontSize="15"
+                        CornerRadius="8"
+                        HeightRequest="48"
+                        Margin="0,0,0,12"
+                        Clicked="OnBackToLoginClicked" />
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Success Modal (verborgen standaard) -->
+            <Frame 
+                x:Name="SuccessFrame"
+                IsVisible="False"
+                BackgroundColor="White"
+                CornerRadius="16"
+                HasShadow="True"
+                Padding="40"
+                Margin="20,0">
+                <VerticalStackLayout Spacing="20" HorizontalOptions="Center">
+
+                    <!-- Success Icon -->
+                    <Frame 
+                        BackgroundColor="#4CAF50"
+                        CornerRadius="50"
+                        WidthRequest="100"
+                        HeightRequest="100"
+                        Padding="0"
+                        HasShadow="False"
+                        HorizontalOptions="Center">
+                        <Label 
+                            Text="✓"
+                            FontSize="60"
+                            TextColor="White"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            FontAttributes="Bold" />
+                    </Frame>
+
+                    <!-- Success Message -->
+                    <Label 
+                        Text="Account succesvol aangemaakt!"
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        TextColor="#1A1A1A"
+                        HorizontalTextAlignment="Center" />
+
+                    <Label 
+                        Text="Je kunt nu inloggen met je nieuwe gegevens."
+                        FontSize="13"
+                        TextColor="#666666"
+                        HorizontalTextAlignment="Center"
+                        LineBreakMode="WordWrap" />
+
+                    <!-- Ga naar inloggen Button -->
+                    <Button 
+                        x:Name="GoToLoginButton"
+                        Text="→  Ga naar inloggen"
+                        BackgroundColor="#1A1A1A"
+                        TextColor="White"
+                        FontSize="15"
+                        FontAttributes="Bold"
+                        CornerRadius="6"
+                        HeightRequest="48"
+                        Margin="0,12,0,0"
+                        Clicked="OnGoToLoginClicked" />
+
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentView>
