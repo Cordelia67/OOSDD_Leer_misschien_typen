@@ -7,5 +7,20 @@
             Text="Pagina voor instellingen"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Frame>
+            <Button 
+                Text="Test"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+        </Frame>
+        <Entry 
+            Placeholder="Test invoerveld"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Editor 
+            Placeholder="Test tekstvak"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
     </VerticalStackLayout>
 </ContentView>

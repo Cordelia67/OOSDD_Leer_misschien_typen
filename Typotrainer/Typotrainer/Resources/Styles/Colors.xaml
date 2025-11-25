@@ -48,6 +48,5 @@
     <!-- kleuren voor style typotrainer -->
 
     <Color x:Key="PageBackground">#E7EEFF</Color>
-    <Color x:Key="FrameBackground">#FFFFFF</Color>
     <Color x:Key="BorderColor">#030213</Color>
 </ResourceDictionary>
