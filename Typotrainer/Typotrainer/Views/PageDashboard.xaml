@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Typotrainer.Views.PageDashboard"
-             BackgroundColor="#eaf1ff">
+             x:Class="Typotrainer.Views.PageDashboard">
+    
     <Grid Padding="20" RowSpacing="20" ColumnSpacing="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
@@ -18,11 +18,7 @@
 
         <!-- Linksboven: Oefening starten -->
         <Frame Grid.Row="1" Grid.Column="0"
-               BackgroundColor="White"
-               CornerRadius="15"
-               Padding="15"
-               HeightRequest="200"
-               HasShadow="True">
+               HeightRequest="200">
             <Grid RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -63,11 +59,7 @@
 
         <!-- Rechtsboven: Resultaten en voortgang -->
         <Frame Grid.Row="1" Grid.Column="1"
-               BackgroundColor="White"
-               CornerRadius="15"
-               Padding="15"
-               HeightRequest="200"
-               HasShadow="True">
+               HeightRequest="200">
             <Grid RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -108,11 +100,7 @@
 
         <!-- Linksonder: Adaptieve oefening -->
         <Frame Grid.Row="2" Grid.Column="0"
-               BackgroundColor="White"
-               CornerRadius="15"
-               Padding="15"
-               HeightRequest="200"
-               HasShadow="True">
+               HeightRequest="200">
             <Grid RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -153,11 +141,7 @@
 
         <!-- Rechtsonder: Instellingen -->
         <Frame Grid.Row="2" Grid.Column="1"
-               BackgroundColor="White"
-               CornerRadius="15"
-               Padding="15"
-               HeightRequest="200"
-               HasShadow="True">
+               HeightRequest="200">
             <Grid RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
