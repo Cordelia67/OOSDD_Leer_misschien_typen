@@ -3,10 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Typotrainer.Views.PageInstellingen">
     <VerticalStackLayout>
-        <Label 
-            Text="Pagina voor instellingen"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Label Text="Pagina voor instellingen" />
         <Frame>
             <Button 
                 Text="Test"
@@ -21,6 +18,14 @@
             Placeholder="Test tekstvak"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Frame Style="{StaticResource Foutmelding}">
+            <Label Text="Foutmelding" />
+        </Frame>
+        <Frame Style="{StaticResource Info}">
+            <Label Text="Informatie" />
+        </Frame>
+        <Label Text="Groen" Style="{StaticResource TextGroen}"/>
+        <Label Text="Rood" Style="{StaticResource TextRood}"/>
 
     </VerticalStackLayout>
 </ContentView>

@@ -49,4 +49,8 @@
 
     <Color x:Key="PageBackground">#E7EEFF</Color>
     <Color x:Key="BorderColor">#030213</Color>
+    <Color x:Key="WarningYellow">#F3EBB5</Color>
+    <Color x:Key="InfoGray">#F0E6F7</Color>
+    <Color x:Key="TextGreen">#00A032</Color>
+    <Color x:Key="TextRed">#833638</Color>
 </ResourceDictionary>

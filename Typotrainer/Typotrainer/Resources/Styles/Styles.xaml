@@ -335,6 +335,7 @@
 
     <Style TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource Black}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="FontFamily" Value="Aptos" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="BackgroundColor" Value="Transparent" />
@@ -420,6 +421,24 @@
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>
+    </Style>
+    
+    <!-- xkey styles -->
+
+    <Style x:Key="Foutmelding" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="{StaticResource WarningYellow}" />
+    </Style>
+
+    <Style x:Key="Info" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="{StaticResource InfoGray}" />
+    </Style>
+
+    <Style x:Key="TextGroen" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextGreen}" />
+    </Style>
+
+    <Style x:Key="TextRood" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextRed}" />
     </Style>
 
 </ResourceDictionary>
