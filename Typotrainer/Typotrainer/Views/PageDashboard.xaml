@@ -17,8 +17,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Linksboven: Oefening starten -->
-        <Frame Grid.Row="1" Grid.Column="0"
-               HeightRequest="200">
+        <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource FrameGrid200}">
             <Grid RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -58,8 +57,7 @@
         </Frame>
 
         <!-- Rechtsboven: Resultaten en voortgang -->
-        <Frame Grid.Row="1" Grid.Column="1"
-               HeightRequest="200">
+        <Frame Grid.Row="1" Grid.Column="1" Style="{StaticResource FrameGrid200}">
             <Grid RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -99,8 +97,7 @@
         </Frame>
 
         <!-- Linksonder: Adaptieve oefening -->
-        <Frame Grid.Row="2" Grid.Column="0"
-               HeightRequest="200">
+        <Frame Grid.Row="2" Grid.Column="0" Style="{StaticResource FrameGrid200}">
             <Grid RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -140,8 +137,7 @@
         </Frame>
 
         <!-- Rechtsonder: Instellingen -->
-        <Frame Grid.Row="2" Grid.Column="1"
-               HeightRequest="200">
+        <Frame Grid.Row="2" Grid.Column="1" Style="{StaticResource FrameGrid200}">
             <Grid RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
