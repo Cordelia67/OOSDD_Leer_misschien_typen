@@ -26,6 +26,9 @@
         </Frame>
         <Label Text="Groen" Style="{StaticResource TextGroen}"/>
         <Label Text="Rood" Style="{StaticResource TextRood}"/>
+        <Label Text="Bold" Style="{StaticResource Bold}"/>
+        <Label Text="Groen" Style="{StaticResource TextGroenBold}"/>
+        <Label Text="Rood" Style="{StaticResource TextRoodBold}"/>
 
     </VerticalStackLayout>
 </ContentView>

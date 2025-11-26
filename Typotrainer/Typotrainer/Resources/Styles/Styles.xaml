@@ -455,4 +455,18 @@
         <Setter Property="TextColor" Value="{StaticResource TextRed}" />
     </Style>
 
+    <Style x:Key="Bold" TargetType="Label">
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <Style x:Key="TextGroenBold" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextGreen}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <Style x:Key="TextRoodBold" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextRed}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
 </ResourceDictionary>
