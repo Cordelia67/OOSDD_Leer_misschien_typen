@@ -2,8 +2,8 @@ namespace Typotrainer.Views;
 
 public partial class PageOefening : ContentView
 {
-    private List<string> allSentences;
-    private List<string> remainingSentences;
+    private List<string> allSentences = new List<string>();
+    private List<string> remainingSentences = new List<string>();
     private Random random;
 
     public PageOefening()
@@ -16,8 +16,6 @@ public partial class PageOefening : ContentView
     private async void LoadSentences()
     {
         {
-            allSentences = new List<string>();
-
             // Open makkelijk.txt en lees het als één string
             using var stream = await FileSystem.OpenAppPackageFileAsync("makkelijk.txt");
             using var reader = new StreamReader(stream);
