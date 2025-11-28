@@ -5,6 +5,17 @@
              Padding="20">
     <VerticalStackLayout Spacing="20" VerticalOptions="Center">
 
+        <!-- Tekstveld + testknoppen -->
+        <Label x:Name="SentenceLabel"
+            Text="Klik op 'Volgende zin' om te beginnen" />
+        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+            <Button Text="Volgende zin"
+                    Clicked="OnVolgendeButtonClicked" />
+
+            <Button Text="Reset"
+                    Clicked="OnResetButtonClicked" />
+        </HorizontalStackLayout>
+
         <!-- Invoerveld -->
         <Border BackgroundColor="White"
                 StrokeThickness="1"

@@ -57,6 +57,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiAsset Include="Resources\Raw\makkelijk.txt" LogicalName="makkelijk.txt" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Icons\settings.png" />
 	  <None Remove="Resources\Icons\sparkles.png" />
 	</ItemGroup>
@@ -66,6 +70,7 @@
 	  <MauiImage Include="Resources\Icons\settings.png" />
 	  <MauiImage Include="Resources\Icons\sparkles.png" />
 	  <MauiImage Include="Resources\Icons\square_play.png" />
+	  <AndroidInterfaceDescription Include="Resources\Raw\makkelijk.txt" />
 	</ItemGroup>
 
 	<ItemGroup>
