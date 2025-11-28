@@ -36,6 +36,12 @@ public partial class PageOefening : ContentView
 
     private void OnVolgendeButtonClicked(object sender, EventArgs e)
     {
+        if (remainingSentences.Count == 0)
+        {
+            SentenceLabel.Text = "Alle zinnen zijn geweest! Klik op Reset.";
+            return;
+        }
+
         // Kijk naar het aantal zinnen, kies random een, toon die, en verwijder die uit de lijst
         int index = random.Next(remainingSentences.Count);
         string selectedSentence = remainingSentences[index];
@@ -45,7 +51,10 @@ public partial class PageOefening : ContentView
 
     private void OnResetButtonClicked(object sender, EventArgs e)
     {
-        remainingSentences = new List<string>(allSentences);
-        SentenceLabel.Text = "Klik op 'Volgende zin' om te beginnen";
+        if (allSentences != null) // Check eerst of de zinnen al geladen zijn
+        {
+            remainingSentences = new List<string>(allSentences);
+            SentenceLabel.Text = "Klik op 'Volgende zin' om te beginnen";
+        }
     }
 }
