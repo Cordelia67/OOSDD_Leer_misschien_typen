@@ -15,7 +15,9 @@
                 <RoundRectangle CornerRadius="12"/>
             </Border.StrokeShape>
 
-            <Editor Placeholder="Begin hier te typen..."
+            <Editor x:Name="InputEditor"
+                    TextChanged="InputEdittor_TextChanged"
+                    Placeholder="Begin hier te typen..."
                     FontFamily="Consolas, Monaco, monospace"
                     FontSize="16"
                     TextColor="#374151"

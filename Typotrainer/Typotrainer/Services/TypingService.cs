@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Typotrainer.Services
 {
-    public class TypControle
+    public class TypingService
     {
         public bool IsCorrectLetter(string correctZin, int Index, char typedChar)
         {
