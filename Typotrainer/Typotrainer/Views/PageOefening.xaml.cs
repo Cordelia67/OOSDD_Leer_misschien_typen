@@ -15,23 +15,27 @@ public partial class PageOefening : ContentView
 
     private async void LoadSentences()
     {
+        var files = new[] { "makkelijk.txt", "middelmatig.txt", "moeilijk.txt" };
+
+        foreach (var fileName in files)
         {
-            // Open makkelijk.txt en lees het als één string
-            using var stream = await FileSystem.OpenAppPackageFileAsync("makkelijk.txt");
+            // Open het geselecteerde bestand en lees het als één string
+            using var stream = await FileSystem.OpenAppPackageFileAsync(fileName);
             using var reader = new StreamReader(stream);
             var content = await reader.ReadToEndAsync();
-            
-            // split de string tot de losse regels en voeg ze toe aan allSentences
+
+            // Split de string tot de aparte regels en voeg het toe aan allSentences
             var lines = content.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (var line in lines)
             {
                 var sentence = line.Trim();
                 allSentences.Add(sentence);
             }
-            // Maakt een kopie om te gebruiken voor de oefening, de andere lijst blijft compleet zodat we niet
-            // elke keer de .txt hoeven te lezen.
-            remainingSentences = new List<string>(allSentences);
         }
+
+        // Maakt een kopie om te gebruiken voor de oefening, de andere lijst blijft compleet zodat we niet
+        // elke keer de .txt hoeven te lezen.
+        remainingSentences = new List<string>(allSentences);
     }
 
     private void OnVolgendeButtonClicked(object sender, EventArgs e)
