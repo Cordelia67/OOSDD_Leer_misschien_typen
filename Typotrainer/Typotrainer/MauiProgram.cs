@@ -17,6 +17,7 @@ namespace Typotrainer
                 });
 
             builder.Services.AddSingleton<TypingService>();
+            builder.Services.AddSingleton<SentenceService>();
 
 #if DEBUG
             builder.Logging.AddDebug();

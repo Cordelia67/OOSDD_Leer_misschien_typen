@@ -5,12 +5,8 @@ namespace Typotrainer.Views;
 public partial class PageOefening : ContentView
 {
     private readonly TypingService _typingService;
-
-    private string correctZin =
-        "De snelle bruine vos springt over de luie hond."; //placeholder test zin
-    private readonly string correctZin2 =
-        "Een andere voorbeeldzin om te testen."; //placeholder test zin 2
-
+    private readonly SentenceService _sentenceService;
+    private string correctZin;
     private int AantalFouten = 0;
     private HashSet<int> foutPosities = new();        // ← Om dubbele telling te voorkomen
 
@@ -18,6 +14,9 @@ public partial class PageOefening : ContentView
     {
         InitializeComponent();
         _typingService = new TypingService();
+        _sentenceService = new SentenceService();
+
+        correctZin = _sentenceService.GetRandomSentence(Difficulty.Easy);
 
         CorrectText.Text = correctZin;
         FoutenCount.Text = $"Fouten: {AantalFouten}";
@@ -61,7 +60,7 @@ public partial class PageOefening : ContentView
             //debug line om fouten telling te controleren
             Debug.WriteLine($"Oefening voltooid! Aantal fouten: {AantalFouten}");
             // Nieuwe zin instellen later vervangen met zin select logica
-            correctZin = correctZin2;
+            correctZin = _sentenceService.GetRandomSentence(Difficulty.Easy);
             CorrectText.Text = correctZin;
 
             // Reset foutlocaties maar behoud totaal aantal fouten
