@@ -1,4 +1,4 @@
-﻿using Typotrainer.Services;
+ï»¿using Typotrainer.Services;
 using System.Diagnostics;
 namespace Typotrainer.Views;
 
@@ -8,7 +8,7 @@ public partial class PageOefening : ContentView
     private readonly SentenceService _sentenceService;
     private string correctZin;
     private int AantalFouten = 0;
-    private HashSet<int> foutPosities = new();        // ← Om dubbele telling te voorkomen
+    private HashSet<int> foutPosities = new();        // Om dubbele telling te voorkomen
 
     public PageOefening()
     {
@@ -41,7 +41,7 @@ public partial class PageOefening : ContentView
                 {
                     AantalFouten++;
                     foutPosities.Add(i);
-                    FoutenCount.Text = $"Fouten: {AantalFouten}";   // ← UI bijwerken
+                    FoutenCount.Text = $"Fouten: {AantalFouten}";   // UI bijwerken
                 }
             }
 
@@ -87,7 +87,7 @@ public partial class PageOefening : ContentView
         // Kleine delay zodat MAUI de editor kan tonen
         await Task.Delay(50);
 
-        // Focus erzéker geven
+        // Focus terug geven
         InputEditor.Focus();
     }
 }
