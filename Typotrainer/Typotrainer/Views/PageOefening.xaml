@@ -30,6 +30,14 @@
                 Opacity="0"
                 HeightRequest="1" />
 
+        <!-- Foutenteller -->
+        <Label x:Name="FoutenCount"
+                Text="Fouten: 0"
+                FontSize="18"
+                HorizontalOptions="Center"
+                TextColor="black" />
+
+
         <!-- Start knop -->
         <Button Text="Start oefening"
                 FontSize="20"

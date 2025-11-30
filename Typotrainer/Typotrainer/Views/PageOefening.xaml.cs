@@ -20,6 +20,7 @@ public partial class PageOefening : ContentView
         _typingService = new TypingService();
 
         CorrectText.Text = correctZin;
+        FoutenCount.Text = $"Fouten: {AantalFouten}";
     }
 
     private void InputEditor_TextChanged(object sender, TextChangedEventArgs e)
@@ -41,6 +42,7 @@ public partial class PageOefening : ContentView
                 {
                     AantalFouten++;
                     foutPosities.Add(i);
+                    FoutenCount.Text = $"Fouten: {AantalFouten}";   // ← UI bijwerken
                 }
             }
 
