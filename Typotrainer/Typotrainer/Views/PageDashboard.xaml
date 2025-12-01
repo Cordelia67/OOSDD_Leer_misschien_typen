@@ -2,8 +2,8 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Typotrainer.Views.PageDashboard">
-    
-    <Grid Padding="15" RowSpacing="20" ColumnSpacing="20">
+
+    <Grid Style="{StaticResource DashGrid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -16,8 +16,8 @@
 
         <!-- Linksboven: Oefening starten -->
         <Frame Grid.Row="0" Grid.Column="0" Style="{StaticResource FrameGrid200}">
-            <VerticalStackLayout Spacing="10">
-                <HorizontalStackLayout Spacing="15">
+            <VerticalStackLayout>
+                <HorizontalStackLayout>
                     <Image Source="square_play.png" Style="{StaticResource Icon}" />
                     <Button Text="Oefening starten" Style="{StaticResource DashKnop}"
                             Clicked="PageOefeningClicked"/>
@@ -31,8 +31,8 @@
 
         <!-- Rechtsboven: Resultaten en voortgang -->
         <Frame Grid.Row="0" Grid.Column="1" Style="{StaticResource FrameGrid200}">
-            <VerticalStackLayout Spacing="10">
-                <HorizontalStackLayout Spacing="15">
+            <VerticalStackLayout>
+                <HorizontalStackLayout>
                     <Image Source="chart_column_increasing.png" Style="{StaticResource Icon}" />
                     <Button Text="Resultaten en voortgang" Style="{StaticResource DashKnop}"
                             Clicked="PageResultatenClicked"/>
@@ -46,8 +46,8 @@
 
         <!-- Linksonder: Adaptieve oefening -->
         <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource FrameGrid200}">
-            <VerticalStackLayout Spacing="10">
-                <HorizontalStackLayout Spacing="15">
+            <VerticalStackLayout>
+                <HorizontalStackLayout>
                     <Image Source="sparkles.png" Style="{StaticResource Icon}" />
                     <Button Text="Adaptieve oefening" Style="{StaticResource DashKnop}"
                             Clicked="PageAdaptieveOefeningClicked"/>
@@ -61,8 +61,8 @@
 
         <!-- Rechtsonder: Instellingen -->
         <Frame Grid.Row="1" Grid.Column="1" Style="{StaticResource FrameGrid200}">
-            <VerticalStackLayout Spacing="10">
-                <HorizontalStackLayout Spacing="15">
+            <VerticalStackLayout>
+                <HorizontalStackLayout>
                     <Image Source="settings.png" Style="{StaticResource Icon}" />
                     <Button Text="Instellingen" Style="{StaticResource DashKnop}"
                             Clicked="PageInstellingenClicked"/>

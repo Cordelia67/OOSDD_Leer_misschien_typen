@@ -461,13 +461,20 @@
     <Style x:Key="DashKnop" TargetType="Button">
         <Setter Property="FontSize" Value="16" />
         <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="Margin" Value="10,0,0,0" />
     </Style>
 
     <Style x:Key="DashUitleg" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource Gray500}" />
         <Setter Property="HorizontalOptions" Value="Start" />
         <Setter Property="VerticalOptions" Value="Start" />
-        <Setter Property="Margin" Value="55,0,0,0" />
+        <Setter Property="Margin" Value="55,6,0,0" />
+    </Style>
+
+    <Style x:Key="DashGrid" TargetType="Grid">
+        <Setter Property="Padding" Value="15" />
+        <Setter Property="RowSpacing" Value="20" />
+        <Setter Property="ColumnSpacing" Value="20" />
     </Style>
 
     <Style x:Key="Text16" TargetType="Label">
