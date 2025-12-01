@@ -447,6 +447,14 @@
         <Setter Property="HorizontalOptions" Value="Fill" />
     </Style>
 
+    <Style x:Key="Text16" TargetType="Label">
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
+    <Style x:Key="Text12" TargetType="Label">
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+
     <Style x:Key="TextGroen" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource TextGreen}" />
     </Style>

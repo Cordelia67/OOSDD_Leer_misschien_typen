@@ -3,13 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Typotrainer.Views.PageDashboard">
     
-    <Grid Padding="20" RowSpacing="20" ColumnSpacing="20">
+    <Grid Padding="15" RowSpacing="20" ColumnSpacing="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -17,7 +15,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Linksboven: Oefening starten -->
-        <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource FrameGrid200}">
+        <Frame Grid.Row="0" Grid.Column="0" Style="{StaticResource FrameGrid200}">
             <Grid RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -36,7 +34,7 @@
                     <Button Grid.Column="1"
                             BackgroundColor="Transparent"
                             Text="Oefening starten"
-                            FontSize="24"
+                            FontSize="16"
                             FontAttributes="Bold"
                             TextColor="Black"
                             VerticalOptions="Center"
@@ -45,7 +43,6 @@
                 </Grid>
                 <Label Grid.Row="1"
                        Text="Begin met een standaard typ oefening."
-                       FontSize="14"
                        TextColor="#666666"
                        HorizontalOptions="Start"
                        VerticalOptions="Start"
@@ -57,7 +54,7 @@
         </Frame>
 
         <!-- Rechtsboven: Resultaten en voortgang -->
-        <Frame Grid.Row="1" Grid.Column="1" Style="{StaticResource FrameGrid200}">
+        <Frame Grid.Row="0" Grid.Column="1" Style="{StaticResource FrameGrid200}">
             <Grid RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -76,7 +73,7 @@
                     <Button Grid.Column="1"
                             BackgroundColor="Transparent"
                             Text="Resultaten en voortgang"
-                            FontSize="24"
+                            FontSize="16"
                             FontAttributes="Bold"
                             TextColor="Black"
                             VerticalOptions="Center"
@@ -85,7 +82,6 @@
                 </Grid>
                 <Label Grid.Row="1"
                        Text="Bekijk je statistieken en prestaties."
-                       FontSize="14"
                        TextColor="#666666"
                        HorizontalOptions="Start"
                        VerticalOptions="Start"
@@ -97,7 +93,7 @@
         </Frame>
 
         <!-- Linksonder: Adaptieve oefening -->
-        <Frame Grid.Row="2" Grid.Column="0" Style="{StaticResource FrameGrid200}">
+        <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource FrameGrid200}">
             <Grid RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -116,7 +112,7 @@
                     <Button Grid.Column="1"
                             BackgroundColor="Transparent"
                             Text="Adaptieve oefening"
-                            FontSize="24"
+                            FontSize="16"
                             FontAttributes="Bold"
                             TextColor="Black"
                             VerticalOptions="Center"
@@ -125,7 +121,6 @@
                 </Grid>
                 <Label Grid.Row="1"
                        Text="Genereer een oefening op basis van je niveau."
-                       FontSize="14"
                        TextColor="#666666"
                        HorizontalOptions="Start"
                        VerticalOptions="Start"
@@ -137,7 +132,7 @@
         </Frame>
 
         <!-- Rechtsonder: Instellingen -->
-        <Frame Grid.Row="2" Grid.Column="1" Style="{StaticResource FrameGrid200}">
+        <Frame Grid.Row="1" Grid.Column="1" Style="{StaticResource FrameGrid200}">
             <Grid RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -156,7 +151,7 @@
                     <Button Grid.Column="1"
                             BackgroundColor="Transparent"
                             Text="Instellingen"
-                            FontSize="24"
+                            FontSize="16"
                             FontAttributes="Bold"
                             TextColor="Black"
                             VerticalOptions="Center"
@@ -165,7 +160,6 @@
                 </Grid>
                 <Label Grid.Row="1"
                        Text="Pas je voorkeuren aan."
-                       FontSize="14"
                        TextColor="#666666"
                        HorizontalOptions="Start"
                        VerticalOptions="Start"
@@ -177,17 +171,8 @@
         </Frame>
 
         <!-- Welkomsttekst onderaan -->
-        <Frame Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-               BackgroundColor="#eef2ff"
-               BorderColor="#E0E0E0"
-               CornerRadius="10"
-               Padding="20"
-               Margin="0,20,0,0">
-            <Label Text="Welkom terug! Kies een optie hierboven om te beginnen met oefenen of om je voortgang te bekijken."
-                   FontSize="18"
-                   TextColor="#333333"
-                   HorizontalTextAlignment="Center"
-                   VerticalTextAlignment="Center"/>
+        <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource Info}">
+            <Label Text="Welkom terug! Kies een optie hierboven om te beginnen met oefenen of om je voortgang te bekijken."/>
         </Frame>
     </Grid>
 </ContentView>
