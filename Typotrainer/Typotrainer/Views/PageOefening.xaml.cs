@@ -1,5 +1,6 @@
 using Typotrainer.Services;
 using System.Diagnostics;
+
 namespace Typotrainer.Views;
 
 public partial class PageOefening : ContentView
@@ -8,7 +9,7 @@ public partial class PageOefening : ContentView
     private readonly SentenceService _sentenceService;
     private string correctZin;
     private int AantalFouten = 0;
-    private HashSet<int> foutPosities = new();        // Om dubbele telling te voorkomen
+    private HashSet<int> foutPosities = new();
 
     public PageOefening()
     {
@@ -16,32 +17,35 @@ public partial class PageOefening : ContentView
         _typingService = new TypingService();
         _sentenceService = new SentenceService();
 
-        correctZin = "Klik start oefening om te beginnen."; // pas een zin ophalen als de oefening start
+        // ? Nog geen random zin ophalen bij opstart
+        correctZin = "";
 
-        CorrectText.Text = correctZin;
+        // Placeholder tekst tonen
+        CorrectText.Text = "Klik op start oefening om te starten.";
         FoutenCount.Text = $"Fouten: {AantalFouten}";
     }
 
     private void InputEditor_TextChanged(object sender, TextChangedEventArgs e)
     {
+        // Als oefening nog niet gestart is ? niets doen
+        if (string.IsNullOrWhiteSpace(correctZin))
+            return;
+
         string typed = InputEditor.Text ?? "";
         var formatted = new FormattedString();
 
         for (int i = 0; i < typed.Length; i++)
         {
             char typedChar = typed[i];
-
             bool correct = _typingService.IsCorrectLetter(correctZin, i, typedChar);
 
-
-            // telt fout als deze fout nog niet eerder is geteld
             if (!correct && i < correctZin.Length)
             {
                 if (!foutPosities.Contains(i))
                 {
                     AantalFouten++;
                     foutPosities.Add(i);
-                    FoutenCount.Text = $"Fouten: {AantalFouten}";   // UI bijwerken
+                    FoutenCount.Text = $"Fouten: {AantalFouten}";
                 }
             }
 
@@ -54,23 +58,17 @@ public partial class PageOefening : ContentView
 
         ColoredOutput.FormattedText = formatted;
 
-        // Controleert of de zin volledig is getypt
         if (typed.Length == correctZin.Length)
         {
-            //debug line om fouten telling te controleren
             Debug.WriteLine($"Oefening voltooid! Aantal fouten: {AantalFouten}");
-            // Nieuwe zin instellen later vervangen met zin select logica
+
             correctZin = _sentenceService.GetRandomSentence(Difficulty.Easy);
             CorrectText.Text = correctZin;
 
-            // Reset foutlocaties maar behoud totaal aantal fouten
             foutPosities.Clear();
 
-            // Editor en gekleurde output resetten
             InputEditor.Text = "";
             ColoredOutput.FormattedText = new FormattedString();
-
-            // Focus teruggeven
             InputEditor.Focus();
         }
     }
@@ -78,18 +76,19 @@ public partial class PageOefening : ContentView
     private async void Startknop_Clicked(object sender, EventArgs e)
     {
         // Reset
+        AantalFouten = 0;
+        foutPosities.Clear();
+        FoutenCount.Text = $"Fouten: {AantalFouten}";
+
         InputEditor.Text = "";
         ColoredOutput.FormattedText = new FormattedString();
 
-        correctZin = _sentenceService.GetRandomSentence(Difficulty.Easy); // bij start een zin ophalen
+        //Hier wordt nu pas de random zin opgehaald
+        correctZin = _sentenceService.GetRandomSentence(Difficulty.Easy);
+        CorrectText.Text = correctZin;
 
-        // Editor tonen zodat hij focus mag krijgen
         InputEditor.IsVisible = true;
-
-        // Kleine delay zodat MAUI de editor kan tonen
         await Task.Delay(50);
-
-        // Focus terug geven
         InputEditor.Focus();
     }
 }
