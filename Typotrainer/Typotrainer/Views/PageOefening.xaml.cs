@@ -75,7 +75,7 @@ public partial class PageOefening : ContentView
         }
     }
 
-    private async void Button_Clicked(object sender, EventArgs e)
+    private async void Startknop_Clicked(object sender, EventArgs e)
     {
         // Reset
         InputEditor.Text = "";
