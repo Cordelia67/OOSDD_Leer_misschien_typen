@@ -13,6 +13,7 @@
 
         <!-- De zin die getypt moet worden -->
         <Label x:Name="CorrectText"
+               Text="{Binding CorrectSentence}"
                FontSize="22"
                TextColor="black"
                HorizontalOptions="Center" />
@@ -25,6 +26,7 @@
 
         <!-- Onzichtbare editor die geen ruimte inneemt -->
         <Editor x:Name="InputEditor"
+                Text="{Binding TypedText}"
                 TextChanged="InputEditor_TextChanged"
                 AutoSize="TextChanges"
                 Opacity="0"
@@ -32,11 +34,10 @@
 
         <!-- Foutenteller -->
         <Label x:Name="FoutenCount"
-                Text="Fouten: 0"
+                Text="{Binding ErrorCountText}"
                 FontSize="18"
                 HorizontalOptions="Center"
                 TextColor="black" />
-
 
         <!-- Start knop -->
         <Button Text="Start oefening"
@@ -45,5 +46,5 @@
                 HorizontalOptions="Center" />
 
     </VerticalStackLayout>
-
+    
 </ContentView>
