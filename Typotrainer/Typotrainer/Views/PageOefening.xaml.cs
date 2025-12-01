@@ -10,6 +10,7 @@ public partial class PageOefening : ContentView
     private string correctZin;
     private int AantalFouten = 0;
     private HashSet<int> foutPosities = new();
+    private Difficulty selectedDifficulty = Difficulty.Easy;  // Standaard moeilijkheid
 
     public PageOefening()
     {
@@ -21,8 +22,28 @@ public partial class PageOefening : ContentView
         correctZin = "";
 
         // Placeholder tekst tonen
-        CorrectText.Text = "Klik op start oefening om te starten.";
+        CorrectText.Text = "Kies een moeilijkheid en klik op start oefening om te starten.";
         FoutenCount.Text = $"Fouten: {AantalFouten}";
+
+        // Zet de standaard geselecteerde moeilijkheid
+        DifficultyPicker.SelectedIndex = 0; // Easy is de eerste optie
+
+        // Voeg event handler toe voor wanneer de moeilijkheid verandert
+        DifficultyPicker.SelectedIndexChanged += DifficultyPicker_SelectedIndexChanged;
+    }
+
+    private void DifficultyPicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        // Update de geselecteerde moeilijkheid wanneer de gebruiker een keuze maakt
+        if (DifficultyPicker.SelectedIndex >= 0)
+        {
+            string selected = DifficultyPicker.SelectedItem.ToString();
+            if (Enum.TryParse<Difficulty>(selected, out Difficulty difficulty))
+            {
+                selectedDifficulty = difficulty;
+                Debug.WriteLine($"Moeilijkheid gewijzigd naar: {selectedDifficulty}");
+            }
+        }
     }
 
     private void InputEditor_TextChanged(object sender, TextChangedEventArgs e)
@@ -62,7 +83,8 @@ public partial class PageOefening : ContentView
         {
             Debug.WriteLine($"Oefening voltooid! Aantal fouten: {AantalFouten}");
 
-            correctZin = _sentenceService.GetRandomSentence(Difficulty.Easy);
+            // Gebruik de geselecteerde moeilijkheid voor de volgende zin
+            correctZin = _sentenceService.GetRandomSentence(selectedDifficulty);
             CorrectText.Text = correctZin;
 
             foutPosities.Clear();
@@ -83,8 +105,8 @@ public partial class PageOefening : ContentView
         InputEditor.Text = "";
         ColoredOutput.FormattedText = new FormattedString();
 
-        //Hier wordt nu pas de random zin opgehaald
-        correctZin = _sentenceService.GetRandomSentence(Difficulty.Easy);
+        // Gebruik de geselecteerde moeilijkheid
+        correctZin = _sentenceService.GetRandomSentence(selectedDifficulty);
         CorrectText.Text = correctZin;
 
         InputEditor.IsVisible = true;
