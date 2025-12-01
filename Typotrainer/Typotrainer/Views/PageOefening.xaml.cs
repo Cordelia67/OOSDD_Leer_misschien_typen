@@ -16,7 +16,7 @@ public partial class PageOefening : ContentView
         _typingService = new TypingService();
         _sentenceService = new SentenceService();
 
-        correctZin = _sentenceService.GetRandomSentence(Difficulty.Easy);
+        correctZin = "Klik start oefening om te beginnen."; // pas een zin ophalen als de oefening start
 
         CorrectText.Text = correctZin;
         FoutenCount.Text = $"Fouten: {AantalFouten}";
@@ -80,6 +80,8 @@ public partial class PageOefening : ContentView
         // Reset
         InputEditor.Text = "";
         ColoredOutput.FormattedText = new FormattedString();
+
+        correctZin = _sentenceService.GetRandomSentence(Difficulty.Easy); // bij start een zin ophalen
 
         // Editor tonen zodat hij focus mag krijgen
         InputEditor.IsVisible = true;
