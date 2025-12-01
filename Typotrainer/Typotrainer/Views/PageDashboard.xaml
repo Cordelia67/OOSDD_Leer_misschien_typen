@@ -16,11 +16,7 @@
 
         <!-- Linksboven: Oefening starten -->
         <Frame Grid.Row="0" Grid.Column="0" Style="{StaticResource FrameGrid200}">
-            <Grid RowSpacing="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            <VerticalStackLayout Spacing="10">
                 <Grid Grid.Row="0" ColumnSpacing="15">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -44,7 +40,7 @@
                 <Label Grid.Row="1"
                        Text="Begin met een standaard typ oefening."
                        Style="{StaticResource DashUitleg}" />
-            </Grid>
+            </VerticalStackLayout>
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="PageOefeningClicked"/>
             </Frame.GestureRecognizers>
@@ -52,11 +48,7 @@
 
         <!-- Rechtsboven: Resultaten en voortgang -->
         <Frame Grid.Row="0" Grid.Column="1" Style="{StaticResource FrameGrid200}">
-            <Grid RowSpacing="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            <VerticalStackLayout Spacing="10">
                 <Grid Grid.Row="0" ColumnSpacing="15">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -80,7 +72,7 @@
                 <Label Grid.Row="1"
                        Text="Bekijk je statistieken en prestaties."
                        Style="{StaticResource DashUitleg}" />
-            </Grid>
+            </VerticalStackLayout>
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="PageResultatenClicked"/>
             </Frame.GestureRecognizers>
@@ -88,11 +80,7 @@
 
         <!-- Linksonder: Adaptieve oefening -->
         <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource FrameGrid200}">
-            <Grid RowSpacing="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            <VerticalStackLayout Spacing="10">
                 <Grid Grid.Row="0" ColumnSpacing="15">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -116,7 +104,7 @@
                 <Label Grid.Row="1"
                        Text="Genereer een oefening op basis van je niveau."
                        Style="{StaticResource DashUitleg}" />
-            </Grid>
+            </VerticalStackLayout>
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="PageAdaptieveOefeningClicked"/>
             </Frame.GestureRecognizers>
@@ -124,11 +112,7 @@
 
         <!-- Rechtsonder: Instellingen -->
         <Frame Grid.Row="1" Grid.Column="1" Style="{StaticResource FrameGrid200}">
-            <Grid RowSpacing="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            <VerticalStackLayout Spacing="10">
                 <Grid Grid.Row="0" ColumnSpacing="15">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -152,7 +136,7 @@
                 <Label Grid.Row="1"
                        Text="Pas je voorkeuren aan."
                        Style="{StaticResource DashUitleg}" />
-            </Grid>
+            </VerticalStackLayout>
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="PageInstellingenClicked"/>
             </Frame.GestureRecognizers>
