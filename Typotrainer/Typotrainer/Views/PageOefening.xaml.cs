@@ -1,64 +1,95 @@
+using Typotrainer.Services;
+using System.Diagnostics;
 namespace Typotrainer.Views;
 
 public partial class PageOefening : ContentView
 {
-    private List<string> allSentences = new List<string>();
-    private List<string> remainingSentences = new List<string>();
-    private Random random;
+    private readonly TypingService _typingService;
+    private readonly SentenceService _sentenceService;
+    private string correctZin;
+    private int AantalFouten = 0;
+    private HashSet<int> foutPosities = new();        // Om dubbele telling te voorkomen
 
     public PageOefening()
     {
-        InitializeComponent(); 
-        random = new Random(); 
-        LoadSentences(); 
+        InitializeComponent();
+        _typingService = new TypingService();
+        _sentenceService = new SentenceService();
+
+        correctZin = "Klik start oefening om te beginnen."; // pas een zin ophalen als de oefening start
+
+        CorrectText.Text = correctZin;
+        FoutenCount.Text = $"Fouten: {AantalFouten}";
     }
 
-    private async void LoadSentences()
+    private void InputEditor_TextChanged(object sender, TextChangedEventArgs e)
     {
-        var files = new[] { "makkelijk.txt", "middelmatig.txt", "moeilijk.txt" };
+        string typed = InputEditor.Text ?? "";
+        var formatted = new FormattedString();
 
-        foreach (var fileName in files)
+        for (int i = 0; i < typed.Length; i++)
         {
-            // Open het geselecteerde bestand en lees het als één string
-            using var stream = await FileSystem.OpenAppPackageFileAsync(fileName);
-            using var reader = new StreamReader(stream);
-            var content = await reader.ReadToEndAsync();
+            char typedChar = typed[i];
 
-            // Split de string tot de aparte regels en voeg het toe aan allSentences
-            var lines = content.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
+            bool correct = _typingService.IsCorrectLetter(correctZin, i, typedChar);
+
+
+            // telt fout als deze fout nog niet eerder is geteld
+            if (!correct && i < correctZin.Length)
             {
-                var sentence = line.Trim();
-                allSentences.Add(sentence);
+                if (!foutPosities.Contains(i))
+                {
+                    AantalFouten++;
+                    foutPosities.Add(i);
+                    FoutenCount.Text = $"Fouten: {AantalFouten}";   // UI bijwerken
+                }
             }
+
+            formatted.Spans.Add(new Span
+            {
+                Text = typedChar.ToString(),
+                TextColor = correct ? Colors.Green : Colors.Red
+            });
         }
 
-        // Maakt een kopie om te gebruiken voor de oefening, de andere lijst blijft compleet zodat we niet
-        // elke keer de .txt hoeven te lezen.
-        remainingSentences = new List<string>(allSentences);
+        ColoredOutput.FormattedText = formatted;
+
+        // Controleert of de zin volledig is getypt
+        if (typed.Length == correctZin.Length)
+        {
+            //debug line om fouten telling te controleren
+            Debug.WriteLine($"Oefening voltooid! Aantal fouten: {AantalFouten}");
+            // Nieuwe zin instellen later vervangen met zin select logica
+            correctZin = _sentenceService.GetRandomSentence(Difficulty.Easy);
+            CorrectText.Text = correctZin;
+
+            // Reset foutlocaties maar behoud totaal aantal fouten
+            foutPosities.Clear();
+
+            // Editor en gekleurde output resetten
+            InputEditor.Text = "";
+            ColoredOutput.FormattedText = new FormattedString();
+
+            // Focus teruggeven
+            InputEditor.Focus();
+        }
     }
 
-    private void OnVolgendeButtonClicked(object sender, EventArgs e)
+    private async void Startknop_Clicked(object sender, EventArgs e)
     {
-        if (remainingSentences.Count == 0)
-        {
-            SentenceLabel.Text = "Alle zinnen zijn geweest! Klik op Reset.";
-            return;
-        }
+        // Reset
+        InputEditor.Text = "";
+        ColoredOutput.FormattedText = new FormattedString();
 
-        // Kijk naar het aantal zinnen, kies random een, toon die, en verwijder die uit de lijst
-        int index = random.Next(remainingSentences.Count);
-        string selectedSentence = remainingSentences[index];
-        SentenceLabel.Text = selectedSentence;
-        remainingSentences.RemoveAt(index);
-    }
+        correctZin = _sentenceService.GetRandomSentence(Difficulty.Easy); // bij start een zin ophalen
 
-    private void OnResetButtonClicked(object sender, EventArgs e)
-    {
-        if (allSentences != null) // Check eerst of de zinnen al geladen zijn
-        {
-            remainingSentences = new List<string>(allSentences);
-            SentenceLabel.Text = "Klik op 'Volgende zin' om te beginnen";
-        }
+        // Editor tonen zodat hij focus mag krijgen
+        InputEditor.IsVisible = true;
+
+        // Kleine delay zodat MAUI de editor kan tonen
+        await Task.Delay(50);
+
+        // Focus terug geven
+        InputEditor.Focus();
     }
 }

@@ -1,41 +1,49 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Typotrainer.Views.PageOefening"
-             Padding="20">
-    <VerticalStackLayout Spacing="20" VerticalOptions="Center">
+             x:Class="Typotrainer.Views.PageOefening">
 
-        <!-- Tekstveld + testknoppen -->
-        <Label x:Name="SentenceLabel"
-            Text="Klik op 'Volgende zin' om te beginnen" />
-        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
-            <Button Text="Volgende zin"
-                    Clicked="OnVolgendeButtonClicked" />
+    <VerticalStackLayout Padding="30" Spacing="25">
 
-            <Button Text="Reset"
-                    Clicked="OnResetButtonClicked" />
-        </HorizontalStackLayout>
+        <!-- Titel -->
+        <Label Text="Typ onderstaande zin over."
+               FontSize="12"
+               HorizontalOptions="Center"
+               TextColor="Grey" />
 
-        <!-- Invoerveld -->
-        <Border BackgroundColor="White"
-                StrokeThickness="1"
-                Stroke="#D3D3D3"
-                Padding="20"
-                HeightRequest="150">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="12"/>
-            </Border.StrokeShape>
+        <!-- De zin die getypt moet worden -->
+        <Label x:Name="CorrectText"
+               FontSize="22"
+               TextColor="black"
+               HorizontalOptions="Center" />
 
-            <Editor Placeholder="Begin hier te typen..."
-                    FontFamily="Consolas, Monaco, monospace"
-                    FontSize="16"
-                    TextColor="#374151"
-                    PlaceholderColor="#9CA3AF"
-                    BackgroundColor="Transparent"
-                    VerticalOptions="Fill"
-                    HorizontalOptions="Fill"
-                    AutoSize="TextChanges"/>
-        </Border>
+        <!-- Gekleurde output -->
+        <Label x:Name="ColoredOutput"
+               FontSize="26"
+               HorizontalOptions="Center"
+               LineBreakMode="NoWrap" />
+
+        <!-- Onzichtbare editor die geen ruimte inneemt -->
+        <Editor x:Name="InputEditor"
+                TextChanged="InputEditor_TextChanged"
+                AutoSize="TextChanges"
+                Opacity="0"
+                HeightRequest="1" />
+
+        <!-- Foutenteller -->
+        <Label x:Name="FoutenCount"
+                Text="Fouten: 0"
+                FontSize="18"
+                HorizontalOptions="Center"
+                TextColor="black" />
+
+
+        <!-- Start knop -->
+        <Button Text="Start oefening"
+                FontSize="20"
+                Clicked="Startknop_Clicked"
+                HorizontalOptions="Center" />
 
     </VerticalStackLayout>
+
 </ContentView>
