@@ -7,10 +7,16 @@ public partial class PageOefening : ContentView
 {
     private readonly TypingService _typingService;
     private readonly SentenceService _sentenceService;
+
     private string correctZin;
     private int AantalFouten = 0;
+    private int TotaalGetypt = 0;
+    private double GemiddeldeAccuracy = 0.0;
+
+    private HashSet<int> geteldePosities = new();
     private HashSet<int> foutPosities = new();
-    private Difficulty selectedDifficulty = Difficulty.Easy;  // Standaard moeilijkheid
+
+    private Difficulty selectedDifficulty = Difficulty.Easy;
 
     public PageOefening()
     {
@@ -18,37 +24,30 @@ public partial class PageOefening : ContentView
         _typingService = new TypingService();
         _sentenceService = new SentenceService();
 
-        // ? Nog geen random zin ophalen bij opstart
         correctZin = "";
-
-        // Placeholder tekst tonen
         CorrectText.Text = "Kies een moeilijkheid en klik op start oefening om te starten.";
+
         FoutenCount.Text = $"Fouten: {AantalFouten}";
+        TotaalCount.Text = $"Totaal: {TotaalGetypt}";
 
-        // Zet de standaard geselecteerde moeilijkheid
-        DifficultyPicker.SelectedIndex = 0; // Easy is de eerste optie
-
-        // Voeg event handler toe voor wanneer de moeilijkheid verandert
+        DifficultyPicker.SelectedIndex = 0;
         DifficultyPicker.SelectedIndexChanged += DifficultyPicker_SelectedIndexChanged;
     }
 
     private void DifficultyPicker_SelectedIndexChanged(object sender, EventArgs e)
     {
-        // Update de geselecteerde moeilijkheid wanneer de gebruiker een keuze maakt
         if (DifficultyPicker.SelectedIndex >= 0)
         {
-            string selected = DifficultyPicker.SelectedItem.ToString();
-            if (Enum.TryParse<Difficulty>(selected, out Difficulty difficulty))
+            if (Enum.TryParse(DifficultyPicker.SelectedItem.ToString(), out Difficulty diff))
             {
-                selectedDifficulty = difficulty;
-                Debug.WriteLine($"Moeilijkheid gewijzigd naar: {selectedDifficulty}");
+                selectedDifficulty = diff;
+                Debug.WriteLine($"Moeilijkheid: {selectedDifficulty}");
             }
         }
     }
 
     private void InputEditor_TextChanged(object sender, TextChangedEventArgs e)
     {
-        // Als oefening nog niet gestart is ? niets doen
         if (string.IsNullOrWhiteSpace(correctZin))
             return;
 
@@ -58,8 +57,18 @@ public partial class PageOefening : ContentView
         for (int i = 0; i < typed.Length; i++)
         {
             char typedChar = typed[i];
+
+            // Tel unieke typeposities
+            if (!geteldePosities.Contains(i))
+            {
+                TotaalGetypt++;
+                geteldePosities.Add(i);
+                TotaalCount.Text = $"Totaal: {TotaalGetypt}";
+            }
+
             bool correct = _typingService.IsCorrectLetter(correctZin, i, typedChar);
 
+            // Foutentelling
             if (!correct && i < correctZin.Length)
             {
                 if (!foutPosities.Contains(i))
@@ -79,15 +88,28 @@ public partial class PageOefening : ContentView
 
         ColoredOutput.FormattedText = formatted;
 
+        // --- ACCURACY BEREKENING ---
+        if (TotaalGetypt > 0)
+        {
+            int correctAantal = TotaalGetypt - AantalFouten;
+            GemiddeldeAccuracy = (double)correctAantal / TotaalGetypt * 100.0;
+            Nauwkeurigheid.Text = GemiddeldeAccuracy.ToString("F2") + "%";
+        }
+        else
+        {
+            Nauwkeurigheid.Text = "0%";
+        }
+
+        // --- VOLGENDE ZIN ---
         if (typed.Length == correctZin.Length)
         {
-            Debug.WriteLine($"Oefening voltooid! Aantal fouten: {AantalFouten}");
+            Debug.WriteLine($"Oefening voltooid! Fouten: {AantalFouten}");
 
-            // Gebruik de geselecteerde moeilijkheid voor de volgende zin
             correctZin = _sentenceService.GetRandomSentence(selectedDifficulty);
             CorrectText.Text = correctZin;
 
             foutPosities.Clear();
+            geteldePosities.Clear();
 
             InputEditor.Text = "";
             ColoredOutput.FormattedText = new FormattedString();
@@ -97,15 +119,18 @@ public partial class PageOefening : ContentView
 
     private async void Startknop_Clicked(object sender, EventArgs e)
     {
-        // Reset
         AantalFouten = 0;
+        TotaalGetypt = 0;
+        geteldePosities.Clear();
         foutPosities.Clear();
+
         FoutenCount.Text = $"Fouten: {AantalFouten}";
+        TotaalCount.Text = $"Totaal: {TotaalGetypt}";
+        Nauwkeurigheid.Text = "0%";
 
         InputEditor.Text = "";
         ColoredOutput.FormattedText = new FormattedString();
 
-        // Gebruik de geselecteerde moeilijkheid
         correctZin = _sentenceService.GetRandomSentence(selectedDifficulty);
         CorrectText.Text = correctZin;
 

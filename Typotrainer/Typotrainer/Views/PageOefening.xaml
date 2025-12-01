@@ -37,6 +37,18 @@
                 HorizontalOptions="Center"
                 TextColor="black" />
 
+        <Label x:Name="TotaalCount"
+               Text="Totaal: 0"
+               HorizontalOptions="Center"
+               TextColor="black"
+               FontSize="18" />
+
+        <Label x:Name="Nauwkeurigheid"
+                Text="Accuracy:%100"
+                HorizontalOptions="Center"
+                TextColor="black"
+               FontSize="18"/>
+
         <!-- Moeilijkheidsgraad selectie BOVEN startknop -->
         <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
             <Picker x:Name="DifficultyPicker"
