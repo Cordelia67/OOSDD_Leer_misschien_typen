@@ -17,29 +17,12 @@
         <!-- Linksboven: Oefening starten -->
         <Frame Grid.Row="0" Grid.Column="0" Style="{StaticResource FrameGrid200}">
             <VerticalStackLayout Spacing="10">
-                <Grid Grid.Row="0" ColumnSpacing="15">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0"
-                           Source="square_play.png"
-                           WidthRequest="40"
-                           HeightRequest="40"
-                           VerticalOptions="Center"/>
-                    <Button Grid.Column="1"
-                            BackgroundColor="Transparent"
-                            Text="Oefening starten"
-                            FontSize="16"
-                            FontAttributes="Bold"
-                            TextColor="Black"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Start"
+                <HorizontalStackLayout Spacing="15">
+                    <Image Source="square_play.png" Style="{StaticResource Icon}" />
+                    <Button Text="Oefening starten" Style="{StaticResource DashKnop}"
                             Clicked="PageOefeningClicked"/>
-                </Grid>
-                <Label Grid.Row="1"
-                       Text="Begin met een standaard typ oefening."
-                       Style="{StaticResource DashUitleg}" />
+                </HorizontalStackLayout>
+                <Label Text="Begin met een standaard typ oefening." Style="{StaticResource DashUitleg}" />
             </VerticalStackLayout>
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="PageOefeningClicked"/>
@@ -49,29 +32,12 @@
         <!-- Rechtsboven: Resultaten en voortgang -->
         <Frame Grid.Row="0" Grid.Column="1" Style="{StaticResource FrameGrid200}">
             <VerticalStackLayout Spacing="10">
-                <Grid Grid.Row="0" ColumnSpacing="15">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0"
-                           Source="chart_column_increasing.png"
-                           WidthRequest="40"
-                           HeightRequest="40"
-                           VerticalOptions="Center"/>
-                    <Button Grid.Column="1"
-                            BackgroundColor="Transparent"
-                            Text="Resultaten en voortgang"
-                            FontSize="16"
-                            FontAttributes="Bold"
-                            TextColor="Black"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Start"
+                <HorizontalStackLayout Spacing="15">
+                    <Image Source="chart_column_increasing.png" Style="{StaticResource Icon}" />
+                    <Button Text="Resultaten en voortgang" Style="{StaticResource DashKnop}"
                             Clicked="PageResultatenClicked"/>
-                </Grid>
-                <Label Grid.Row="1"
-                       Text="Bekijk je statistieken en prestaties."
-                       Style="{StaticResource DashUitleg}" />
+                </HorizontalStackLayout>
+                <Label Text="Bekijk je statistieken en prestaties." Style="{StaticResource DashUitleg}" />
             </VerticalStackLayout>
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="PageResultatenClicked"/>
@@ -81,29 +47,12 @@
         <!-- Linksonder: Adaptieve oefening -->
         <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource FrameGrid200}">
             <VerticalStackLayout Spacing="10">
-                <Grid Grid.Row="0" ColumnSpacing="15">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0"
-                           Source="sparkles.png"
-                           WidthRequest="40"
-                           HeightRequest="40"
-                           VerticalOptions="Center"/>
-                    <Button Grid.Column="1"
-                            BackgroundColor="Transparent"
-                            Text="Adaptieve oefening"
-                            FontSize="16"
-                            FontAttributes="Bold"
-                            TextColor="Black"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Start"
+                <HorizontalStackLayout Spacing="15">
+                    <Image Source="sparkles.png" Style="{StaticResource Icon}" />
+                    <Button Text="Adaptieve oefening" Style="{StaticResource DashKnop}"
                             Clicked="PageAdaptieveOefeningClicked"/>
-                </Grid>
-                <Label Grid.Row="1"
-                       Text="Genereer een oefening op basis van je niveau."
-                       Style="{StaticResource DashUitleg}" />
+                </HorizontalStackLayout>
+                <Label Text="Genereer een oefening op basis van je niveau." Style="{StaticResource DashUitleg}" />
             </VerticalStackLayout>
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="PageAdaptieveOefeningClicked"/>
@@ -113,29 +62,12 @@
         <!-- Rechtsonder: Instellingen -->
         <Frame Grid.Row="1" Grid.Column="1" Style="{StaticResource FrameGrid200}">
             <VerticalStackLayout Spacing="10">
-                <Grid Grid.Row="0" ColumnSpacing="15">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0"
-                           Source="settings.png"
-                           WidthRequest="40"
-                           HeightRequest="40"
-                           VerticalOptions="Center"/>
-                    <Button Grid.Column="1"
-                            BackgroundColor="Transparent"
-                            Text="Instellingen"
-                            FontSize="16"
-                            FontAttributes="Bold"
-                            TextColor="Black"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Start"
+                <HorizontalStackLayout Spacing="15">
+                    <Image Source="settings.png" Style="{StaticResource Icon}" />
+                    <Button Text="Instellingen" Style="{StaticResource DashKnop}"
                             Clicked="PageInstellingenClicked"/>
-                </Grid>
-                <Label Grid.Row="1"
-                       Text="Pas je voorkeuren aan."
-                       Style="{StaticResource DashUitleg}" />
+                </HorizontalStackLayout>
+                <Label Text="Pas je voorkeuren aan." Style="{StaticResource DashUitleg}" />
             </VerticalStackLayout>
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="PageInstellingenClicked"/>

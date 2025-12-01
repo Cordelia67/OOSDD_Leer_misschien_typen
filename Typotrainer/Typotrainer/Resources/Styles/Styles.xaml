@@ -363,6 +363,7 @@
         <Setter Property="FontFamily" Value="Aptos" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Padding" Value="14,10" />
+        <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="MinimumHeightRequest" Value="44" />
         <Setter Property="MinimumWidthRequest" Value="44" />
         <Setter Property="VisualStateManager.VisualStateGroups">
@@ -423,7 +424,12 @@
             </VisualStateGroupList>
         </Setter>
     </Style>
-    
+
+    <Style TargetType="Image">
+        <Setter Property="HeightRequest" Value="200" />
+        <Setter Property="WidthRequest" Value="200" />
+    </Style>
+
     <!-- xkey styles -->
 
     <Style x:Key="Foutmelding" TargetType="Frame">
@@ -445,6 +451,23 @@
     <Style x:Key="FrameGrid200" TargetType="Frame">
         <Setter Property="HeightRequest" Value="200" />
         <Setter Property="HorizontalOptions" Value="Fill" />
+    </Style>
+
+    <Style x:Key="Icon" TargetType="Image">
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="WidthRequest" Value="40" />
+    </Style>
+
+    <Style x:Key="DashKnop" TargetType="Button">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <Style x:Key="DashUitleg" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Gray500}" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="Margin" Value="55,0,0,0" />
     </Style>
 
     <Style x:Key="Text16" TargetType="Label">
@@ -475,13 +498,6 @@
     <Style x:Key="TextRoodBold" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource TextRed}" />
         <Setter Property="FontAttributes" Value="Bold" />
-    </Style>
-
-    <Style x:Key="DashUitleg" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource Gray500}" />
-        <Setter Property="HorizontalOptions" Value="Start" />
-        <Setter Property="VerticalOptions" Value="Start" />
-        <Setter Property="Margin" Value="55,0,0,0" />
     </Style>
 
 </ResourceDictionary>
