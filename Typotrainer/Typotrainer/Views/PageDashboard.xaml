@@ -43,10 +43,7 @@
                 </Grid>
                 <Label Grid.Row="1"
                        Text="Begin met een standaard typ oefening."
-                       TextColor="#666666"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Start"
-                       Margin="40,0,0,0"/>
+                       Style="{StaticResource DashUitleg}" />
             </Grid>
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="PageOefeningClicked"/>
@@ -82,10 +79,7 @@
                 </Grid>
                 <Label Grid.Row="1"
                        Text="Bekijk je statistieken en prestaties."
-                       TextColor="#666666"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Start"
-                       Margin="40,0,0,0"/>
+                       Style="{StaticResource DashUitleg}" />
             </Grid>
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="PageResultatenClicked"/>
@@ -121,10 +115,7 @@
                 </Grid>
                 <Label Grid.Row="1"
                        Text="Genereer een oefening op basis van je niveau."
-                       TextColor="#666666"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Start"
-                       Margin="40,0,0,0"/>
+                       Style="{StaticResource DashUitleg}" />
             </Grid>
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="PageAdaptieveOefeningClicked"/>
@@ -160,10 +151,7 @@
                 </Grid>
                 <Label Grid.Row="1"
                        Text="Pas je voorkeuren aan."
-                       TextColor="#666666"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Start"
-                       Margin="40,0,0,0"/>
+                       Style="{StaticResource DashUitleg}" />
             </Grid>
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer Tapped="PageInstellingenClicked"/>

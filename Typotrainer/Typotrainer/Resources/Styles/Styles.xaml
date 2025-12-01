@@ -455,16 +455,16 @@
         <Setter Property="FontSize" Value="12" />
     </Style>
 
+    <Style x:Key="Bold" TargetType="Label">
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
     <Style x:Key="TextGroen" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource TextGreen}" />
     </Style>
 
     <Style x:Key="TextRood" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource TextRed}" />
-    </Style>
-
-    <Style x:Key="Bold" TargetType="Label">
-        <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
     <Style x:Key="TextGroenBold" TargetType="Label">
@@ -475,6 +475,13 @@
     <Style x:Key="TextRoodBold" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource TextRed}" />
         <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <Style x:Key="DashUitleg" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Gray500}" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="Margin" Value="55,0,0,0" />
     </Style>
 
 </ResourceDictionary>
