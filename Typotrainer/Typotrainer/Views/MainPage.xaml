@@ -20,11 +20,6 @@
         <ToolbarItem Text="Instellingen"
             Clicked="PageInstellingenClicked" />
     </ContentPage.ToolbarItems>
-    <VerticalStackLayout>
-        <Label 
-            Text="Dit is de hoofdpagina, de geselecteerde pagina zal hieronder weergeven."
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />   
-        <ContentView x:Name="SubPage"/>
-    </VerticalStackLayout>
+
+    <ContentView x:Name="SubPage"/>
 </ContentPage>

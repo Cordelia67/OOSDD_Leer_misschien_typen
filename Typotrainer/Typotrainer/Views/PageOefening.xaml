@@ -3,47 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Typotrainer.Views.PageOefening">
 
-    <VerticalStackLayout Padding="30" Spacing="25">
+    <VerticalStackLayout Style="{StaticResource Oefenpagina}">
+        <HorizontalStackLayout>
+            <Frame>
+                <HorizontalStackLayout>
+                    <Image Source="zap.png" Style="{StaticResource Icon}" />
+                    <Label Text="Snelheid: &#10;N/A"/> <!-- &#10; is een line break -->
+                </HorizontalStackLayout>
+            </Frame>
+            <Frame>
+                <HorizontalStackLayout>
+                    <Image Source="target.png" Style="{StaticResource Icon}" />
+                    <Label Text="Nauwkeurigheid: &#10;N/A"/>
+                </HorizontalStackLayout>
+            </Frame>
+            <Frame>
+                <HorizontalStackLayout>
+                    <Image Source="clock.png" Style="{StaticResource Icon}" />
+                    <Label Text="Tijd: &#10;N/A"/>
+                </HorizontalStackLayout>
+            </Frame>
+        </HorizontalStackLayout>
+        <Frame WidthRequest="500">
+            <VerticalStackLayout Style="{StaticResource Oefening}">
+            <!-- De zin die getypt moet worden -->
+            <Label x:Name="CorrectText" Style="{StaticResource Text18}" />
 
-        <!-- Titel -->
-        <Label Text="Typ onderstaande zin over."
-               FontSize="12"
-               HorizontalOptions="Center"
-               TextColor="Grey" />
+            <!-- Gekleurde output -->
+            <Label x:Name="ColoredOutput" Style="{StaticResource Text18}" />
 
-        <!-- De zin die getypt moet worden -->
-        <Label x:Name="CorrectText"
-               FontSize="22"
-               TextColor="black"
-               HorizontalOptions="Center" />
+            <!-- Foutenteller -->
+            <Label x:Name="FoutenCount" Text="Fouten: 0" Style="{StaticResource Text18}"/>
 
-        <!-- Gekleurde output -->
-        <Label x:Name="ColoredOutput"
-               FontSize="26"
-               HorizontalOptions="Center"
-               LineBreakMode="NoWrap" />
-
+            <!-- Start knop -->
+            <Button Text="Start oefening" Clicked="Startknop_Clicked" Style="{StaticResource OefeningStart}"/>
+            </VerticalStackLayout>
+        </Frame>
         <!-- Onzichtbare editor die geen ruimte inneemt -->
-        <Editor x:Name="InputEditor"
-                TextChanged="InputEditor_TextChanged"
-                AutoSize="TextChanges"
-                Opacity="0"
-                HeightRequest="1" />
-
-        <!-- Foutenteller -->
-        <Label x:Name="FoutenCount"
-                Text="Fouten: 0"
-                FontSize="18"
-                HorizontalOptions="Center"
-                TextColor="black" />
-
-
-        <!-- Start knop -->
-        <Button Text="Start oefening"
-                FontSize="20"
-                Clicked="Startknop_Clicked"
-                HorizontalOptions="Center" />
-
+        <Editor x:Name="InputEditor" TextChanged="InputEditor_TextChanged" Style="{StaticResource OefeningEditor}"/>
     </VerticalStackLayout>
 
 </ContentView>

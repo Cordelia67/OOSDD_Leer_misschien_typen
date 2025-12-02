@@ -72,6 +72,9 @@
 	  <MauiImage Include="Resources\Icons\settings.png" />
 	  <MauiImage Include="Resources\Icons\sparkles.png" />
 	  <MauiImage Include="Resources\Icons\square_play.png" />
+	  <MauiImage Include="Resources\Icons\clock.png" />
+	  <MauiImage Include="Resources\Icons\target.png" />
+	  <MauiImage Include="Resources\Icons\zap.png" />
 	  <MauiImage Include="Resources\Raw\middelmatig.txt" />
 	  <MauiImage Include="Resources\Raw\moeilijk.txt" />
 	  <AndroidInterfaceDescription Include="Resources\Raw\makkelijk.txt" />
