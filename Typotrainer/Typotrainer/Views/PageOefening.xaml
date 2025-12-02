@@ -5,14 +5,14 @@
 
     <VerticalStackLayout Padding="15" Spacing="15">
         <HorizontalStackLayout>
-            <Frame Style="{StaticResource FrameOefeningInfo}">
-                <Label Text="Snelheid: &#10;N/A" /> <!-- &#10; is geen error, het is een linebreak -->
+            <Frame>
+                <Label Text="Snelheid: N/A"/>
             </Frame>
-            <Frame Style="{StaticResource FrameOefeningInfo}">
-                <Label Text="Nauwkeurigheid: &#10;N/A"/>
+            <Frame>
+                <Label Text="Nauwkeurigheid: N/A"/>
             </Frame>
-            <Frame Style="{StaticResource FrameOefeningInfo}">
-                <Label Text="Tijd: &#10;N/A"/>
+            <Frame>
+                <Label Text="Tijd: N/A"/>
             </Frame>
         </HorizontalStackLayout>
         <Frame WidthRequest="500">
