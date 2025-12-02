@@ -17,7 +17,7 @@
         <!-- Linksboven: Oefening starten -->
         <Frame Grid.Row="0" Grid.Column="0" Style="{StaticResource FrameGrid200}">
             <VerticalStackLayout>
-                <HorizontalStackLayout>
+                <HorizontalStackLayout Style="{StaticResource DashHorizontal}">
                     <Image Source="square_play.png" Style="{StaticResource Icon}" />
                     <Button Text="Oefening starten" Style="{StaticResource DashKnop}"
                             Clicked="PageOefeningClicked"/>
@@ -32,7 +32,7 @@
         <!-- Rechtsboven: Resultaten en voortgang -->
         <Frame Grid.Row="0" Grid.Column="1" Style="{StaticResource FrameGrid200}">
             <VerticalStackLayout>
-                <HorizontalStackLayout>
+                <HorizontalStackLayout Style="{StaticResource DashHorizontal}">
                     <Image Source="chart_column_increasing.png" Style="{StaticResource Icon}" />
                     <Button Text="Resultaten en voortgang" Style="{StaticResource DashKnop}"
                             Clicked="PageResultatenClicked"/>
@@ -47,7 +47,7 @@
         <!-- Linksonder: Adaptieve oefening -->
         <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource FrameGrid200}">
             <VerticalStackLayout>
-                <HorizontalStackLayout>
+                <HorizontalStackLayout Style="{StaticResource DashHorizontal}">
                     <Image Source="sparkles.png" Style="{StaticResource Icon}" />
                     <Button Text="Adaptieve oefening" Style="{StaticResource DashKnop}"
                             Clicked="PageAdaptieveOefeningClicked"/>
@@ -62,7 +62,7 @@
         <!-- Rechtsonder: Instellingen -->
         <Frame Grid.Row="1" Grid.Column="1" Style="{StaticResource FrameGrid200}">
             <VerticalStackLayout>
-                <HorizontalStackLayout>
+                <HorizontalStackLayout Style="{StaticResource DashHorizontal}">
                     <Image Source="settings.png" Style="{StaticResource Icon}" />
                     <Button Text="Instellingen" Style="{StaticResource DashKnop}"
                             Clicked="PageInstellingenClicked"/>

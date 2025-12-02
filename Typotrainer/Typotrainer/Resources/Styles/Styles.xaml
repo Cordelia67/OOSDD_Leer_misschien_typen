@@ -430,6 +430,11 @@
         <Setter Property="WidthRequest" Value="200" />
     </Style>
 
+    <Style TargetType="HorizontalStackLayout">
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Spacing" Value="15" />
+    </Style>
+
     <!-- xkey styles -->
 
     <Style x:Key="Foutmelding" TargetType="Frame">
@@ -440,10 +445,6 @@
         <Setter Property="BackgroundColor" Value="{StaticResource InfoGray}" />
     </Style>
 
-    <Style x:Key="FrameCenter" TargetType="Frame">
-        <Setter Property="HorizontalOptions" Value="Center" />
-    </Style>
-    
     <Style x:Key="FrameGrid" TargetType="Frame">
         <Setter Property="HorizontalOptions" Value="Fill" />
     </Style>
@@ -476,6 +477,12 @@
         <Setter Property="RowSpacing" Value="20" />
         <Setter Property="ColumnSpacing" Value="20" />
     </Style>
+
+    <Style x:Key="DashHorizontal" TargetType="HorizontalStackLayout">
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="Spacing" Value="0" />
+    </Style>
+
 
     <Style x:Key="Text16" TargetType="Label">
         <Setter Property="FontSize" Value="16" />

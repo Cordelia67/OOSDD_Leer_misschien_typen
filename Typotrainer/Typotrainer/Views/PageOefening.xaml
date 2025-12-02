@@ -3,46 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Typotrainer.Views.PageOefening">
 
-    <VerticalStackLayout Padding="30" Spacing="25">
+    <VerticalStackLayout Padding="15" Spacing="15">
+        <HorizontalStackLayout>
+            <Frame>
+                <Label Text="Test1"/>
+            </Frame>
+            <Frame>
+                <Label Text="Test2"/>
+            </Frame>
+            <Frame>
+                <Label Text="Test3"/>
+            </Frame>
+        </HorizontalStackLayout>
+        <Frame>
+            <VerticalStackLayout>
+            <!-- De zin die getypt moet worden -->
+            <Label x:Name="CorrectText"
+                   FontSize="22"
+                   HorizontalOptions="Center" />
 
-        <!-- Titel -->
-        <Label Text="Typ onderstaande zin over."
-               FontSize="12"
-               HorizontalOptions="Center"
-               TextColor="Grey" />
+            <!-- Gekleurde output -->
+            <Label x:Name="ColoredOutput"
+                   FontSize="26"
+                   HorizontalOptions="Center"
+                   LineBreakMode="NoWrap" />
 
-        <!-- De zin die getypt moet worden -->
-        <Label x:Name="CorrectText"
-               FontSize="22"
-               TextColor="black"
-               HorizontalOptions="Center" />
+            <!-- Onzichtbare editor die geen ruimte inneemt -->
+            <Editor x:Name="InputEditor"
+                    TextChanged="InputEditor_TextChanged"
+                    AutoSize="TextChanges"
+                    Opacity="0"
+                    HeightRequest="1" />
 
-        <!-- Gekleurde output -->
-        <Label x:Name="ColoredOutput"
-               FontSize="26"
-               HorizontalOptions="Center"
-               LineBreakMode="NoWrap" />
-
-        <!-- Onzichtbare editor die geen ruimte inneemt -->
-        <Editor x:Name="InputEditor"
-                TextChanged="InputEditor_TextChanged"
-                AutoSize="TextChanges"
-                Opacity="0"
-                HeightRequest="1" />
-
-        <!-- Foutenteller -->
-        <Label x:Name="FoutenCount"
-                Text="Fouten: 0"
-                FontSize="18"
-                HorizontalOptions="Center"
-                TextColor="black" />
+            <!-- Foutenteller -->
+            <Label x:Name="FoutenCount"
+                    Text="Fouten: 0"
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    TextColor="black" />
 
 
-        <!-- Start knop -->
-        <Button Text="Start oefening"
-                FontSize="20"
-                Clicked="Startknop_Clicked"
-                HorizontalOptions="Center" />
+            <!-- Start knop -->
+            <Button Text="Start oefening"
+                    FontSize="20"
+                    Clicked="Startknop_Clicked"
+                    HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Frame>
 
     </VerticalStackLayout>
 
