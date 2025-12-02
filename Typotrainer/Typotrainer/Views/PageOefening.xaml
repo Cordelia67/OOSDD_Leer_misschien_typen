@@ -6,51 +6,32 @@
     <VerticalStackLayout Padding="15" Spacing="15">
         <HorizontalStackLayout>
             <Frame>
-                <Label Text="Test1"/>
+                <Label Text="Snelheid: N/A"/>
             </Frame>
             <Frame>
-                <Label Text="Test2"/>
+                <Label Text="Nauwkeurigheid: N/A"/>
             </Frame>
             <Frame>
-                <Label Text="Test3"/>
+                <Label Text="Tijd: N/A"/>
             </Frame>
         </HorizontalStackLayout>
-        <Frame>
-            <VerticalStackLayout>
+        <Frame WidthRequest="500">
+            <VerticalStackLayout Spacing="10">
             <!-- De zin die getypt moet worden -->
-            <Label x:Name="CorrectText"
-                   FontSize="22"
-                   HorizontalOptions="Center" />
+            <Label x:Name="CorrectText" Style="{StaticResource Text18}" />
 
             <!-- Gekleurde output -->
-            <Label x:Name="ColoredOutput"
-                   FontSize="26"
-                   HorizontalOptions="Center"
-                   LineBreakMode="NoWrap" />
-
-            <!-- Onzichtbare editor die geen ruimte inneemt -->
-            <Editor x:Name="InputEditor"
-                    TextChanged="InputEditor_TextChanged"
-                    AutoSize="TextChanges"
-                    Opacity="0"
-                    HeightRequest="1" />
+            <Label x:Name="ColoredOutput" Style="{StaticResource Text18}" />
 
             <!-- Foutenteller -->
-            <Label x:Name="FoutenCount"
-                    Text="Fouten: 0"
-                    FontSize="18"
-                    HorizontalOptions="Center"
-                    TextColor="black" />
-
+            <Label x:Name="FoutenCount" Text="Fouten: 0" Style="{StaticResource Text18}"/>
 
             <!-- Start knop -->
-            <Button Text="Start oefening"
-                    FontSize="20"
-                    Clicked="Startknop_Clicked"
-                    HorizontalOptions="Center" />
+            <Button Text="Start oefening" Clicked="Startknop_Clicked" Style="{StaticResource OefeningStart}"/>
             </VerticalStackLayout>
         </Frame>
-
+        <!-- Onzichtbare editor die geen ruimte inneemt -->
+        <Editor x:Name="InputEditor" TextChanged="InputEditor_TextChanged" Style="{StaticResource OefeningEditor}"/>
     </VerticalStackLayout>
 
 </ContentView>
