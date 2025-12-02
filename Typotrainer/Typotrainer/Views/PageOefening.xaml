@@ -3,20 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Typotrainer.Views.PageOefening">
 
-    <VerticalStackLayout Padding="15" Spacing="15">
+    <VerticalStackLayout Style="{StaticResource Oefenpagina}">
         <HorizontalStackLayout>
             <Frame>
-                <Label Text="Snelheid: N/A"/>
+                <HorizontalStackLayout>
+                    <Image Source="zap.png" Style="{StaticResource Icon}" />
+                    <Label Text="Snelheid: &#10;N/A"/> <!-- &#10; is een line break -->
+                </HorizontalStackLayout>
             </Frame>
             <Frame>
-                <Label Text="Nauwkeurigheid: N/A"/>
+                <HorizontalStackLayout>
+                    <Image Source="target.png" Style="{StaticResource Icon}" />
+                    <Label Text="Nauwkeurigheid: &#10;N/A"/>
+                </HorizontalStackLayout>
             </Frame>
             <Frame>
-                <Label Text="Tijd: N/A"/>
+                <HorizontalStackLayout>
+                    <Image Source="clock.png" Style="{StaticResource Icon}" />
+                    <Label Text="Tijd: &#10;N/A"/>
+                </HorizontalStackLayout>
             </Frame>
         </HorizontalStackLayout>
         <Frame WidthRequest="500">
-            <VerticalStackLayout Spacing="10">
+            <VerticalStackLayout Style="{StaticResource Oefening}">
             <!-- De zin die getypt moet worden -->
             <Label x:Name="CorrectText" Style="{StaticResource Text18}" />
 
