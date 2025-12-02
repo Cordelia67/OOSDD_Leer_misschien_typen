@@ -4,10 +4,14 @@ using System.Text.RegularExpressions;
 namespace Typotrainer.ViewModels
 {
     /// <summary>
-    /// Login ViewModel - handles login logic with database
+    /// ViewModel voor login functionaliteit
+    /// Handles authenticatie van gebruikers
     /// </summary>
     public class LoginViewModel : BaseViewModel
     {
+        private const int MinPasswordLength = 4;
+        private const int SimulatedLoadTimeMs = 2000;
+
         private readonly IUserRepository _userRepository;
 
         private string _email = string.Empty;
@@ -39,7 +43,6 @@ namespace Typotrainer.ViewModels
             set => SetProperty(ref _isErrorVisible, value);
         }
 
-        // Event voor succesvolle login
         public event EventHandler? LoginSuccessful;
 
         public LoginViewModel(IUserRepository userRepository)
@@ -49,64 +52,101 @@ namespace Typotrainer.ViewModels
 
         public async Task<bool> LoginAsync()
         {
-            // Reset foutmelding
+            ClearErrors();
+
+            if (!ValidateInput())
+                return false;
+
+            await SimulateLoading();
+
+            return await AuthenticateUser();
+        }
+
+        private void ClearErrors()
+        {
             IsErrorVisible = false;
             ErrorMessage = string.Empty;
+        }
 
-            // Validatie e-mail
+        private bool ValidateInput()
+        {
+            if (!ValidateEmail())
+                return false;
+
+            if (!ValidatePassword())
+                return false;
+
+            return true;
+        }
+
+        private bool ValidateEmail()
+        {
             if (string.IsNullOrWhiteSpace(Email))
             {
                 ShowError("Voer een e-mailadres in");
                 return false;
             }
 
-            if (!IsValidEmail(Email))
+            if (!IsValidEmailFormat(Email))
             {
                 ShowError("Voer een geldig e-mailadres in (bijv. naam@voorbeeld.nl)");
                 return false;
             }
 
-            // Validatie wachtwoord
+            return true;
+        }
+
+        private bool ValidatePassword()
+        {
             if (string.IsNullOrWhiteSpace(Password))
             {
                 ShowError("Voer een wachtwoord in");
                 return false;
             }
 
-            if (Password.Length < 4)
+            if (Password.Length < MinPasswordLength)
             {
-                ShowError("Wachtwoord moet minimaal 4 tekens bevatten");
+                ShowError($"Wachtwoord moet minimaal {MinPasswordLength} tekens bevatten");
                 return false;
             }
 
-            if (!IsValidPassword(Password))
+            if (!IsValidPasswordFormat(Password))
             {
                 ShowError("Wachtwoord mag geen ongeldige tekens bevatten");
                 return false;
             }
 
-            // Simuleer laadtijd (NFR1: binnen 2 seconden)
-            await Task.Delay(2000);
+            return true;
+        }
 
-            // Valideer login met database
+        private async Task SimulateLoading()
+        {
+            await Task.Delay(SimulatedLoadTimeMs);
+        }
+
+        private async Task<bool> AuthenticateUser()
+        {
             var user = await _userRepository.GetByEmailAsync(Email.ToLower());
 
-            if (user == null)
+            if (user == null || !IsPasswordCorrect(user.PasswordHash))
             {
                 ShowError("Ongeldige inloggegevens. Controleer je e-mail en wachtwoord.");
                 return false;
             }
 
-            // Simpele wachtwoord check (in productie zou dit gehashed zijn)
-            if (user.PasswordHash != Password)
-            {
-                ShowError("Ongeldige inloggegevens. Controleer je e-mail en wachtwoord.");
-                return false;
-            }
-
-            // Succesvolle login
-            LoginSuccessful?.Invoke(this, EventArgs.Empty);
+            TriggerLoginSuccess();
             return true;
+        }
+
+        private bool IsPasswordCorrect(string storedHash)
+        {
+            // In productie: gebruik proper password hashing (bcrypt, Argon2, etc.)
+            return storedHash == Password;
+        }
+
+        private void TriggerLoginSuccess()
+        {
+            LoginSuccessful?.Invoke(this, EventArgs.Empty);
         }
 
         private void ShowError(string message)
@@ -115,14 +155,14 @@ namespace Typotrainer.ViewModels
             IsErrorVisible = true;
         }
 
-        private bool IsValidEmail(string email)
+        private bool IsValidEmailFormat(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
                 return false;
 
             try
             {
-                string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+                const string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
                 return Regex.IsMatch(email, pattern);
             }
             catch
@@ -131,18 +171,25 @@ namespace Typotrainer.ViewModels
             }
         }
 
-        private bool IsValidPassword(string password)
+        private bool IsValidPasswordFormat(string password)
         {
             if (string.IsNullOrWhiteSpace(password))
                 return false;
 
-            if (password.Contains('\t') || password.Contains('\n') || password.Contains('\r'))
+            if (ContainsInvalidCharacters(password))
                 return false;
 
-            if (password.Length < 4)
+            if (password.Length < MinPasswordLength)
                 return false;
 
             return true;
+        }
+
+        private bool ContainsInvalidCharacters(string password)
+        {
+            return password.Contains('\t')
+                   || password.Contains('\n')
+                   || password.Contains('\r');
         }
     }
 }

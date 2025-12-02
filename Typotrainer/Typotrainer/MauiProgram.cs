@@ -22,32 +22,50 @@ namespace Typotrainer
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            // === TIJDELIJKE IN-MEMORY REPOSITORIES ===
-            // Later te vervangen door database implementaties
-            builder.Services.AddSingleton<IUserRepository, UserRepository>();
-            builder.Services.AddSingleton<IExerciseRepository, ExerciseRepository>();
-
-            // === Services ===
-            builder.Services.AddSingleton<ISentenceService, SentenceService>();
-            builder.Services.AddSingleton<ITypingService, TypingService>();
-
-            // === ViewModels ===
-            builder.Services.AddTransient<LoginViewModel>();
-            builder.Services.AddTransient<RegisterViewModel>();
-            builder.Services.AddTransient<ExerciseViewModel>();
-            builder.Services.AddTransient<DashboardViewModel>();
-
-            // === Views ===
-            builder.Services.AddTransient<PageInloggen>();
-            builder.Services.AddTransient<PageAanmelden>();
-            builder.Services.AddTransient<PageOefening>();
-            builder.Services.AddTransient<PageDashboard>();
+            RegisterRepositories(builder.Services);
+            RegisterServices(builder.Services);
+            RegisterViewModels(builder.Services);
+            RegisterViews(builder.Services);
 
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
+        }
+
+        private static void RegisterRepositories(IServiceCollection services)
+        {
+            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<IExerciseRepository, ExerciseRepository>();
+        }
+
+        private static void RegisterServices(IServiceCollection services)
+        {
+            services.AddSingleton<ISentenceService, SentenceService>();
+            services.AddSingleton<ITypingService, TypingService>();
+        }
+
+        private static void RegisterViewModels(IServiceCollection services)
+        {
+            services.AddTransient<LoginViewModel>();
+            services.AddTransient<RegisterViewModel>();
+            services.AddTransient<ExerciseViewModel>();
+            services.AddTransient<DashboardViewModel>();
+        }
+
+        private static void RegisterViews(IServiceCollection services)
+        {
+            // Shell en App
+            services.AddSingleton<AppShell>();
+            services.AddSingleton<App>();
+
+            // Pages
+            services.AddTransient<MainPage>();
+            services.AddTransient<PageInloggen>();
+            services.AddTransient<PageAanmelden>();
+            services.AddTransient<PageOefening>();
+            services.AddTransient<PageDashboard>();
         }
     }
 }

@@ -5,10 +5,14 @@ using System.Text.RegularExpressions;
 namespace Typotrainer.ViewModels
 {
     /// <summary>
-    /// Register ViewModel - handles registration logic with database
+    /// ViewModel voor gebruikersregistratie
+    /// Handles account aanmaken met real-time validatie
     /// </summary>
     public class RegisterViewModel : BaseViewModel
     {
+        private const int MinPasswordLength = 4;
+        private const int SimulatedLoadTimeMs = 1000;
+
         private readonly IUserRepository _userRepository;
 
         private string _email = string.Empty;
@@ -26,7 +30,7 @@ namespace Typotrainer.ViewModels
             set
             {
                 SetProperty(ref _email, value);
-                ValidateEmailRealTime();
+                ValidateEmailAsync();
             }
         }
 
@@ -36,7 +40,7 @@ namespace Typotrainer.ViewModels
             set
             {
                 SetProperty(ref _password, value);
-                ValidatePasswordRealTime();
+                ValidatePassword();
             }
         }
 
@@ -76,7 +80,6 @@ namespace Typotrainer.ViewModels
             set => SetProperty(ref _isGeneralErrorVisible, value);
         }
 
-        // Event voor succesvolle registratie
         public event EventHandler? RegistrationSuccessful;
 
         public RegisterViewModel(IUserRepository userRepository)
@@ -84,135 +87,188 @@ namespace Typotrainer.ViewModels
             _userRepository = userRepository;
         }
 
-        private async void ValidateEmailRealTime()
-        {
-            IsEmailErrorVisible = false;
-            IsGeneralErrorVisible = false;
-
-            if (!string.IsNullOrEmpty(Email) && Email.Contains("@"))
-            {
-                if (!IsValidEmail(Email))
-                {
-                    EmailError = "Voer een geldig e-mailadres in";
-                    IsEmailErrorVisible = true;
-                    return;
-                }
-
-                // Check of email al bestaat
-                if (await _userRepository.EmailExistsAsync(Email.ToLower()))
-                {
-                    EmailError = "Er bestaat al een account met dit e-mailadres";
-                    IsEmailErrorVisible = true;
-                }
-            }
-        }
-
-        private void ValidatePasswordRealTime()
-        {
-            IsPasswordErrorVisible = false;
-            IsGeneralErrorVisible = false;
-
-            if (!string.IsNullOrEmpty(Password))
-            {
-                if (Password.Length < 4)
-                {
-                    PasswordError = "Wachtwoord moet minimaal 4 tekens bevatten";
-                    IsPasswordErrorVisible = true;
-                }
-                else if (!IsValidPassword(Password))
-                {
-                    PasswordError = "Wachtwoord mag geen ongeldige tekens bevatten";
-                    IsPasswordErrorVisible = true;
-                }
-            }
-        }
-
         public async Task<bool> RegisterAsync()
         {
-            // Verberg foutmeldingen
-            IsEmailErrorVisible = false;
-            IsPasswordErrorVisible = false;
-            IsGeneralErrorVisible = false;
+            ClearAllErrors();
 
-            // Validatie: velden ingevuld
+            if (!ValidateAllFields())
+                return false;
+
+            if (!await ValidateEmailAvailability())
+                return false;
+
+            await SimulateAccountCreation();
+            await CreateUserAccount();
+
+            TriggerRegistrationSuccess();
+            return true;
+        }
+
+        private async void ValidateEmailAsync()
+        {
+            ClearEmailError();
+
+            if (!ShouldValidateEmail())
+                return;
+
+            if (!IsValidEmailFormat(Email))
+            {
+                ShowEmailError("Voer een geldig e-mailadres in");
+                return;
+            }
+
+            await CheckEmailAvailability();
+        }
+
+        private void ValidatePassword()
+        {
+            ClearPasswordError();
+
+            if (string.IsNullOrEmpty(Password))
+                return;
+
+            if (Password.Length < MinPasswordLength)
+            {
+                ShowPasswordError($"Wachtwoord moet minimaal {MinPasswordLength} tekens bevatten");
+            }
+            else if (!IsValidPasswordFormat(Password))
+            {
+                ShowPasswordError("Wachtwoord mag geen ongeldige tekens bevatten");
+            }
+        }
+
+        private bool ValidateAllFields()
+        {
             if (string.IsNullOrWhiteSpace(Email))
             {
-                EmailError = "Voer een e-mailadres in";
-                IsEmailErrorVisible = true;
-                GeneralError = "Vul alle velden in";
-                IsGeneralErrorVisible = true;
+                ShowEmailError("Voer een e-mailadres in");
+                ShowGeneralError("Vul alle velden in");
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(Password))
             {
-                PasswordError = "Voer een wachtwoord in";
-                IsPasswordErrorVisible = true;
-                GeneralError = "Vul alle velden in";
-                IsGeneralErrorVisible = true;
+                ShowPasswordError("Voer een wachtwoord in");
+                ShowGeneralError("Vul alle velden in");
                 return false;
             }
 
-            // Validatie: geldig email format
-            if (!IsValidEmail(Email))
+            if (!IsValidEmailFormat(Email))
             {
-                EmailError = "Voer een geldig e-mailadres in (bijv. naam@voorbeeld.nl)";
-                IsEmailErrorVisible = true;
-                GeneralError = "Controleer je gegevens";
-                IsGeneralErrorVisible = true;
+                ShowEmailError("Voer een geldig e-mailadres in (bijv. naam@voorbeeld.nl)");
+                ShowGeneralError("Controleer je gegevens");
                 return false;
             }
 
-            // Validatie: wachtwoord minimaal 4 tekens
-            if (Password.Length < 4)
+            if (Password.Length < MinPasswordLength)
             {
-                PasswordError = "Wachtwoord moet minimaal 4 tekens bevatten";
-                IsPasswordErrorVisible = true;
-                GeneralError = "Controleer je gegevens";
-                IsGeneralErrorVisible = true;
+                ShowPasswordError($"Wachtwoord moet minimaal {MinPasswordLength} tekens bevatten");
+                ShowGeneralError("Controleer je gegevens");
                 return false;
             }
 
-            // Validatie: wachtwoord geen ongeldige tekens
-            if (!IsValidPassword(Password))
+            if (!IsValidPasswordFormat(Password))
             {
-                PasswordError = "Wachtwoord mag geen ongeldige tekens bevatten";
-                IsPasswordErrorVisible = true;
-                GeneralError = "Controleer je gegevens";
-                IsGeneralErrorVisible = true;
+                ShowPasswordError("Wachtwoord mag geen ongeldige tekens bevatten");
+                ShowGeneralError("Controleer je gegevens");
                 return false;
             }
 
-            // Validatie: email bestaat al
-            if (await _userRepository.EmailExistsAsync(Email.ToLower()))
-            {
-                EmailError = "Er bestaat al een account met dit e-mailadres";
-                IsEmailErrorVisible = true;
-                GeneralError = "Dit account bestaat al";
-                IsGeneralErrorVisible = true;
-                return false;
-            }
-
-            // Simuleer account aanmaken
-            await Task.Delay(1000);
-
-            // Registreer gebruiker in database
-            var user = new User(Email.ToLower(), Password); // In productie: hash het wachtwoord!
-            await _userRepository.AddAsync(user);
-
-            // Trigger success event
-            RegistrationSuccessful?.Invoke(this, EventArgs.Empty);
             return true;
         }
 
-        private bool IsValidEmail(string email)
+        private async Task<bool> ValidateEmailAvailability()
+        {
+            if (await _userRepository.EmailExistsAsync(Email.ToLower()))
+            {
+                ShowEmailError("Er bestaat al een account met dit e-mailadres");
+                ShowGeneralError("Dit account bestaat al");
+                return false;
+            }
+
+            return true;
+        }
+
+        private async Task CheckEmailAvailability()
+        {
+            if (await _userRepository.EmailExistsAsync(Email.ToLower()))
+            {
+                ShowEmailError("Er bestaat al een account met dit e-mailadres");
+            }
+        }
+
+        private async Task SimulateAccountCreation()
+        {
+            await Task.Delay(SimulatedLoadTimeMs);
+        }
+
+        private async Task CreateUserAccount()
+        {
+            // In productie: hash het wachtwoord met bcrypt/Argon2
+            var user = new User(Email.ToLower(), Password);
+            await _userRepository.AddAsync(user);
+        }
+
+        private void TriggerRegistrationSuccess()
+        {
+            RegistrationSuccessful?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void ClearAllErrors()
+        {
+            ClearEmailError();
+            ClearPasswordError();
+            ClearGeneralError();
+        }
+
+        private void ClearEmailError()
+        {
+            IsEmailErrorVisible = false;
+            IsGeneralErrorVisible = false;
+        }
+
+        private void ClearPasswordError()
+        {
+            IsPasswordErrorVisible = false;
+            IsGeneralErrorVisible = false;
+        }
+
+        private void ClearGeneralError()
+        {
+            IsGeneralErrorVisible = false;
+        }
+
+        private void ShowEmailError(string message)
+        {
+            EmailError = message;
+            IsEmailErrorVisible = true;
+        }
+
+        private void ShowPasswordError(string message)
+        {
+            PasswordError = message;
+            IsPasswordErrorVisible = true;
+        }
+
+        private void ShowGeneralError(string message)
+        {
+            GeneralError = message;
+            IsGeneralErrorVisible = true;
+        }
+
+        private bool ShouldValidateEmail()
+        {
+            return !string.IsNullOrEmpty(Email) && Email.Contains("@");
+        }
+
+        private bool IsValidEmailFormat(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
                 return false;
 
             try
             {
-                string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+                const string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
                 return Regex.IsMatch(email, pattern);
             }
             catch
@@ -221,18 +277,22 @@ namespace Typotrainer.ViewModels
             }
         }
 
-        private bool IsValidPassword(string password)
+        private bool IsValidPasswordFormat(string password)
         {
             if (string.IsNullOrWhiteSpace(password))
                 return false;
 
-            if (password.Contains('\t') || password.Contains('\n') || password.Contains('\r'))
+            if (ContainsInvalidCharacters(password))
                 return false;
 
-            if (password.Length < 4)
-                return false;
+            return password.Length >= MinPasswordLength;
+        }
 
-            return true;
+        private bool ContainsInvalidCharacters(string password)
+        {
+            return password.Contains('\t')
+                   || password.Contains('\n')
+                   || password.Contains('\r');
         }
     }
 }

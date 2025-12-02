@@ -3,48 +3,145 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Typotrainer.Views.PageOefening">
 
-    <VerticalStackLayout Padding="30" Spacing="25">
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="25" VerticalOptions="Center">
 
-        <!-- Titel -->
-        <Label Text="Typ onderstaande zin over."
-               FontSize="12"
-               HorizontalOptions="Center"
-               TextColor="Grey" />
+            <!-- Titel -->
+            <Label Text="Typ de onderstaande zin over"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#333333"
+                   Margin="0,0,0,10" />
 
-        <!-- De zin die getypt moet worden -->
-        <Label x:Name="CorrectText"
-               Text="{Binding CorrectSentence}"
-               FontSize="22"
-               TextColor="black"
-               HorizontalOptions="Center" />
+            <!-- De zin die getypt moet worden -->
+            <Frame BackgroundColor="#F5F5F5" 
+                   Padding="20"
+                   CornerRadius="10"
+                   HasShadow="False"
+                   BorderColor="#DDDDDD"
+                   Margin="0,0,0,20">
+                <Label x:Name="CorrectText"
+                       Text="{Binding CorrectSentence}"
+                       FontSize="20"
+                       TextColor="#333333"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       LineBreakMode="WordWrap" />
+            </Frame>
 
-        <!-- Gekleurde output -->
-        <Label x:Name="ColoredOutput"
-               FontSize="26"
-               HorizontalOptions="Center"
-               LineBreakMode="NoWrap" />
+            <!-- Gekleurde output van getypte tekst -->
+            <Frame BackgroundColor="White" 
+                   Padding="20"
+                   CornerRadius="10"
+                   HasShadow="True"
+                   MinimumHeightRequest="100"
+                   Margin="0,0,0,20">
+                <VerticalStackLayout>
+                    <Label Text="Jouw input:"
+                           FontSize="12"
+                           TextColor="#666666"
+                           Margin="0,0,0,10" />
+                    <Label x:Name="ColoredOutput"
+                           FontSize="20"
+                           HorizontalOptions="Start"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Frame>
 
-        <!-- Onzichtbare editor die geen ruimte inneemt -->
-        <Editor x:Name="InputEditor"
-                Text="{Binding TypedText}"
-                TextChanged="InputEditor_TextChanged"
-                AutoSize="TextChanges"
-                Opacity="0"
-                HeightRequest="1" />
+            <!-- Input veld (nu zichtbaar) -->
+            <Frame BackgroundColor="White" 
+                   Padding="0"
+                   CornerRadius="10"
+                   HasShadow="True"
+                   Margin="0,0,0,20">
+                <Editor x:Name="InputEditor"
+                        Text="{Binding TypedText}"
+                        TextChanged="InputEditor_TextChanged"
+                        Placeholder="Begin hier te typen..."
+                        AutoSize="TextChanges"
+                        MinimumHeightRequest="60"
+                        FontSize="16"
+                        IsEnabled="False" />
+            </Frame>
 
-        <!-- Foutenteller -->
-        <Label x:Name="FoutenCount"
-                Text="{Binding ErrorCountText}"
-                FontSize="18"
-                HorizontalOptions="Center"
-                TextColor="black" />
+            <!-- Statistieken -->
+            <Grid ColumnDefinitions="*,*" 
+                  ColumnSpacing="20"
+                  Margin="0,0,0,20">
+                <Frame Grid.Column="0" 
+                       BackgroundColor="#E3F2FD"
+                       Padding="15"
+                       CornerRadius="10"
+                       HasShadow="False">
+                    <VerticalStackLayout>
+                        <Label Text="Fouten"
+                               FontSize="12"
+                               TextColor="#666666"
+                               HorizontalOptions="Center" />
+                        <Label x:Name="FoutenCount"
+                               Text="{Binding ErrorCount}"
+                               FontSize="32"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               TextColor="{Binding ErrorCount, Converter={StaticResource ErrorColorConverter}}" />
+                    </VerticalStackLayout>
+                </Frame>
 
-        <!-- Start knop -->
-        <Button Text="Start oefening"
-                FontSize="20"
-                Clicked="Startknop_Clicked"
-                HorizontalOptions="Center" />
+                <Frame Grid.Column="1" 
+                       BackgroundColor="#F3E5F5"
+                       Padding="15"
+                       CornerRadius="10"
+                       HasShadow="False">
+                    <VerticalStackLayout>
+                        <Label Text="Status"
+                               FontSize="12"
+                               TextColor="#666666"
+                               HorizontalOptions="Center" />
+                        <Label x:Name="StatusLabel"
+                               Text="Niet gestart"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               TextColor="#7B1FA2" />
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
 
-    </VerticalStackLayout>
-    
+            <!-- Start knop -->
+            <Button x:Name="StartButton"
+                    Text="Start oefening"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    Clicked="Startknop_Clicked"
+                    HorizontalOptions="Center"
+                    WidthRequest="200"
+                    HeightRequest="50"
+                    CornerRadius="25"
+                    BackgroundColor="#4CAF50"
+                    TextColor="White" />
+
+            <!-- Instructies -->
+            <Frame BackgroundColor="#FFF3E0" 
+                   Padding="15"
+                   CornerRadius="10"
+                   HasShadow="False"
+                   Margin="0,20,0,0">
+                <Label HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       LineBreakMode="WordWrap">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="💡 Tip: " 
+                                  FontAttributes="Bold"
+                                  FontSize="14" />
+                            <Span Text="Klik op 'Start oefening' en begin direct te typen. Groene letters zijn correct, rode letters zijn fout."
+                                  FontSize="14" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentView>

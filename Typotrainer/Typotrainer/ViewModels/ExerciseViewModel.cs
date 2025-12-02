@@ -6,11 +6,14 @@ using System.Diagnostics;
 namespace Typotrainer.ViewModels
 {
     /// <summary>
-    /// Exercise ViewModel - handles typing exercise logic
-    /// Behoudt de originele functionaliteit van PageOefening.xaml.cs
+    /// ViewModel voor typ oefeningen
+    /// Handles alle logica voor het oefenen van typen
     /// </summary>
     public class ExerciseViewModel : BaseViewModel
     {
+        private const int CharactersPerWord = 5;
+        private const int DefaultUserId = 1;
+
         private readonly ITypingService _typingService;
         private readonly ISentenceService _sentenceService;
         private readonly IExerciseRepository _exerciseRepository;
@@ -18,9 +21,8 @@ namespace Typotrainer.ViewModels
         private string _correctSentence = string.Empty;
         private string _typedText = string.Empty;
         private int _errorCount = 0;
-        private HashSet<int> _errorPositions = new();
-        private Stopwatch _stopwatch = new();
-        private int _currentUserId = 1; // Demo user ID
+        private readonly HashSet<int> _errorPositions = new();
+        private readonly Stopwatch _stopwatch = new();
 
         public string CorrectSentence
         {
@@ -34,7 +36,7 @@ namespace Typotrainer.ViewModels
             set
             {
                 SetProperty(ref _typedText, value);
-                OnTextChanged(value);
+                ProcessTypedText(value);
             }
         }
 
@@ -45,6 +47,8 @@ namespace Typotrainer.ViewModels
         }
 
         public string ErrorCountText => $"Fouten: {ErrorCount}";
+
+        public event EventHandler? ExerciseCompleted;
 
         public ExerciseViewModel(
             ITypingService typingService,
@@ -58,73 +62,9 @@ namespace Typotrainer.ViewModels
 
         public void StartExercise()
         {
-            // Reset alles
-            ErrorCount = 0;
-            _errorPositions.Clear();
-            TypedText = string.Empty;
-
-            // Haal random zin op
-            CorrectSentence = _sentenceService.GetRandomSentence(Domain.Models.Difficulty.Easy);
-
-            // Start timer
-            _stopwatch.Restart();
-        }
-
-        private async void OnTextChanged(string newText)
-        {
-            if (string.IsNullOrWhiteSpace(CorrectSentence))
-                return;
-
-            // Check elke letter
-            for (int i = 0; i < newText.Length; i++)
-            {
-                char typedChar = newText[i];
-                bool correct = _typingService.IsCorrectLetter(CorrectSentence, i, typedChar);
-
-                if (!correct && i < CorrectSentence.Length)
-                {
-                    if (!_errorPositions.Contains(i))
-                    {
-                        _errorPositions.Add(i);
-                        ErrorCount++;
-                        OnPropertyChanged(nameof(ErrorCountText));
-                    }
-                }
-            }
-
-            // Check of oefening compleet is
-            if (newText.Length == CorrectSentence.Length)
-            {
-                _stopwatch.Stop();
-
-                Debug.WriteLine($"Oefening voltooid! Fouten: {ErrorCount}");
-
-                // Sla resultaat op in database
-                await SaveExerciseResult();
-
-                // Start nieuwe oefening
-                StartExercise();
-            }
-        }
-
-        private async Task SaveExerciseResult()
-        {
-            var exercise = new Exercise(
-                _currentUserId,
-                CorrectSentence,
-                Domain.Models.Difficulty.Easy
-            )
-            {
-                ErrorCount = ErrorCount,
-                Duration = _stopwatch.Elapsed
-            };
-
-            // Bereken statistieken
-            exercise.CalculateAccuracy(CorrectSentence.Length);
-            exercise.CalculateWPM(CorrectSentence.Length);
-
-            // Sla op in database
-            await _exerciseRepository.AddAsync(exercise);
+            ResetExercise();
+            LoadNewSentence();
+            StartTimer();
         }
 
         public FormattedString GetColoredText()
@@ -133,17 +73,124 @@ namespace Typotrainer.ViewModels
 
             for (int i = 0; i < TypedText.Length; i++)
             {
-                char typedChar = TypedText[i];
-                bool correct = _typingService.IsCorrectLetter(CorrectSentence, i, typedChar);
-
-                formatted.Spans.Add(new Span
-                {
-                    Text = typedChar.ToString(),
-                    TextColor = correct ? Colors.Green : Colors.Red
-                });
+                formatted.Spans.Add(CreateColoredSpan(i));
             }
 
             return formatted;
+        }
+
+        private void ResetExercise()
+        {
+            ErrorCount = 0;
+            _errorPositions.Clear();
+            TypedText = string.Empty;
+        }
+
+        private void LoadNewSentence()
+        {
+            CorrectSentence = _sentenceService.GetRandomSentence(Difficulty.Easy);
+        }
+
+        private void StartTimer()
+        {
+            _stopwatch.Restart();
+        }
+
+        private void ProcessTypedText(string text)
+        {
+            if (string.IsNullOrWhiteSpace(CorrectSentence))
+                return;
+
+            if (text == null)
+                return;
+
+            CheckForErrors(text);
+
+            if (IsExerciseComplete(text))
+            {
+                CompleteExercise();
+            }
+        }
+
+        private void CheckForErrors(string text)
+        {
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (IsNewError(i, text[i]))
+                {
+                    RegisterError(i);
+                }
+            }
+        }
+
+        private bool IsNewError(int index, char typedChar)
+        {
+            return !_typingService.IsCorrectLetter(CorrectSentence, index, typedChar)
+                   && !_errorPositions.Contains(index)
+                   && index < CorrectSentence.Length;
+        }
+
+        private void RegisterError(int position)
+        {
+            _errorPositions.Add(position);
+            ErrorCount++;
+            OnPropertyChanged(nameof(ErrorCountText));
+        }
+
+        private bool IsExerciseComplete(string text)
+        {
+            return text.Length == CorrectSentence.Length;
+        }
+
+        private async void CompleteExercise()
+        {
+            _stopwatch.Stop();
+            await SaveResults();
+
+            // Trigger event voor UI update
+            ExerciseCompleted?.Invoke(this, EventArgs.Empty);
+
+            // Geef UI tijd om te updaten voordat we een nieuwe oefening starten
+            await Task.Delay(1500);
+            StartExercise();
+        }
+
+        private async Task SaveResults()
+        {
+            var exercise = CreateExercise();
+            CalculateStatistics(exercise);
+            await _exerciseRepository.AddAsync(exercise);
+
+            Debug.WriteLine($"Oefening voltooid! WPM: {exercise.WordsPerMinute}, " +
+                          $"Accuracy: {exercise.Accuracy:F1}%, Fouten: {ErrorCount}");
+        }
+
+        private Exercise CreateExercise()
+        {
+            return new Exercise(DefaultUserId, CorrectSentence, Difficulty.Easy)
+            {
+                ErrorCount = ErrorCount,
+                Duration = _stopwatch.Elapsed
+            };
+        }
+
+        private void CalculateStatistics(Exercise exercise)
+        {
+            int totalChars = CorrectSentence.Length;
+            exercise.CalculateAccuracy(totalChars);
+            exercise.CalculateWPM(totalChars);
+        }
+
+        private Span CreateColoredSpan(int index)
+        {
+            char typedChar = TypedText[index];
+            bool isCorrect = _typingService.IsCorrectLetter(CorrectSentence, index, typedChar);
+
+            return new Span
+            {
+                Text = typedChar.ToString(),
+                TextColor = isCorrect ? Colors.Green : Colors.Red
+            };
         }
     }
 }
