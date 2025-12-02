@@ -449,6 +449,10 @@
         <Setter Property="HorizontalOptions" Value="Fill" />
     </Style>
 
+    <Style x:Key="FrameOefeningInfo" TargetType="Frame">
+        <Setter Property="WidthRequest" Value="150" />
+    </Style>
+
     <Style x:Key="FrameGrid200" TargetType="Frame">
         <Setter Property="HeightRequest" Value="200" />
         <Setter Property="HorizontalOptions" Value="Fill" />

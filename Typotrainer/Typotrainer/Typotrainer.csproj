@@ -60,17 +60,14 @@
 	  <MauiAsset Include="Resources\Raw\makkelijk.txt" LogicalName="makkelijk.txt" />
 		<MauiAsset Include="Resources\Raw\middelmatig.txt" LogicalName="middelmatig.txt" />
 		<MauiAsset Include="Resources\Raw\moeilijk.txt" LogicalName="moeilijk.txt" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Remove="Resources\Icons\settings.png" />
-	  <None Remove="Resources\Icons\sparkles.png" />
-	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\Icons\chart_column_increasing.png" />
 	  <MauiImage Include="Resources\Icons\settings.png" />
 	  <MauiImage Include="Resources\Icons\sparkles.png" />
+	  <MauiImage Include="Resources\Icons\zap.png" />
+	  <MauiImage Include="Resources\Icons\clock.png" />
+	  <MauiImage Include="Resources\Icons\target.png" />
 	  <MauiImage Include="Resources\Icons\square_play.png" />
 	  <MauiImage Include="Resources\Raw\middelmatig.txt" />
 	  <MauiImage Include="Resources\Raw\moeilijk.txt" />
@@ -81,6 +78,12 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Include="Resources\Icons\clock.png" />
+	  <Page Include="Resources\Icons\target.png" />
+	  <Page Include="Resources\Icons\zap.png" />
 	</ItemGroup>
 
 	<ItemGroup>
