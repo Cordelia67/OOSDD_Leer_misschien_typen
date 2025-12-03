@@ -337,6 +337,7 @@
     <Style TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource Black}" />
         <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="FontFamily" Value="Aptos" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="BackgroundColor" Value="Transparent" />
