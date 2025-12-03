@@ -450,6 +450,12 @@
         <Setter Property="HorizontalOptions" Value="Fill" />
     </Style>
 
+    <Style x:Key="Header" TargetType="Frame">
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="Padding" Value="5" />
+    </Style>
+
     <Style x:Key="Oefenpagina" TargetType="VerticalStackLayout">
         <Setter Property="Padding" Value="15" />
         <Setter Property="Spacing" Value="15" />
@@ -491,6 +497,16 @@
     <Style x:Key="DashHorizontal" TargetType="HorizontalStackLayout">
         <Setter Property="HorizontalOptions" Value="Start" />
         <Setter Property="Spacing" Value="0" />
+    </Style>
+
+    <Style x:Key="HeaderLinks" TargetType="HorizontalStackLayout">
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="Grid.Column" Value="0" />
+    </Style>
+
+    <Style x:Key="HeaderRechts" TargetType="HorizontalStackLayout">
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="Grid.Column" Value="1" />
     </Style>
 
     <Style x:Key="Text18" TargetType="Label">
