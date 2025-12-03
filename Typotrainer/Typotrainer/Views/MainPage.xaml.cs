@@ -7,6 +7,7 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
+        SubPage.Content = new PageDashboard(); // Dashboard als startpagina
     }
 
     public void PageInloggenClicked(object sender, EventArgs e)
