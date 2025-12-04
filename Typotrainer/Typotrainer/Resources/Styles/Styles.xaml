@@ -365,7 +365,7 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Padding" Value="14,10" />
         <Setter Property="HorizontalOptions" Value="Center" />
-        <Setter Property="MinimumHeightRequest" Value="44" />
+        <Setter Property="MinimumHeightRequest" Value="40" />
         <Setter Property="MinimumWidthRequest" Value="44" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
@@ -438,6 +438,17 @@
 
     <!-- xkey styles -->
 
+    <Style x:Key="Header" TargetType="Frame">
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="HeightRequest" Value="50" />
+    </Style>
+
+    <Style x:Key="HeaderTitel" TargetType="Frame">
+        <Setter Property="Padding" Value="12,0" />
+    </Style>
+
     <Style x:Key="Foutmelding" TargetType="Frame">
         <Setter Property="BackgroundColor" Value="{StaticResource WarningYellow}" />
     </Style>
@@ -446,14 +457,13 @@
         <Setter Property="BackgroundColor" Value="{StaticResource InfoGray}" />
     </Style>
 
-    <Style x:Key="FrameGrid" TargetType="Frame">
+    <Style x:Key="FrameGrid200" TargetType="Frame">
+        <Setter Property="HeightRequest" Value="200" />
         <Setter Property="HorizontalOptions" Value="Fill" />
     </Style>
-
-    <Style x:Key="Header" TargetType="Frame">
+    
+    <Style x:Key="FrameGrid" TargetType="Frame">
         <Setter Property="HorizontalOptions" Value="Fill" />
-        <Setter Property="CornerRadius" Value="0" />
-        <Setter Property="Padding" Value="5" />
     </Style>
 
     <Style x:Key="Oefenpagina" TargetType="VerticalStackLayout">
@@ -463,35 +473,6 @@
 
     <Style x:Key="Oefening" TargetType="VerticalStackLayout">
         <Setter Property="Spacing" Value="10" />
-    </Style>
-
-    <Style x:Key="FrameGrid200" TargetType="Frame">
-        <Setter Property="HeightRequest" Value="200" />
-        <Setter Property="HorizontalOptions" Value="Fill" />
-    </Style>
-
-    <Style x:Key="Icon" TargetType="Image">
-        <Setter Property="HeightRequest" Value="40" />
-        <Setter Property="WidthRequest" Value="40" />
-    </Style>
-
-    <Style x:Key="DashKnop" TargetType="Button">
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="Margin" Value="10,0,0,0" />
-    </Style>
-
-    <Style x:Key="DashUitleg" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource Gray500}" />
-        <Setter Property="HorizontalOptions" Value="Start" />
-        <Setter Property="VerticalOptions" Value="Start" />
-        <Setter Property="Margin" Value="55,6,0,0" />
-    </Style>
-
-    <Style x:Key="DashGrid" TargetType="Grid">
-        <Setter Property="Padding" Value="15" />
-        <Setter Property="RowSpacing" Value="20" />
-        <Setter Property="ColumnSpacing" Value="20" />
     </Style>
 
     <Style x:Key="DashHorizontal" TargetType="HorizontalStackLayout">
@@ -509,8 +490,47 @@
         <Setter Property="Grid.Column" Value="1" />
     </Style>
 
+    <Style x:Key="DashGrid" TargetType="Grid">
+        <Setter Property="Padding" Value="15" />
+        <Setter Property="RowSpacing" Value="15" />
+        <Setter Property="ColumnSpacing" Value="15" />
+    </Style>
+
+    <Style x:Key="Icon" TargetType="Image">
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="WidthRequest" Value="40" />
+    </Style>
+
+    <Style x:Key="DashKnop" TargetType="Button">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="Margin" Value="10,0,0,0" />
+    </Style>
+
+    <Style x:Key="OefeningStart" TargetType="Button">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Black}" />
+    </Style>
+
+    <Style x:Key="OefeningEditor" TargetType="Editor">
+        <Setter Property="Opacity" Value="0" />
+    </Style>
+
+    <Style x:Key="DashUitleg" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Gray500}" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="Margin" Value="55,6,0,0" />
+    </Style>
+    
     <Style x:Key="Text18" TargetType="Label">
         <Setter Property="FontSize" Value="18" />
+    </Style>
+
+    <Style x:Key="Text18Bold" TargetType="Label">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
     <Style x:Key="Text16" TargetType="Label">
@@ -541,16 +561,6 @@
     <Style x:Key="TextRoodBold" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource TextRed}" />
         <Setter Property="FontAttributes" Value="Bold" />
-    </Style>
-
-    <Style x:Key="OefeningStart" TargetType="Button">
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="TextColor" Value="{StaticResource White}" />
-        <Setter Property="BackgroundColor" Value="{StaticResource Black}" />
-    </Style>
-
-    <Style x:Key="OefeningEditor" TargetType="Editor">
-        <Setter Property="Opacity" Value="0" />
     </Style>
 
 </ResourceDictionary>

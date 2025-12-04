@@ -8,14 +8,14 @@
         <Frame Style="{StaticResource Header}">
             <Grid ColumnDefinitions="*, Auto">
                 <HorizontalStackLayout Style="{StaticResource HeaderLinks}">
-                    <Frame>
-                        <Label Text="Typotrainer" FontSize="18" FontAttributes="Bold"/>
+                    <Frame Style="{StaticResource HeaderTitel}">
+                        <Label Text="Typotrainer" Style="{StaticResource Text18Bold}"/>
                     </Frame>
                     <Label x:Name="HeaderTitel"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Style="{StaticResource HeaderRechts}">
-                    <Button Text="Dashboard" Clicked="PageDashboardClicked" />
-                    <Button Text="Instellingen" Clicked="PageInstellingenClicked" />
+                    <Button Text="Dashboard" Clicked="PageDashboardClicked"/>
+                    <Button Text="Instellingen" Clicked="PageInstellingenClicked"/>
                 </HorizontalStackLayout>
             </Grid>
         </Frame>
