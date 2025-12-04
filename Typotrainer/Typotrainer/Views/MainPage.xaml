@@ -3,33 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Typotrainer.Views.MainPage"
              xmlns:ContentView="clr-namespace:Typotrainer.Views"
-             Title="TypoTrainer">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Inloggen"
-            Clicked="PageInloggenClicked" />
-        <ToolbarItem Text="Aanmelden"
-            Clicked="PageAanmeldenClicked" />
-        <ToolbarItem Text="Dashboard"
-            Clicked="PageDashboardClicked" />
-        <ToolbarItem Text="Oefening starten"
-            Clicked="PageOefeningClicked" />
-        <ToolbarItem Text="Adaptieve oefening"
-            Clicked="PageAdaptieveOefeningClicked" />
-        <ToolbarItem Text="Resultaten en voortgang"
-            Clicked="PageResultatenClicked" />
-        <ToolbarItem Text="Instellingen"
-            Clicked="PageInstellingenClicked" />
-    </ContentPage.ToolbarItems>
+             Shell.NavBarIsVisible="False">
     <VerticalStackLayout>
-        <Label 
-            x:Name="DBLabel" 
-            Text="Database checken.."
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Label 
-            Text="Dit is de hoofdpagina, de geselecteerde pagina zal hieronder weergeven."
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />   
+        <Frame Style="{StaticResource Header}">
+            <Grid ColumnDefinitions="*, Auto">
+                <HorizontalStackLayout Style="{StaticResource HeaderLinks}">
+                    <Frame Style="{StaticResource HeaderTitel}">
+                        <Label Text="Typotrainer" Style="{StaticResource Text18Bold}"/>
+                    </Frame>
+                    <Label x:Name="HeaderTitel"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Style="{StaticResource HeaderRechts}">
+                    <Button Text="Dashboard" Clicked="PageDashboardClicked"/>
+                    <Button Text="Instellingen" Clicked="PageInstellingenClicked"/>
+                </HorizontalStackLayout>
+            </Grid>
+        </Frame>
         <ContentView x:Name="SubPage"/>
     </VerticalStackLayout>
 </ContentPage>
