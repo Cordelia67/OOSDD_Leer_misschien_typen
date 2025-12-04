@@ -3,32 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Typotrainer.Views.PageInstellingen">
     <VerticalStackLayout>
-        <Label Text="Pagina voor instellingen" />
-        <Frame>
-            <Button 
-                Text="Test"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
-        </Frame>
-        <Entry 
-            Placeholder="Test invoerveld"
+        <Label 
+            Text="Pagina voor instellingen"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <Editor 
-            Placeholder="Test tekstvak"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Frame Style="{StaticResource Foutmelding}">
-            <Label Text="Foutmelding" />
-        </Frame>
-        <Frame Style="{StaticResource Info}">
-            <Label Text="Informatie" />
-        </Frame>
-        <Label Text="Groen" Style="{StaticResource TextGroen}"/>
-        <Label Text="Rood" Style="{StaticResource TextRood}"/>
-        <Label Text="Bold" Style="{StaticResource Bold}"/>
-        <Label Text="Groen" Style="{StaticResource TextGroenBold}"/>
-        <Label Text="Rood" Style="{StaticResource TextRoodBold}"/>
-
     </VerticalStackLayout>
 </ContentView>
