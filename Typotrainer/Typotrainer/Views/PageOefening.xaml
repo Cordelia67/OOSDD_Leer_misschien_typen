@@ -20,7 +20,7 @@
             <Frame>
                 <HorizontalStackLayout>
                     <Image Source="clock.png" Style="{StaticResource Icon}" />
-                    <Label Text="Tijd: &#10;N/A"/>
+                    <Label x:Name="TimerLabel" Text="Tijd: N/A"/>
                 </HorizontalStackLayout>
             </Frame>
         </HorizontalStackLayout>
