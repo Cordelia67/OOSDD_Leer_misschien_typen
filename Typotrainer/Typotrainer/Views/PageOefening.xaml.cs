@@ -23,6 +23,10 @@ public partial class PageOefening : ContentView
         // Placeholder tekst tonen
         CorrectText.Text = "Klik op start oefening om te starten.";
         FoutenCount.Text = $"Fouten: {AantalFouten}";
+
+        _timer = Dispatcher.CreateTimer();
+        _timer.Interval = TimeSpan.FromMilliseconds(1);
+        _timer.Tick += Timer_Tick;
     }
 
     private void InputEditor_TextChanged(object sender, TextChangedEventArgs e)
@@ -90,5 +94,17 @@ public partial class PageOefening : ContentView
         InputEditor.IsVisible = true;
         await Task.Delay(50);
         InputEditor.Focus();
+
+        _stopwatch.Restart();
+        _timer.Start();
+        _timerRunning = true;
+    }
+    private Stopwatch _stopwatch = new Stopwatch();
+    private bool _timerRunning = false;
+    private IDispatcherTimer _timer;
+
+    private void Timer_Tick(object sender, EventArgs e)
+    {
+        TimerLabel.Text = $"Tijd: {_stopwatch.Elapsed.TotalSeconds:0.000}";
     }
 }
