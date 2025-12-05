@@ -1,6 +1,3 @@
-using Typotrainer.Services;
-using System.Diagnostics;
-
 namespace Typotrainer.Views;
 
 public partial class PageOefening : ContentView
