@@ -20,7 +20,7 @@ namespace Typotrainer
             builder.Services.AddSingleton<SentenceService>();
 
 #if DEBUG
-            builder.Logging.AddDebug();
+    		builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
