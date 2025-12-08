@@ -10,6 +10,12 @@ public partial class PageOefening : ContentView
     private string correctZin;
     private int AantalFouten = 0;
     private HashSet<int> foutPosities = new();
+    private int totalCharactersTyped = 0;
+
+    // Timer velden
+    private Stopwatch _stopwatch = new Stopwatch();
+    private bool _timerRunning = false;
+    private IDispatcherTimer _timer;
 
     public PageOefening()
     {
@@ -17,21 +23,22 @@ public partial class PageOefening : ContentView
         _typingService = new TypingService();
         _sentenceService = new SentenceService();
 
-        // ? Nog geen random zin ophalen bij opstart
+        // No sentence yet
         correctZin = "";
 
-        // Placeholder tekst tonen
+        // Placeholder text
         CorrectText.Text = "Klik op start oefening om te starten.";
-        FoutenCount.Text = $"Fouten: {AantalFouten}";
+        UpdateStats();
 
+        // Setup timer
         _timer = Dispatcher.CreateTimer();
-        _timer.Interval = TimeSpan.FromMilliseconds(1);
+        _timer.Interval = TimeSpan.FromMilliseconds(100); // Update every 100ms
         _timer.Tick += Timer_Tick;
     }
 
     private void InputEditor_TextChanged(object sender, TextChangedEventArgs e)
     {
-        // Als oefening nog niet gestart is ? niets doen
+        // If exercise hasn't started, do nothing
         if (string.IsNullOrWhiteSpace(correctZin))
             return;
 
@@ -49,7 +56,6 @@ public partial class PageOefening : ContentView
                 {
                     AantalFouten++;
                     foutPosities.Add(i);
-                    FoutenCount.Text = $"Fouten: {AantalFouten}";
                 }
             }
 
@@ -62,13 +68,22 @@ public partial class PageOefening : ContentView
 
         ColoredOutput.FormattedText = formatted;
 
+        // Update statistieken
+        UpdateStats();
+
+        // Check of zin voltooid is
         if (typed.Length == correctZin.Length)
         {
             Debug.WriteLine($"Oefening voltooid! Aantal fouten: {AantalFouten}");
 
+            // Kijk totaal aantal karakters getypd bij alle zinnen
+            totalCharactersTyped += correctZin.Length;
+
+            // Pak nieuwe zin
             correctZin = _sentenceService.GetRandomSentence(Difficulty.Easy);
             CorrectText.Text = correctZin;
 
+            // Laat timer nog steeds door gaan zelfs na errors
             foutPosities.Clear();
 
             InputEditor.Text = "";
@@ -79,15 +94,15 @@ public partial class PageOefening : ContentView
 
     private async void Startknop_Clicked(object sender, EventArgs e)
     {
-        // Reset
+        // Reset everything
         AantalFouten = 0;
         foutPosities.Clear();
-        FoutenCount.Text = $"Fouten: {AantalFouten}";
+        totalCharactersTyped = 0;
 
         InputEditor.Text = "";
         ColoredOutput.FormattedText = new FormattedString();
 
-        //Hier wordt nu pas de random zin opgehaald
+        // Pak eerste zin
         correctZin = _sentenceService.GetRandomSentence(Difficulty.Easy);
         CorrectText.Text = correctZin;
 
@@ -95,16 +110,33 @@ public partial class PageOefening : ContentView
         await Task.Delay(50);
         InputEditor.Focus();
 
+        // Start timer
         _stopwatch.Restart();
         _timer.Start();
         _timerRunning = true;
+
+        UpdateStats();
     }
-    private Stopwatch _stopwatch = new Stopwatch();
-    private bool _timerRunning = false;
-    private IDispatcherTimer _timer;
 
     private void Timer_Tick(object sender, EventArgs e)
     {
-        TimerLabel.Text = $"Tijd: {_stopwatch.Elapsed.TotalSeconds:0.000}";
+        UpdateStats();
+    }
+
+    private void UpdateStats()
+    {
+        // Calculeer hoeveelheid tijd
+        double elapsedMinutes = _stopwatch.Elapsed.TotalMinutes;
+
+        // Calculeer WPM (Woorden Per Minuut)
+        // Standaard: 1 woord = 5 karakters
+        int currentTypedChars = (InputEditor.Text?.Length ?? 0) + totalCharactersTyped;
+        double words = currentTypedChars / 5.0;
+        double wpm = elapsedMinutes > 0 ? words / elapsedMinutes : 0;
+
+        // Update waardes
+        SnelheidLabel.Text = $"Snelheid:\n{wpm:0} WPM";
+        TimerLabel.Text = $"Tijd:\n{_stopwatch.Elapsed.Minutes:00}:{_stopwatch.Elapsed.Seconds:00}";
+        FoutenCount.Text = $"Fouten: {AantalFouten}";
     }
 }
