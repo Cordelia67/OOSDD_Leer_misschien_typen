@@ -33,11 +33,17 @@
                 <!-- Gekleurde output -->
                 <Label x:Name="ColoredOutput" Style="{StaticResource Text18}" />
 
-                <!-- Foutenteller -->
-                <Label x:Name="FoutenCount" Text="Fouten: 0" Style="{StaticResource Text18}"/>
+                <!-- Foutenteller en voortgang -->
+                <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                    <Label x:Name="FoutenCount" Text="Fouten: 0" Style="{StaticResource Text18}"/>
+                    <Label x:Name="OefeningenCount" Text="Oefeningen: 0/10" Style="{StaticResource Text18}"/>
+                </HorizontalStackLayout>
 
-                <!-- Start knop -->
-                <Button Text="Start oefening" Clicked="Startknop_Clicked" Style="{StaticResource OefeningStart}"/>
+                <!-- Start en Pauze knoppen -->
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Button x:Name="StartButton" Text="Start oefening" Clicked="Startknop_Clicked" Style="{StaticResource OefeningStart}"/>
+                    <Button x:Name="PauseButton" Text="Pauzeer" Clicked="Pauzeknop_Clicked" Style="{StaticResource OefeningStart}" IsVisible="False"/>
+                </HorizontalStackLayout>
             </VerticalStackLayout>
         </Frame>
         <!-- Onzichtbare editor die geen ruimte inneemt -->
