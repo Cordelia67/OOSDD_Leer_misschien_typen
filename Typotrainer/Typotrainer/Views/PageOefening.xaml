@@ -42,4 +42,5 @@
         <!-- Onzichtbare editor die geen ruimte inneemt -->
         <Editor x:Name="InputEditor" TextChanged="InputEditor_TextChanged" Style="{StaticResource OefeningEditor}"/>
     </VerticalStackLayout>
+
 </ContentView>

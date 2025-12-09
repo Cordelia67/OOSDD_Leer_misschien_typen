@@ -1,3 +1,6 @@
+using Typotrainer.Services;
+using System.Diagnostics;
+
 namespace Typotrainer.Views;
 
 public partial class PageOefening : ContentView
@@ -22,7 +25,7 @@ public partial class PageOefening : ContentView
         FoutenCount.Text = $"Fouten: {AantalFouten}";
 
         _timer = Dispatcher.CreateTimer();
-        _timer.Interval = TimeSpan.FromMilliseconds(1);
+        _timer.Interval = TimeSpan.FromMilliseconds(50); // 50ms in plaats van 1 om stabiliteit te verbeteren
         _timer.Tick += Timer_Tick;
     }
 
@@ -102,6 +105,39 @@ public partial class PageOefening : ContentView
 
     private void Timer_Tick(object sender, EventArgs e)
     {
-        TimerLabel.Text = $"Tijd: {_stopwatch.Elapsed.TotalSeconds:0.000}";
+        // Stop timer als view niet geladen is
+        if (Handler == null)
+        {
+            StopTimer();
+            return;
+        }
+
+        if (TimerLabel is null)
+            return;
+
+        try
+        {
+            TimerLabel.Text = $"Tijd: {_stopwatch.Elapsed.TotalSeconds:0.000}";
+        }
+        catch (ObjectDisposedException)
+        {
+            StopTimer();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Timer_Tick exception: {ex}");
+            StopTimer();
+        }
+    }
+
+    private void StopTimer()
+    {
+        if (_timer is not null)
+        {
+            _timer.Stop();
+            _timer.Tick -= Timer_Tick;
+            _timer = null;
+        }
+        _stopwatch.Stop();
     }
 }

@@ -8,8 +8,9 @@ These files will be deployed with your package and will be accessible using Esse
 
 	async Task LoadMauiAsset()
 	{
-		using var stream = await FileSystem.OpenAppPackageFileAsync("AboutAssets.txt");
+		using var stream = await FileSystem.OpenAppPackageFileAsync("makkelijk.txt");
 		using var reader = new StreamReader(stream);
-
-		var contents = reader.ReadToEnd();
+		var content = await reader.ReadToEndAsync();
+		var lines = content.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+		ProcessLines(lines);
 	}
