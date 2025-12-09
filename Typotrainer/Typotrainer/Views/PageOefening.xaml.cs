@@ -134,8 +134,15 @@ public partial class PageOefening : ContentView
         double words = currentTypedChars / 5.0;
         double wpm = elapsedMinutes > 0 ? words / elapsedMinutes : 0;
 
+        // Calculate accuracy
+        int totalCharsAttempted = currentTypedChars;
+        double accuracy = totalCharsAttempted > 0
+            ? ((totalCharsAttempted - AantalFouten) / (double)totalCharsAttempted) * 100
+            : 100;
+
         // Update waardes
         SnelheidLabel.Text = $"Snelheid:\n{wpm:0} WPM";
+        NauwkeurigheidLabel.Text = $"Nauwkeurigheid:\n{accuracy:0.0}%";
         TimerLabel.Text = $"Tijd:\n{_stopwatch.Elapsed.Minutes:00}:{_stopwatch.Elapsed.Seconds:00}";
         FoutenCount.Text = $"Fouten: {AantalFouten}";
     }
