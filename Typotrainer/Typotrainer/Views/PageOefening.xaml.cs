@@ -11,6 +11,9 @@ public partial class PageOefening : ContentView
     private int AantalFouten = 0;
     private HashSet<int> foutPosities = new();
     private int totalCharactersTyped = 0;
+    private int voltooideOefeningen = 0;
+    private const int maxOefeningen = 10;
+    private bool isPaused = false;
 
     // Timer velden
     private Stopwatch _stopwatch = new Stopwatch();
@@ -38,8 +41,8 @@ public partial class PageOefening : ContentView
 
     private void InputEditor_TextChanged(object sender, TextChangedEventArgs e)
     {
-        // If exercise hasn't started, do nothing
-        if (string.IsNullOrWhiteSpace(correctZin))
+        // If exercise hasn't started or is paused, do nothing
+        if (string.IsNullOrWhiteSpace(correctZin) || isPaused)
             return;
 
         string typed = InputEditor.Text ?? "";
@@ -78,6 +81,14 @@ public partial class PageOefening : ContentView
 
             // Kijk totaal aantal karakters getypd bij alle zinnen
             totalCharactersTyped += correctZin.Length;
+            voltooideOefeningen++;
+
+            // Check of we 10 oefeningen hebben voltooid
+            if (voltooideOefeningen >= maxOefeningen)
+            {
+                OefeningenCompleet();
+                return;
+            }
 
             // Pak nieuwe zin
             correctZin = _sentenceService.GetRandomSentence(Difficulty.Easy);
@@ -89,15 +100,26 @@ public partial class PageOefening : ContentView
             InputEditor.Text = "";
             ColoredOutput.FormattedText = new FormattedString();
             InputEditor.Focus();
+
+            UpdateStats();
         }
     }
 
     private async void Startknop_Clicked(object sender, EventArgs e)
     {
-        // Reset everything
+        // Check of we hervatten na pauze
+        if (isPaused)
+        {
+            HervattOefening();
+            return;
+        }
+
+        // Reset alle waardes
         AantalFouten = 0;
         foutPosities.Clear();
         totalCharactersTyped = 0;
+        voltooideOefeningen = 0;
+        isPaused = false;
 
         InputEditor.Text = "";
         ColoredOutput.FormattedText = new FormattedString();
@@ -114,6 +136,76 @@ public partial class PageOefening : ContentView
         _stopwatch.Restart();
         _timer.Start();
         _timerRunning = true;
+
+        // Update knoppen
+        StartButton.IsVisible = false;
+        PauseButton.IsVisible = true;
+        PauseButton.Text = "Pauzeer";
+
+        UpdateStats();
+    }
+
+    private void Pauzeknop_Clicked(object sender, EventArgs e)
+    {
+        if (isPaused)
+        {
+            HervattOefening();
+        }
+        else
+        {
+            PauzeerOefening();
+        }
+    }
+
+    private void PauzeerOefening()
+    {
+        isPaused = true;
+        _stopwatch.Stop();
+        _timer.Stop();
+
+        // Disable invoer
+        InputEditor.IsEnabled = false;
+
+        // Update knoppen
+        PauseButton.Text = "Hervat";
+        CorrectText.Text = "Oefening gepauzeerd. Klik op 'Hervat' om door te gaan.";
+    }
+
+    private async void HervattOefening()
+    {
+        isPaused = false;
+        _stopwatch.Start();
+        _timer.Start();
+
+        // Enable invoer
+        InputEditor.IsEnabled = true;
+        CorrectText.Text = correctZin;
+
+        // Update knoppen
+        PauseButton.Text = "Pauzeer";
+
+        await Task.Delay(50);
+        InputEditor.Focus();
+    }
+
+    private void OefeningenCompleet()
+    {
+        // Stop timer
+        _stopwatch.Stop();
+        _timer.Stop();
+        _timerRunning = false;
+
+        // Disable invoer
+        InputEditor.IsEnabled = false;
+
+        // Toon voltooiingsbericht
+        CorrectText.Text = "Gefeliciteerd! Je hebt 10 oefeningen voltooid!";
+        ColoredOutput.FormattedText = new FormattedString();
+
+        // Update knoppen
+        StartButton.IsVisible = true;
+        StartButton.Text = "Start nieuwe reeks";
+        PauseButton.IsVisible = false;
 
         UpdateStats();
     }
@@ -145,5 +237,6 @@ public partial class PageOefening : ContentView
         NauwkeurigheidLabel.Text = $"Nauwkeurigheid:\n{accuracy:0.0}%";
         TimerLabel.Text = $"Tijd:\n{_stopwatch.Elapsed.Minutes:00}:{_stopwatch.Elapsed.Seconds:00}";
         FoutenCount.Text = $"Fouten: {AantalFouten}";
+        OefeningenCount.Text = $"Oefeningen: {voltooideOefeningen}/{maxOefeningen}";
     }
 }
