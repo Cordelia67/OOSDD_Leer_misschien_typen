@@ -14,6 +14,7 @@ public partial class PageOefening : ContentView
     private int voltooideOefeningen = 0;
     private const int maxOefeningen = 10;
     private bool isPaused = false;
+    private int previousTextLength = 0;
 
     // Timer velden
     private Stopwatch _stopwatch = new Stopwatch();
@@ -35,7 +36,7 @@ public partial class PageOefening : ContentView
 
         // Setup timer
         _timer = Dispatcher.CreateTimer();
-        _timer.Interval = TimeSpan.FromMilliseconds(100); // Update elke 100ms in plaats van 1 om stabiliteit te verbeteren
+        _timer.Interval = TimeSpan.FromMilliseconds(100);
         _timer.Tick += Timer_Tick;
     }
 
@@ -46,6 +47,19 @@ public partial class PageOefening : ContentView
             return;
 
         string typed = InputEditor.Text ?? "";
+
+        // Controleer of gebruiker probeert te verwijderen (backspace)
+        if (typed.Length < previousTextLength)
+        {
+            // Herstel de vorige tekst (blokkeer backspace)
+            InputEditor.Text = e.OldTextValue ?? "";
+            previousTextLength = InputEditor.Text?.Length ?? 0;
+            return;
+        }
+
+        // Update de vorige tekstlengte
+        previousTextLength = typed.Length;
+
         var formatted = new FormattedString();
 
         for (int i = 0; i < typed.Length; i++)
@@ -98,6 +112,7 @@ public partial class PageOefening : ContentView
             foutPosities.Clear();
 
             InputEditor.Text = "";
+            previousTextLength = 0; // Reset lengte
             ColoredOutput.FormattedText = new FormattedString();
             InputEditor.Focus();
 
@@ -120,6 +135,7 @@ public partial class PageOefening : ContentView
         totalCharactersTyped = 0;
         voltooideOefeningen = 0;
         isPaused = false;
+        previousTextLength = 0;
 
         InputEditor.Text = "";
         ColoredOutput.FormattedText = new FormattedString();
