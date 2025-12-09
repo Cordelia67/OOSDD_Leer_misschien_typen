@@ -32,7 +32,7 @@ public partial class PageOefening : ContentView
 
         // Setup timer
         _timer = Dispatcher.CreateTimer();
-        _timer.Interval = TimeSpan.FromMilliseconds(100); // Update every 100ms
+        _timer.Interval = TimeSpan.FromMilliseconds(100); // Update elke 100ms in plaats van 1 om stabiliteit te verbeteren
         _timer.Tick += Timer_Tick;
     }
 
