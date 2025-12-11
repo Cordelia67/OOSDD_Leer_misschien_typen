@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Typotrainer.Services
+namespace Typotrainer.Core.Services
 {
     public class TypingService
     {
