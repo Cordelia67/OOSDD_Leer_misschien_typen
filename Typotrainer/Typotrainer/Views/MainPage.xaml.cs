@@ -1,5 +1,4 @@
 namespace Typotrainer.Views;
-using Typotrainer.Services;
 
 public partial class MainPage : ContentPage
 {
