@@ -1,31 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Typotrainer.Core.Interfaces;
+using Typotrainer.Core.Models;
 
-namespace Typotrainer.Services
-{
+namespace Typotrainer.Core.Services
+{ 
     public class SentenceService
     {
-        // Dictionary met per moeilijkheidsgraad een lijst zinnen
+        private readonly IFileProvider _fileProvider;
         private readonly Dictionary<Difficulty, List<string>> _sentences;
 
-        public SentenceService()
+        public SentenceService(IFileProvider fileProvider)
         {
+            _fileProvider = fileProvider;
+
             // Laadt voor elke moeilijkheidsgraad de bijbehorende tekstbestanden
             _sentences = new Dictionary<Difficulty, List<string>>
             {
-                { Difficulty.Easy, Loadfile("makkelijk.txt") },
-                { Difficulty.Medium, Loadfile("middelmatig.txt") },
-                { Difficulty.Hard, Loadfile("moeilijk.txt") }
+                { Difficulty.Easy, LoadFile("makkelijk.txt") },
+                { Difficulty.Medium, LoadFile("middelmatig.txt") },
+                { Difficulty.Hard, LoadFile("moeilijk.txt") }
             };
         }
 
-        private List<string> Loadfile(string fileName)
+        private List<string> LoadFile(string fileName)
         {
-            // Bestand openen vanuit het apppakket
-            using var stream = FileSystem.OpenAppPackageFileAsync(fileName).Result;
+            // Bestand openen via de IFileProvider interface
+            using var stream = _fileProvider.OpenAppPackageFileAsync(fileName).Result;
             using var reader = new StreamReader(stream);
 
             // Hele inhoud inlezen
