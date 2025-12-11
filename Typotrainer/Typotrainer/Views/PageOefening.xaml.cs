@@ -1,4 +1,4 @@
-using Typotrainer.Services;
+using Typotrainer.Core.Services;
 using System.Diagnostics;
 
 namespace Typotrainer.Views;
