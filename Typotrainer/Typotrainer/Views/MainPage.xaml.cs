@@ -10,18 +10,6 @@ public partial class MainPage : ContentPage
         HeaderTitel.Text = "Dashboard";
     }
 
-    public void PageInloggenClicked(object sender, EventArgs e)
-    {
-        SubPage.Content = new PageInloggen();
-        HeaderTitel.Text = "Inloggen";
-    }
-
-    public void PageAanmeldenClicked(object sender, EventArgs e)
-    {
-        SubPage.Content = new PageAanmelden();
-        HeaderTitel.Text = "Aanmelden";
-    }
-
     public void PageDashboardClicked(object sender, EventArgs e)
     {
         SubPage.Content = new PageDashboard();
@@ -57,17 +45,5 @@ public partial class MainPage : ContentPage
     {
         SubPage.Content = new PageDashboard();
         HeaderTitel.Text = "Dashboard";
-    }
-
-    public void ShowRegister()
-    {
-        SubPage.Content = new PageAanmelden();
-        HeaderTitel.Text = "Aanmelden";
-    }
-
-    public void ShowLogin()
-    {
-        SubPage.Content = new PageInloggen();
-        HeaderTitel.Text = "Inloggen";
     }
 }
