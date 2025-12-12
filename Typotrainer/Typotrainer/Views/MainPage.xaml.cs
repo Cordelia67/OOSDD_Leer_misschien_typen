@@ -2,10 +2,13 @@ namespace Typotrainer.Views;
 
 public partial class MainPage : ContentPage
 {
+    private readonly IServiceProvider _serviceProvider;
 
-    public MainPage()
+    public MainPage(IServiceProvider serviceProvider)
     {
         InitializeComponent();
+        _serviceProvider = serviceProvider;
+
         SubPage.Content = new PageDashboard(); // Dashboard als startpagina
         HeaderTitel.Text = "Dashboard";
     }
@@ -18,7 +21,8 @@ public partial class MainPage : ContentPage
 
     public void PageOefeningClicked(object sender, EventArgs e)
     {
-        SubPage.Content = new PageOefening();
+        // PageOefening komt van service provider
+        SubPage.Content = _serviceProvider.GetService<PageOefening>();
         HeaderTitel.Text = "Oefening";
     }
 

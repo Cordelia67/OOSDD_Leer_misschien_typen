@@ -1,4 +1,5 @@
 using Typotrainer.Core.Services;
+using Typotrainer.Core.Models;
 using System.Diagnostics;
 
 namespace Typotrainer.Views;
@@ -20,13 +21,16 @@ public partial class PageOefening : ContentView
     private bool _timerRunning = false;
     private IDispatcherTimer _timer;
 
-    public PageOefening()
+    // Constructor met dependency injection. Is mogelijk door registratie in MauiProgram.cs en MainPage.xaml.cs
+    public PageOefening(TypingService typingService, SentenceService sentenceService)
     {
         InitializeComponent();
-        _typingService = new TypingService();
-        _sentenceService = new SentenceService();
 
-        // No sentence yet
+        // Gebruik injecteerde services
+        _typingService = typingService;
+        _sentenceService = sentenceService;
+
+        // Lege zin totdat oefening is gestart
         correctZin = "";
 
         // Placeholder text
@@ -35,10 +39,9 @@ public partial class PageOefening : ContentView
 
         // Setup timer
         _timer = Dispatcher.CreateTimer();
-        _timer.Interval = TimeSpan.FromMilliseconds(100); // Update elke 100ms in plaats van 1 om stabiliteit te verbeteren
+        _timer.Interval = TimeSpan.FromMilliseconds(100);
         _timer.Tick += Timer_Tick;
     }
-
     private void InputEditor_TextChanged(object sender, TextChangedEventArgs e)
     {
         // If exercise hasn't started or is paused, do nothing

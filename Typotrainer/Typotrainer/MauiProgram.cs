@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Typotrainer.Services;
 using Typotrainer.Core.Services;
 using Typotrainer.Core.Interfaces;
+using Typotrainer.Views;
 
 namespace Typotrainer
 {
@@ -20,12 +21,16 @@ namespace Typotrainer
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            // Register file provider implementation
+            // Registreer file provider
             builder.Services.AddSingleton<IFileProvider, MauiFileProvider>();
 
-            // Register services from Core
+            // Registreer services van Core
             builder.Services.AddSingleton<TypingService>();
             builder.Services.AddSingleton<SentenceService>();
+
+            // Registreer pagina's voor dependency injection
+            builder.Services.AddTransient<PageOefening>(); // Transient: Nieuwe instantie elke keer
+            builder.Services.AddSingleton<MainPage>(); // Singleton: Enkele instantie
 
 #if DEBUG
             builder.Logging.AddDebug();
