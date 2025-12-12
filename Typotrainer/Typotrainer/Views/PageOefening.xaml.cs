@@ -14,7 +14,7 @@ public partial class PageOefening : ContentView
     private int voltooideOefeningen = 0;
     private const int maxOefeningen = 10;
     private bool isPaused = false;
-    private int previousTextLength = 0;
+    private int previousTextLength = 0; // Bewaar de vorige tekstlengte
 
     // Timer velden
     private Stopwatch _stopwatch = new Stopwatch();
@@ -55,6 +55,32 @@ public partial class PageOefening : ContentView
             InputEditor.Text = e.OldTextValue ?? "";
             previousTextLength = InputEditor.Text?.Length ?? 0;
             return;
+        }
+
+        // Controleer op ongeldige symbolen
+        if (typed.Length > previousTextLength && typed.Length > 0)
+        {
+            char nieuwKarakter = typed[typed.Length - 1];
+
+            // Toegestane symbolen: letters, cijfers, spaties, en ? . ! , '
+            bool isGeldig = char.IsLetterOrDigit(nieuwKarakter) ||
+                           nieuwKarakter == ' ' ||
+                           nieuwKarakter == '?' ||
+                           nieuwKarakter == '.' ||
+                           nieuwKarakter == '!' ||
+                           nieuwKarakter == ',' ||
+                           nieuwKarakter == '\'';
+
+            if (!isGeldig)
+            {
+                // Blokkeer het ongeldige karakter - herstel naar vorige tekst
+                string oudeText = e.OldTextValue ?? "";
+                InputEditor.TextChanged -= InputEditor_TextChanged;
+                InputEditor.Text = oudeText;
+                InputEditor.TextChanged += InputEditor_TextChanged;
+                previousTextLength = oudeText.Length;
+                return;
+            }
         }
 
         // Update de vorige tekstlengte
