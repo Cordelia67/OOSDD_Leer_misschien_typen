@@ -7,5 +7,6 @@
             Text="Pagina voor instellingen"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-    </VerticalStackLayout>
+		<Label Text="Kleurenblind modus" />
+	</VerticalStackLayout>
 </ContentView>
