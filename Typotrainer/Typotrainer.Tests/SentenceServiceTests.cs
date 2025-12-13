@@ -46,5 +46,35 @@ namespace Typotrainer.Tests
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Does.StartWith("Makkelijke zin"));
         }
+
+        [Test]
+        public void GetRandomSentence_Middelmatig_ReturnsMediumSentence()
+        {
+            string result = _sentenceService.GetRandomSentence(Difficulty.Medium);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Does.StartWith("Middelmatige zin"));
+        }
+
+        [Test]
+        public void GetRandomSentence_Moeilijk_ReturnsHardSentence()
+        {
+            string result = _sentenceService.GetRandomSentence(Difficulty.Hard);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Does.StartWith("Moeilijke zin"));
+        }
+
+        [Test]
+        public void GetRandomSentence_CalledMultipleTimes_ReturnsSentences()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                string result = _sentenceService.GetRandomSentence(Difficulty.Easy);
+
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result, Does.StartWith("Makkelijke zin"));
+            }
+        }
     }
 }
