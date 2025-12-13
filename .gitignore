@@ -52,12 +52,5 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
-/.vs/OOSDD_Leer_misschien_typen_v2/v17/.wsuo
-/.vs/OOSDD_Leer_misschien_typen_v2/v17/DocumentLayout.json
-/Typotrainer/.vs/Typotrainer/CopilotIndices/17.14.1518.61961/CodeChunks.db
-/Typotrainer/.vs/Typotrainer/CopilotIndices/17.14.1518.61961/CodeChunks.db-shm
-/Typotrainer/.vs/Typotrainer/CopilotIndices/17.14.1518.61961/CodeChunks.db-wal
-/Typotrainer/.vs/Typotrainer/CopilotIndices/17.14.1518.61961/SemanticSymbols.db
-/Typotrainer/.vs/Typotrainer/CopilotIndices/17.14.1518.61961/SemanticSymbols.db-shm
-/Typotrainer/.vs/Typotrainer/CopilotIndices/17.14.1518.61961/SemanticSymbols.db-wal
+.vs/
 *.vsidx
