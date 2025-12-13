@@ -1,26 +1,16 @@
 namespace Typotrainer.Views;
-using Typotrainer.Services;
 
 public partial class MainPage : ContentPage
 {
+    private readonly IServiceProvider _serviceProvider;
 
-    public MainPage()
+    public MainPage(IServiceProvider serviceProvider)
     {
         InitializeComponent();
+        _serviceProvider = serviceProvider;
+
         SubPage.Content = new PageDashboard(); // Dashboard als startpagina
         HeaderTitel.Text = "Dashboard";
-    }
-
-    public void PageInloggenClicked(object sender, EventArgs e)
-    {
-        SubPage.Content = new PageInloggen();
-        HeaderTitel.Text = "Inloggen";
-    }
-
-    public void PageAanmeldenClicked(object sender, EventArgs e)
-    {
-        SubPage.Content = new PageAanmelden();
-        HeaderTitel.Text = "Aanmelden";
     }
 
     public void PageDashboardClicked(object sender, EventArgs e)
@@ -31,7 +21,8 @@ public partial class MainPage : ContentPage
 
     public void PageOefeningClicked(object sender, EventArgs e)
     {
-        SubPage.Content = new PageOefening();
+        // PageOefening komt van service provider
+        SubPage.Content = _serviceProvider.GetService<PageOefening>();
         HeaderTitel.Text = "Oefening";
     }
 
@@ -58,17 +49,5 @@ public partial class MainPage : ContentPage
     {
         SubPage.Content = new PageDashboard();
         HeaderTitel.Text = "Dashboard";
-    }
-
-    public void ShowRegister()
-    {
-        SubPage.Content = new PageAanmelden();
-        HeaderTitel.Text = "Aanmelden";
-    }
-
-    public void ShowLogin()
-    {
-        SubPage.Content = new PageInloggen();
-        HeaderTitel.Text = "Inloggen";
     }
 }
