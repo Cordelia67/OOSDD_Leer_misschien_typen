@@ -1,4 +1,4 @@
-﻿namespace Typotrainer.Models;
+﻿namespace Typotrainer.Core.Models;
 
 public class ExerciseSessionResult
 {

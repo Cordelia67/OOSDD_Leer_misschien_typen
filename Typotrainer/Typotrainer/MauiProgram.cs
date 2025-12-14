@@ -27,11 +27,12 @@ namespace Typotrainer
             // Registreer services van Core
             builder.Services.AddSingleton<TypingService>();
             builder.Services.AddSingleton<SentenceService>();
+            builder.Services.AddSingleton<StatsStorageService>();
 
             // Registreer pagina's voor dependency injection
             builder.Services.AddTransient<PageOefening>(); // Transient: Nieuwe instantie elke keer
             builder.Services.AddSingleton<MainPage>(); // Singleton: Enkele instantie
-
+            builder.Services.AddTransient<PageResultaten>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

@@ -1,3 +1,4 @@
+using Typotrainer.Core.Services;
 using Typotrainer.Services;
 
 namespace Typotrainer.Views;
@@ -6,9 +7,10 @@ public partial class PageResultaten : ContentView
 {
     private readonly StatsStorageService _storage = new();
 
-    public PageResultaten()
+    public PageResultaten(StatsStorageService statsStorageService)
     {
         InitializeComponent();
+        _storage = statsStorageService;
         LoadStats();
     }
 

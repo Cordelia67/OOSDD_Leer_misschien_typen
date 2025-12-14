@@ -1,7 +1,6 @@
 using Typotrainer.Core.Services;
 using Typotrainer.Core.Models;
 using System.Diagnostics;
-using Typotrainer.Models;
 
 namespace Typotrainer.Views;
 

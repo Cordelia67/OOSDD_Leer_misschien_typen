@@ -34,7 +34,7 @@ public partial class MainPage : ContentPage
 
     public void PageResultatenClicked(object sender, EventArgs e)
     {
-        SubPage.Content = new PageResultaten();
+        SubPage.Content = _serviceProvider.GetService<PageResultaten>();
         HeaderTitel.Text = "Resultaten";
     }
 

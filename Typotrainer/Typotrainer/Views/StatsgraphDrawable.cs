@@ -1,4 +1,4 @@
-﻿using Typotrainer.Models;
+﻿using Typotrainer.Core.Models;
 
 namespace Typotrainer.Views;
 

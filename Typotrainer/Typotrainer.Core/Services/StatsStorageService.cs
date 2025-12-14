@@ -1,6 +1,6 @@
-﻿using Typotrainer.Models;
+﻿using Typotrainer.Core.Models;
 
-namespace Typotrainer.Services;
+namespace Typotrainer.Core.Services;
 
 public class StatsStorageService
 {
