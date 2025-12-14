@@ -1,12 +1,17 @@
 ﻿using Typotrainer.Core.Models;
-
+using Typotrainer.Core.Interfaces;
 namespace Typotrainer.Core.Services;
 
 public class StatsStorageService
 {
-    private readonly string _filePath =
-        Path.Combine(FileSystem.AppDataDirectory, "typing_stats.txt");
-   // ^ staat in C:\Users\<jouw naam>\AppData\Local\Packages\com.companyname.voorbeeldmainpage_9zz4h110yvjzm\LocalState
+    private readonly string _filePath;
+
+    public StatsStorageService(IStoragePathProvider pathProvider)
+    {
+        _filePath = Path.Combine(pathProvider.GetAppDataDirectory(), "typing_stats.txt");
+        // ^ staat in C:\Users\<jouw naam>\AppData\Local\Packages\com.companyname.voorbeeldmainpage_9zz4h110yvjzm\LocalState
+    }
+
     public async Task SaveAsync(ExerciseSessionResult result)
     {
         await File.AppendAllTextAsync(_filePath, result + Environment.NewLine);

@@ -5,18 +5,18 @@ namespace Typotrainer.Views;
 
 public partial class PageResultaten : ContentView
 {
-    private readonly StatsStorageService _storage = new();
+    private readonly StatsStorageService _statsStorageService;
 
     public PageResultaten(StatsStorageService statsStorageService)
     {
         InitializeComponent();
-        _storage = statsStorageService;
+        _statsStorageService = statsStorageService;
         LoadStats();
     }
 
     private async void LoadStats()
     {
-        var stats = await _storage.LoadAsync();
+        var stats = await _statsStorageService.LoadAsync();
 
         StatsGraph.Drawable = new StatsGraphDrawable(stats);
 

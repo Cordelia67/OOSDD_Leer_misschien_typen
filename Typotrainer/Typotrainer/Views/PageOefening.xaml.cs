@@ -8,7 +8,7 @@ public partial class PageOefening : ContentView
 {
     private readonly TypingService _typingService;
     private readonly SentenceService _sentenceService;
-    private readonly StatsStorageService _statsStorage = new();
+    private readonly StatsStorageService _statsStorageService;
     private string correctZin;
     private int AantalFouten = 0;
     private HashSet<int> foutPosities = new();
@@ -24,13 +24,14 @@ public partial class PageOefening : ContentView
     private IDispatcherTimer _timer;
 
     // Constructor met dependency injection. Is mogelijk door registratie in MauiProgram.cs en MainPage.xaml.cs
-    public PageOefening(TypingService typingService, SentenceService sentenceService)
+    public PageOefening(TypingService typingService, SentenceService sentenceService, StatsStorageService statsStorageService)
     {
         InitializeComponent();
 
         // Gebruik injecteerde services
         _typingService = typingService;
         _sentenceService = sentenceService;
+        _statsStorageService = statsStorageService;
 
         // Lege zin totdat oefening is gestart
         correctZin = "";
@@ -258,7 +259,7 @@ public partial class PageOefening : ContentView
             Mistakes = AantalFouten
         };
         // Sla het resultaat op
-        await _statsStorage.SaveAsync(result);
+        await _statsStorageService.SaveAsync(result);
 
         CorrectText.Text = "Gefeliciteerd! Je hebt 10 oefeningen voltooid!";
         ColoredOutput.FormattedText = new();

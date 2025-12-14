@@ -23,6 +23,7 @@ namespace Typotrainer
 
             // Registreer file provider
             builder.Services.AddSingleton<IFileProvider, MauiFileProvider>();
+            builder.Services.AddSingleton<IStoragePathProvider, MauiStoragePathProvider>();
 
             // Registreer services van Core
             builder.Services.AddSingleton<TypingService>();
