@@ -8,6 +8,7 @@ public partial class PageOefening : ContentView
 {
     private readonly TypingService _typingService;
     private readonly SentenceService _sentenceService;
+    private readonly StatsStorageService _statsStorageService;
     private string correctZin;
     private int AantalFouten = 0;
     private HashSet<int> foutPosities = new();
@@ -23,13 +24,14 @@ public partial class PageOefening : ContentView
     private IDispatcherTimer _timer;
 
     // Constructor met dependency injection. Is mogelijk door registratie in MauiProgram.cs en MainPage.xaml.cs
-    public PageOefening(TypingService typingService, SentenceService sentenceService)
+    public PageOefening(TypingService typingService, SentenceService sentenceService, StatsStorageService statsStorageService)
     {
         InitializeComponent();
 
         // Gebruik injecteerde services
         _typingService = typingService;
         _sentenceService = sentenceService;
+        _statsStorageService = statsStorageService;
 
         // Lege zin totdat oefening is gestart
         correctZin = "";
@@ -233,27 +235,42 @@ public partial class PageOefening : ContentView
         InputEditor.Focus();
     }
 
-    private void OefeningenCompleet()
+    private async void OefeningenCompleet()
     {
         // Stop timer
         _stopwatch.Stop();
         _timer.Stop();
-        _timerRunning = false;
 
-        // Disable invoer
         InputEditor.IsEnabled = false;
+        // Bereken uiteindelijke statistieken
+        double elapsedMinutes = _stopwatch.Elapsed.TotalMinutes;
+        double words = totalCharactersTyped / 5.0;
+        double wpm = elapsedMinutes > 0 ? words / elapsedMinutes : 0;
+        double accuracy = totalCharactersTyped > 0
+            ? ((totalCharactersTyped - AantalFouten) / (double)totalCharactersTyped) * 100
+            : 100;
+        // Sla statistieken op
+        var result = new ExerciseSessionResult
+        {
+            Date = DateTime.Now,
+            Wpm = wpm,
+            Accuracy = accuracy,
+            TotalTime = _stopwatch.Elapsed,
+            Mistakes = AantalFouten
+        };
+        // Sla het resultaat op
+        await _statsStorageService.SaveAsync(result);
 
-        // Toon voltooiingsbericht
         CorrectText.Text = "Gefeliciteerd! Je hebt 10 oefeningen voltooid!";
-        ColoredOutput.FormattedText = new FormattedString();
+        ColoredOutput.FormattedText = new();
 
-        // Update knoppen
         StartButton.IsVisible = true;
         StartButton.Text = "Start nieuwe reeks";
         PauseButton.IsVisible = false;
 
         UpdateStats();
     }
+
 
     private void Timer_Tick(object sender, EventArgs e)
     {
