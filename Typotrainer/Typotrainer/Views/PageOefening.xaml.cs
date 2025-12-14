@@ -1,6 +1,7 @@
 using Typotrainer.Core.Services;
 using Typotrainer.Core.Models;
 using System.Diagnostics;
+using Typotrainer.Models;
 
 namespace Typotrainer.Views;
 
@@ -8,6 +9,7 @@ public partial class PageOefening : ContentView
 {
     private readonly TypingService _typingService;
     private readonly SentenceService _sentenceService;
+    private readonly StatsStorageService _statsStorage = new();
     private string correctZin;
     private int AantalFouten = 0;
     private HashSet<int> foutPosities = new();
@@ -233,27 +235,42 @@ public partial class PageOefening : ContentView
         InputEditor.Focus();
     }
 
-    private void OefeningenCompleet()
+    private async void OefeningenCompleet()
     {
         // Stop timer
         _stopwatch.Stop();
         _timer.Stop();
-        _timerRunning = false;
 
-        // Disable invoer
         InputEditor.IsEnabled = false;
+        // Bereken uiteindelijke statistieken
+        double elapsedMinutes = _stopwatch.Elapsed.TotalMinutes;
+        double words = totalCharactersTyped / 5.0;
+        double wpm = elapsedMinutes > 0 ? words / elapsedMinutes : 0;
+        double accuracy = totalCharactersTyped > 0
+            ? ((totalCharactersTyped - AantalFouten) / (double)totalCharactersTyped) * 100
+            : 100;
+        // Sla statistieken op
+        var result = new ExerciseSessionResult
+        {
+            Date = DateTime.Now,
+            Wpm = wpm,
+            Accuracy = accuracy,
+            TotalTime = _stopwatch.Elapsed,
+            Mistakes = AantalFouten
+        };
+        // Sla het resultaat op
+        await _statsStorage.SaveAsync(result);
 
-        // Toon voltooiingsbericht
         CorrectText.Text = "Gefeliciteerd! Je hebt 10 oefeningen voltooid!";
-        ColoredOutput.FormattedText = new FormattedString();
+        ColoredOutput.FormattedText = new();
 
-        // Update knoppen
         StartButton.IsVisible = true;
         StartButton.Text = "Start nieuwe reeks";
         PauseButton.IsVisible = false;
 
         UpdateStats();
     }
+
 
     private void Timer_Tick(object sender, EventArgs e)
     {
