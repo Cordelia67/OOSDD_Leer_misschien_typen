@@ -62,6 +62,27 @@ public partial class PageOefening : ContentView
             return;
         }
 
+        // Controleer op dubbele spaties
+        if (typed.Length > previousTextLength && typed.Length >= 2)
+        {
+            // Check of de laatste twee karakters beide spaties zijn
+            if (typed.Length >= 2 && typed[typed.Length - 1] == ' ' && typed[typed.Length - 2] == ' ')
+            {
+                // Verwijder de laatste spatie
+                string oudeText = typed.Substring(0, typed.Length - 1);
+                InputEditor.TextChanged -= InputEditor_TextChanged;
+                InputEditor.Text = oudeText;
+                InputEditor.TextChanged += InputEditor_TextChanged;
+
+                // Tel dit als een fout
+                AantalFouten++;
+
+                previousTextLength = oudeText.Length;
+                UpdateStats();
+                return;
+            }
+        }
+
         // Controleer op ongeldige symbolen
         if (typed.Length > previousTextLength && typed.Length > 0)
         {
