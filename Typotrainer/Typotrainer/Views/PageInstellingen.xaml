@@ -2,55 +2,11 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Typotrainer.Views.PageInstellingen">
-    <ScrollView>
-        <VerticalStackLayout Padding="24" Spacing="24">
-            <Label Text="Instellingen" Style="{StaticResource Text18Bold}" HorizontalOptions="Start" />
-            <Frame HorizontalOptions="Fill" Padding="20,16">
-                <VerticalStackLayout Spacing="16">
-                    <Label Text="Toegankelijkheid" Style="{StaticResource Text18Bold}" HorizontalOptions="Start" />
-                    <Grid ColumnSpacing="12">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <VerticalStackLayout Spacing="4">
-                            <Label Text="Kleurenblind modus" Style="{StaticResource Text16}" HorizontalOptions="Start" />
-                            <Label Text="Vervangt rood/groen feedback door hoge-contrast kleuren en extra accentuering."
-                                   Style="{StaticResource Text12}"
-                                   TextColor="{StaticResource Gray600}"
-                                   HorizontalOptions="Start" />
-                        </VerticalStackLayout>
-                        <Switch x:Name="ColorBlindSwitch"
-                                Grid.Column="1"
-                                HorizontalOptions="End"
-                                VerticalOptions="Center"
-                                SemanticProperties.Description="Schakel hoge-contrast feedback voor oefeningen in of uit."
-                                Toggled="OnColorBlindSwitchToggled" />
-                    </Grid>
-
-                    <BoxView HeightRequest="1"
-                             BackgroundColor="{StaticResource Gray200}"
-                             HorizontalOptions="Fill" />
-
-                    <VerticalStackLayout Spacing="8">
-                        <Label Text="Voorbeeld feedback" Style="{StaticResource Text16}" HorizontalOptions="Start" />
-                        <Frame BackgroundColor="{StaticResource InfoGray}"
-                               Padding="12"
-                               HorizontalOptions="Fill">
-                            <VerticalStackLayout Spacing="6">
-                                <Label x:Name="PreviewCorrectLabel"
-                                       Text="✓ Correcte letter"
-                                       Style="{StaticResource Text16}"
-                                       HorizontalOptions="Start" />
-                                <Label x:Name="PreviewIncorrectLabel"
-                                       Text="✕ Foute letter"
-                                       Style="{StaticResource Text16}"
-                                       HorizontalOptions="Start" />
-                            </VerticalStackLayout>
-                        </Frame>
-                    </VerticalStackLayout>
-                </VerticalStackLayout>
-            </Frame>
-        </VerticalStackLayout>
-    </ScrollView>
+    <VerticalStackLayout>
+        <Label 
+            Text="Pagina voor instellingen"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+		<Label Text="Kleurenblind modus" />
+	</VerticalStackLayout>
 </ContentView>

@@ -61,17 +61,3 @@ nunit-*.xml
 /Typotrainer/.vs/Typotrainer/CopilotIndices/17.14.1518.61961/SemanticSymbols.db-shm
 /Typotrainer/.vs/Typotrainer/CopilotIndices/17.14.1518.61961/SemanticSymbols.db-wal
 *.vsidx
-
-# Visual Studio
-.vs/
-
-# Copilot / index caches
-CopilotIndices/
-FileContentIndex/
-**/CopilotIndices/
-**/FileContentIndex/
-*.copilot*
-/.vs/OOSDD_Leer_misschien_typen/CopilotIndices/17.14.1518.61961/CodeChunks.db
-/.vs/OOSDD_Leer_misschien_typen/CopilotIndices/17.14.1518.61961/SemanticSymbols.db
-/Typotrainer/.vs/Typotrainer/CopilotIndices/17.14.1231.31060/CodeChunks.db
-/Typotrainer/.vs/Typotrainer/CopilotIndices/17.14.1231.31060/SemanticSymbols.db

@@ -3,31 +3,15 @@
   "WorkspaceRootPath": "C:\\Users\\nickt\\source\\repos\\Nicknamee\\OOSDD_Leer_misschien_typen\\Typotrainer\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer\\Typotrainer.csproj|c:\\users\\nickt\\source\\repos\\nicknamee\\oosdd_leer_misschien_typen\\typotrainer\\typotrainer\\views\\pageoefening.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer\\Typotrainer.csproj|solutionrelative:typotrainer\\views\\pageoefening.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer\\Typotrainer.csproj|c:\\users\\nickt\\source\\repos\\nicknamee\\oosdd_leer_misschien_typen\\typotrainer\\typotrainer\\services\\accessibilitysettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer\\Typotrainer.csproj|solutionrelative:typotrainer\\services\\accessibilitysettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer\\Typotrainer.csproj|c:\\users\\nickt\\source\\repos\\nicknamee\\oosdd_leer_misschien_typen\\typotrainer\\typotrainer\\views\\pageinstellingen.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer\\Typotrainer.csproj|solutionrelative:typotrainer\\views\\pageinstellingen.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer\\Typotrainer.csproj|c:\\users\\nickt\\source\\repos\\nicknamee\\oosdd_leer_misschien_typen\\typotrainer\\typotrainer\\views\\pageinstellingen.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer\\Typotrainer.csproj|solutionrelative:typotrainer\\views\\pageinstellingen.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\9.0.308\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.EolTargetFrameworks.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer\\Typotrainer.csproj|c:\\users\\nickt\\source\\repos\\nicknamee\\oosdd_leer_misschien_typen\\typotrainer\\typotrainer\\views\\pageoefening.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer\\Typotrainer.csproj|solutionrelative:typotrainer\\views\\pageoefening.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer\\Typotrainer.csproj|c:\\users\\nickt\\source\\repos\\nicknamee\\oosdd_leer_misschien_typen\\typotrainer\\typotrainer\\typotrainer.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{D586FF1A-62DA-7454-554F-93F07E7C27A3}|Typotrainer\\Typotrainer.csproj|solutionrelative:typotrainer\\typotrainer.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\9.0.308\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.EolTargetFrameworks.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\10.0.100\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.EolTargetFrameworks.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
@@ -61,71 +45,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PageOefening.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\nickt\\source\\repos\\Nicknamee\\OOSDD_Leer_misschien_typen\\Typotrainer\\Typotrainer\\Views\\PageOefening.xaml.cs",
-              "RelativeDocumentMoniker": "Typotrainer\\Views\\PageOefening.xaml.cs",
-              "ToolTip": "C:\\Users\\nickt\\source\\repos\\Nicknamee\\OOSDD_Leer_misschien_typen\\Typotrainer\\Typotrainer\\Views\\PageOefening.xaml.cs",
-              "RelativeToolTip": "Typotrainer\\Views\\PageOefening.xaml.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAA0wBEAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-15T19:43:11.064Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AccessibilitySettings.cs",
-              "DocumentMoniker": "C:\\Users\\nickt\\source\\repos\\Nicknamee\\OOSDD_Leer_misschien_typen\\Typotrainer\\Typotrainer\\Services\\AccessibilitySettings.cs",
-              "RelativeDocumentMoniker": "Typotrainer\\Services\\AccessibilitySettings.cs",
-              "ToolTip": "C:\\Users\\nickt\\source\\repos\\Nicknamee\\OOSDD_Leer_misschien_typen\\Typotrainer\\Typotrainer\\Services\\AccessibilitySettings.cs",
-              "RelativeToolTip": "Typotrainer\\Services\\AccessibilitySettings.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwC0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-15T19:43:03.297Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PageInstellingen.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\nickt\\source\\repos\\Nicknamee\\OOSDD_Leer_misschien_typen\\Typotrainer\\Typotrainer\\Views\\PageInstellingen.xaml.cs",
-              "RelativeDocumentMoniker": "Typotrainer\\Views\\PageInstellingen.xaml.cs",
-              "ToolTip": "C:\\Users\\nickt\\source\\repos\\Nicknamee\\OOSDD_Leer_misschien_typen\\Typotrainer\\Typotrainer\\Views\\PageInstellingen.xaml.cs",
-              "RelativeToolTip": "Typotrainer\\Views\\PageInstellingen.xaml.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAUwAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-15T19:42:45.723Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PageOefening.xaml",
-              "DocumentMoniker": "C:\\Users\\nickt\\source\\repos\\Nicknamee\\OOSDD_Leer_misschien_typen\\Typotrainer\\Typotrainer\\Views\\PageOefening.xaml",
-              "RelativeDocumentMoniker": "Typotrainer\\Views\\PageOefening.xaml",
-              "ToolTip": "C:\\Users\\nickt\\source\\repos\\Nicknamee\\OOSDD_Leer_misschien_typen\\Typotrainer\\Typotrainer\\Views\\PageOefening.xaml",
-              "RelativeToolTip": "Typotrainer\\Views\\PageOefening.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-12-15T19:34:40.204Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "PageInstellingen.xaml",
               "DocumentMoniker": "C:\\Users\\nickt\\source\\repos\\Nicknamee\\OOSDD_Leer_misschien_typen\\Typotrainer\\Typotrainer\\Views\\PageInstellingen.xaml",
               "RelativeDocumentMoniker": "Typotrainer\\Views\\PageInstellingen.xaml",
-              "ToolTip": "C:\\Users\\nickt\\source\\repos\\Nicknamee\\OOSDD_Leer_misschien_typen\\Typotrainer\\Typotrainer\\Views\\PageInstellingen.xaml",
-              "RelativeToolTip": "Typotrainer\\Views\\PageInstellingen.xaml",
-              "ViewState": "AgIAABAAAAAAAAAAAAAIwDcAAAAOAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\nickt\\source\\repos\\Nicknamee\\OOSDD_Leer_misschien_typen\\Typotrainer\\Typotrainer\\Views\\PageInstellingen.xaml*",
+              "RelativeToolTip": "Typotrainer\\Views\\PageInstellingen.xaml*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-12-12T12:27:46.428Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "Typotrainer.csproj",
               "DocumentMoniker": "C:\\Users\\nickt\\source\\repos\\Nicknamee\\OOSDD_Leer_misschien_typen\\Typotrainer\\Typotrainer\\Typotrainer.csproj",
               "RelativeDocumentMoniker": "Typotrainer\\Typotrainer.csproj",
@@ -133,24 +65,24 @@
               "RelativeToolTip": "Typotrainer\\Typotrainer.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-12-03T13:38:14.817Z"
+              "WhenOpened": "2025-12-03T13:38:14.817Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "Microsoft.NET.EolTargetFrameworks.targets",
               "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\9.0.308\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.EolTargetFrameworks.targets",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\Program Files\\dotnet\\sdk\\9.0.308\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.EolTargetFrameworks.targets",
               "ToolTip": "C:\\Program Files\\dotnet\\sdk\\9.0.308\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.EolTargetFrameworks.targets",
               "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\Program Files\\dotnet\\sdk\\9.0.308\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.EolTargetFrameworks.targets",
-              "ViewState": "AgIAABYAAAAAAAAAAAAwwCUAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAABYAAAAAAAAAAAAwwBoAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2025-12-03T13:38:06.726Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-03T13:38:06.726Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
               "Title": "MainApplication.cs",
               "DocumentMoniker": "C:\\Users\\nickt\\source\\repos\\Nicknamee\\OOSDD_Leer_misschien_typen\\Typotrainer\\Typotrainer\\Platforms\\Android\\MainApplication.cs",
               "RelativeDocumentMoniker": "Typotrainer\\Platforms\\Android\\MainApplication.cs",
@@ -162,7 +94,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "Microsoft.NET.EolTargetFrameworks.targets",
               "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\10.0.100\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.EolTargetFrameworks.targets",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\Program Files\\dotnet\\sdk\\10.0.100\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.EolTargetFrameworks.targets",
@@ -173,7 +105,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 5,
               "Title": "MainActivity.cs",
               "DocumentMoniker": "C:\\Users\\nickt\\source\\repos\\Nicknamee\\OOSDD_Leer_misschien_typen\\Typotrainer\\Typotrainer\\Platforms\\Android\\MainActivity.cs",
               "RelativeDocumentMoniker": "Typotrainer\\Platforms\\Android\\MainActivity.cs",
