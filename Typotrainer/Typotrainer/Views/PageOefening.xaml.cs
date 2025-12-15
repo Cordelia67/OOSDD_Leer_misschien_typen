@@ -45,6 +45,7 @@ public partial class PageOefening : ContentView
         _timer.Interval = TimeSpan.FromMilliseconds(100);
         _timer.Tick += Timer_Tick;
     }
+
     private void InputEditor_TextChanged(object sender, TextChangedEventArgs e)
     {
         // If exercise hasn't started or is paused, do nothing
@@ -83,10 +84,27 @@ public partial class PageOefening : ContentView
             }
         }
 
-        // Controleer op ongeldige symbolen
+        // Controleer op ongeldige symbolen en control characters
         if (typed.Length > previousTextLength && typed.Length > 0)
         {
             char nieuwKarakter = typed[typed.Length - 1];
+
+            // Check voor control characters (zoals CTRL combinaties)
+            if (char.IsControl(nieuwKarakter) && nieuwKarakter != '\n' && nieuwKarakter != '\r')
+            {
+                // Blokkeer control character en tel als fout
+                string oudeText = e.OldTextValue ?? "";
+                InputEditor.TextChanged -= InputEditor_TextChanged;
+                InputEditor.Text = oudeText;
+                InputEditor.TextChanged += InputEditor_TextChanged;
+
+                // Tel dit als een fout
+                AantalFouten++;
+
+                previousTextLength = oudeText.Length;
+                UpdateStats();
+                return;
+            }
 
             // Toegestane symbolen: letters, cijfers, spaties, en ? . ! , '
             bool isGeldig = char.IsLetterOrDigit(nieuwKarakter) ||
@@ -99,12 +117,17 @@ public partial class PageOefening : ContentView
 
             if (!isGeldig)
             {
-                // Blokkeer het ongeldige karakter - herstel naar vorige tekst
+                // Blokkeer het ongeldige karakter - herstel naar vorige tekst en tel als fout
                 string oudeText = e.OldTextValue ?? "";
                 InputEditor.TextChanged -= InputEditor_TextChanged;
                 InputEditor.Text = oudeText;
                 InputEditor.TextChanged += InputEditor_TextChanged;
+
+                // Tel dit als een fout
+                AantalFouten++;
+
                 previousTextLength = oudeText.Length;
+                UpdateStats();
                 return;
             }
         }
@@ -140,8 +163,8 @@ public partial class PageOefening : ContentView
         // Update statistieken
         UpdateStats();
 
-        // Check of zin voltooid is
-        if (typed.Length == correctZin.Length)
+        // Check of zin voltooid is (ongeacht of alles correct is)
+        if (typed.Length >= correctZin.Length)
         {
             Debug.WriteLine($"Oefening voltooid! Aantal fouten: {AantalFouten}");
 
@@ -263,6 +286,7 @@ public partial class PageOefening : ContentView
         _timer.Stop();
 
         InputEditor.IsEnabled = false;
+
         // Bereken uiteindelijke statistieken
         double elapsedMinutes = _stopwatch.Elapsed.TotalMinutes;
         double words = totalCharactersTyped / 5.0;
@@ -270,6 +294,11 @@ public partial class PageOefening : ContentView
         double accuracy = totalCharactersTyped > 0
             ? ((totalCharactersTyped - AantalFouten) / (double)totalCharactersTyped) * 100
             : 100;
+
+        // Zorg ervoor dat accuracy nooit negatief is
+        if (accuracy < 0)
+            accuracy = 0;
+
         // Sla statistieken op
         var result = new ExerciseSessionResult
         {
@@ -279,6 +308,7 @@ public partial class PageOefening : ContentView
             TotalTime = _stopwatch.Elapsed,
             Mistakes = AantalFouten
         };
+
         // Sla het resultaat op
         await _statsStorageService.SaveAsync(result);
 
@@ -291,7 +321,6 @@ public partial class PageOefening : ContentView
 
         UpdateStats();
     }
-
 
     private void Timer_Tick(object sender, EventArgs e)
     {
@@ -314,6 +343,10 @@ public partial class PageOefening : ContentView
         double accuracy = totalCharsAttempted > 0
             ? ((totalCharsAttempted - AantalFouten) / (double)totalCharsAttempted) * 100
             : 100;
+
+        // Zorg ervoor dat accuracy nooit negatief is
+        if (accuracy < 0)
+            accuracy = 0;
 
         // Update waardes
         SnelheidLabel.Text = $"Snelheid:\n{wpm:0} WPM";
