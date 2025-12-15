@@ -75,3 +75,36 @@ FileContentIndex/
 /.vs/OOSDD_Leer_misschien_typen/CopilotIndices/17.14.1518.61961/SemanticSymbols.db
 /Typotrainer/.vs/Typotrainer/CopilotIndices/17.14.1231.31060/CodeChunks.db
 /Typotrainer/.vs/Typotrainer/CopilotIndices/17.14.1231.31060/SemanticSymbols.db
+
+# Ignore Visual Studio local state and caches
+.vs/
+**/.vs/
+*.suo
+*.user
+*.userosscache
+*.db
+*.db-shm
+*.db-wal
+.DS_Store
+.idea/modules
+.vscode/extensions
+.vscode/settings.json
+*.orig
+*.pyc
+__pycache__/
+
+# mypy
+.mypy_cache/
+
+# pyright
+.pyright_base/
+
+# vscode
+.history/
+.vscode/
+.vscode-test/
+.vscode-oss/
+
+# git
+.sass-cache
+/.sass-cache
