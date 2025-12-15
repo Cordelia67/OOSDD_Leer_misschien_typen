@@ -25,8 +25,10 @@ public partial class PageOefening : ContentView
         FoutenCount.Text = $"Fouten: {AantalFouten}";
 
         _timer = Dispatcher.CreateTimer();
-        _timer.Interval = TimeSpan.FromMilliseconds(50); // 50ms in plaats van 1 om stabiliteit te verbeteren
+        _timer.Interval = TimeSpan.FromMilliseconds(50);
         _timer.Tick += Timer_Tick;
+
+        AccessibilitySettings.ColorBlindModeChanged += OnColorBlindModeChanged;
     }
 
     private void InputEditor_TextChanged(object sender, TextChangedEventArgs e)
@@ -36,31 +38,21 @@ public partial class PageOefening : ContentView
             return;
 
         string typed = InputEditor.Text ?? "";
-        var formatted = new FormattedString();
 
         for (int i = 0; i < typed.Length; i++)
         {
             char typedChar = typed[i];
             bool correct = _typingService.IsCorrectLetter(correctZin, i, typedChar);
 
-            if (!correct && i < correctZin.Length)
+            if (!correct && i < correctZin.Length && !foutPosities.Contains(i))
             {
-                if (!foutPosities.Contains(i))
-                {
-                    AantalFouten++;
-                    foutPosities.Add(i);
-                    FoutenCount.Text = $"Fouten: {AantalFouten}";
-                }
+                AantalFouten++;
+                foutPosities.Add(i);
+                FoutenCount.Text = $"Fouten: {AantalFouten}";
             }
-
-            formatted.Spans.Add(new Span
-            {
-                Text = typedChar.ToString(),
-                TextColor = correct ? Colors.Green : Colors.Red
-            });
         }
 
-        ColoredOutput.FormattedText = formatted;
+        RenderColoredOutput(typed);
 
         if (typed.Length == correctZin.Length)
         {
@@ -75,6 +67,44 @@ public partial class PageOefening : ContentView
             ColoredOutput.FormattedText = new FormattedString();
             InputEditor.Focus();
         }
+    }
+
+    private void RenderColoredOutput(string typed)
+    {
+        if (string.IsNullOrEmpty(typed) || string.IsNullOrEmpty(correctZin))
+        {
+            ColoredOutput.FormattedText = new FormattedString();
+            return;
+        }
+
+        var formatted = new FormattedString();
+
+        for (int i = 0; i < typed.Length; i++)
+        {
+            char typedChar = typed[i];
+            bool correct = _typingService.IsCorrectLetter(correctZin, i, typedChar);
+
+            formatted.Spans.Add(new Span
+            {
+                Text = typedChar.ToString(),
+                TextColor = correct
+                    ? AccessibilitySettings.GetCorrectFeedbackColor()
+                    : AccessibilitySettings.GetIncorrectFeedbackColor(),
+                TextDecorations = correct
+                    ? TextDecorations.None
+                    : AccessibilitySettings.GetIncorrectTextDecoration(),
+                FontAttributes = correct
+                    ? FontAttributes.None
+                    : AccessibilitySettings.GetIncorrectFontAttributes()
+            });
+        }
+
+        ColoredOutput.FormattedText = formatted;
+    }
+
+    private void OnColorBlindModeChanged(object? sender, bool isEnabled)
+    {
+        RenderColoredOutput(InputEditor.Text ?? string.Empty);
     }
 
     private async void Startknop_Clicked(object sender, EventArgs e)
@@ -139,5 +169,15 @@ public partial class PageOefening : ContentView
             _timer = null;
         }
         _stopwatch.Stop();
+    }
+
+    protected override void OnHandlerChanging(HandlerChangingEventArgs args)
+    {
+        if (args.NewHandler is null)
+        {
+            AccessibilitySettings.ColorBlindModeChanged -= OnColorBlindModeChanged;
+        }
+
+        base.OnHandlerChanging(args);
     }
 }
