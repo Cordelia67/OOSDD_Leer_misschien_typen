@@ -7,9 +7,9 @@ public partial class PageInstellingen : ContentView
 {
     public PageInstellingen()
     {
-        InitializeComponent();
+        InitializeComponent(); //laadt de ui//
 
-        ColorBlindSwitch.IsToggled = AccessibilitySettings.IsColorBlindModeEnabled;
+        ColorBlindSwitch.IsToggled = AccessibilitySettings.IsColorBlindModeEnabled; //als de toggle knop wordt gedrukt//
         AccessibilitySettings.ColorBlindModeChanged += OnColorBlindModeChanged;
 
         UpdatePreview();
@@ -35,7 +35,7 @@ public partial class PageInstellingen : ContentView
         });
     }
 
-    private void UpdatePreview()
+    private void UpdatePreview() //refreshed de kleuren //
     {
         PreviewCorrectLabel.TextColor = AccessibilitySettings.GetCorrectFeedbackColor();
         PreviewIncorrectLabel.TextColor = AccessibilitySettings.GetIncorrectFeedbackColor();

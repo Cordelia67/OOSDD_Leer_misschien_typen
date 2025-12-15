@@ -32,15 +32,15 @@ public static class AccessibilitySettings
         }
     }
 
-    public static Color GetCorrectFeedbackColor() =>
+    public static Color GetCorrectFeedbackColor() => //Kleur als het goed is//
         _isColorBlindModeEnabled ? Color.FromArgb("#0D7C66") : Colors.Green;
 
-    public static Color GetIncorrectFeedbackColor() =>
+    public static Color GetIncorrectFeedbackColor() => //Kleur als het woord slecht is//
         _isColorBlindModeEnabled ? Color.FromArgb("#D84727") : Colors.Red;
 
-    public static TextDecorations GetIncorrectTextDecoration() =>
+    public static TextDecorations GetIncorrectTextDecoration() => //Onderlijn van het woord//
         _isColorBlindModeEnabled ? TextDecorations.Underline : TextDecorations.None;
 
-    public static FontAttributes GetIncorrectFontAttributes() =>
+    public static FontAttributes GetIncorrectFontAttributes() => //Dikt gedrukt//
         _isColorBlindModeEnabled ? FontAttributes.Bold : FontAttributes.None;
 }

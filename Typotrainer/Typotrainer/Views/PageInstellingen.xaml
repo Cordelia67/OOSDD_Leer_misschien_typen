@@ -15,7 +15,7 @@
                         </Grid.ColumnDefinitions>
                         <VerticalStackLayout Spacing="4">
                             <Label Text="Kleurenblind modus" Style="{StaticResource Text16}" HorizontalOptions="Start" />
-                            <Label Text="Vervangt rood/groen feedback door hoge-contrast kleuren en extra accentuering."
+                            <Label Text="Vervangt rood/groen voor een onderlijn en iets meer contrast "
                                    Style="{StaticResource Text12}"
                                    TextColor="{StaticResource Gray600}"
                                    HorizontalOptions="Start" />
@@ -24,7 +24,7 @@
                                 Grid.Column="1"
                                 HorizontalOptions="End"
                                 VerticalOptions="Center"
-                                SemanticProperties.Description="Schakel hoge-contrast feedback voor oefeningen in of uit."
+                                SemanticProperties.Description="Schakel kleurenblind-modus aan"
                                 Toggled="OnColorBlindSwitchToggled" />
                     </Grid>
 
@@ -39,11 +39,11 @@
                                HorizontalOptions="Fill">
                             <VerticalStackLayout Spacing="6">
                                 <Label x:Name="PreviewCorrectLabel"
-                                       Text="✓ Correcte letter"
+                                       Text="✓ Correcte woord"
                                        Style="{StaticResource Text16}"
                                        HorizontalOptions="Start" />
                                 <Label x:Name="PreviewIncorrectLabel"
-                                       Text="✕ Foute letter"
+                                       Text="✕ Foute woord"
                                        Style="{StaticResource Text16}"
                                        HorizontalOptions="Start" />
                             </VerticalStackLayout>

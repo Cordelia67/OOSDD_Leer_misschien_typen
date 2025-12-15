@@ -28,6 +28,7 @@ public partial class PageOefening : ContentView
         _timer.Interval = TimeSpan.FromMilliseconds(50);
         _timer.Tick += Timer_Tick;
 
+        //setting als colorblindmode aangaat//
         AccessibilitySettings.ColorBlindModeChanged += OnColorBlindModeChanged;
     }
 
@@ -171,7 +172,7 @@ public partial class PageOefening : ContentView
         _stopwatch.Stop();
     }
 
-    protected override void OnHandlerChanging(HandlerChangingEventArgs args)
+    protected override void OnHandlerChanging(HandlerChangingEventArgs args) //als view wordt aangepast//
     {
         if (args.NewHandler is null)
         {
