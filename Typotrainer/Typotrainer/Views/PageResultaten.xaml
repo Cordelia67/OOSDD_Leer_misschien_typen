@@ -4,14 +4,24 @@
     x:Class="Typotrainer.Views.PageResultaten">
 
     <VerticalStackLayout Padding="20" Spacing="20">
+
         <Label Text="Voortgang per sessie"
                FontSize="22"
                HorizontalOptions="Center"/>
 
+        <!-- beste wpm -->
+        <Label x:Name="BestWpmLabel"
+               Text="Beste WPM ooit: --"
+               FontSize="16"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"/>
+        <!-- grafiek -->
         <GraphicsView x:Name="StatsGraph"
                       HeightRequest="250"/>
 
         <Label x:Name="SummaryLabel"
                FontSize="14"/>
+
     </VerticalStackLayout>
 </ContentView>
+
