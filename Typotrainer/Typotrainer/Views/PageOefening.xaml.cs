@@ -8,10 +8,12 @@ namespace Typotrainer.Views;
 
 public partial class PageOefening : ContentView
 {
+    private bool _difficultyChosen = false;
     private readonly TypingService _typingService;
     private readonly SentenceService _sentenceService;
     private readonly StatsStorageService _statsStorageService;
     private string correctZin;
+    private Difficulty _selectedDifficulty = Difficulty.Easy;
     private int AantalFouten = 0;
     private HashSet<int> foutPosities = new();
     private int totalCharactersTyped = 0;
@@ -235,6 +237,16 @@ public partial class PageOefening : ContentView
 
 	private async void Startknop_Clicked(object sender, EventArgs e)
     {
+        // Check of een moeilijkheidsgraad gekozen is
+        if (!_difficultyChosen)
+        {
+            await Application.Current.MainPage.DisplayAlert(
+                "Moeilijkheid niet gekozen",
+                "Kies eerst een moeilijkheidsgraad.",
+                "OK");
+            return;
+        }
+
         // Check of we hervatten na pauze
         if (isPaused)
         {
@@ -254,7 +266,7 @@ public partial class PageOefening : ContentView
         ColoredOutput.FormattedText = new FormattedString();
 
         // Pak eerste zin
-        correctZin = _sentenceService.GetRandomSentence(Difficulty.Easy);
+        correctZin = _sentenceService.GetRandomSentence(_selectedDifficulty);
         CorrectText.Text = correctZin;
 
         InputEditor.IsVisible = true;
@@ -324,6 +336,11 @@ public partial class PageOefening : ContentView
         _timer.Stop();
 
         InputEditor.IsEnabled = false;
+
+        // Ontgrendel moeilijkheid na oefening
+        EasyButton.IsEnabled = true;
+        MediumButton.IsEnabled = true;
+        HardButton.IsEnabled = true;
 
         // Bereken uiteindelijke statistieken
         double elapsedMinutes = _stopwatch.Elapsed.TotalMinutes;
@@ -402,4 +419,31 @@ public partial class PageOefening : ContentView
 
 		base.OnHandlerChanging(args);
 	}
+    // Moeilijkheids-knoppen
+
+    private void Easy_Clicked(object sender, EventArgs e)
+    {
+        SelectDifficulty(Difficulty.Easy);
+    }
+
+    private void Medium_Clicked(object sender, EventArgs e)
+    {
+        SelectDifficulty(Difficulty.Medium);
+    }
+
+    private void Hard_Clicked(object sender, EventArgs e)
+    {
+        SelectDifficulty(Difficulty.Hard);
+    }
+
+    private void SelectDifficulty(Difficulty difficulty)
+    {
+        _selectedDifficulty = difficulty;
+        _difficultyChosen = true;
+
+        // Visuele selectie
+        EasyButton.Opacity = difficulty == Difficulty.Easy ? 1 : 0.5;
+        MediumButton.Opacity = difficulty == Difficulty.Medium ? 1 : 0.5;
+        HardButton.Opacity = difficulty == Difficulty.Hard ? 1 : 0.5;
+    }
 }
