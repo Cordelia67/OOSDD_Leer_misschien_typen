@@ -1,6 +1,8 @@
 using Typotrainer.Core.Services;
 using Typotrainer.Core.Models;
 using System.Diagnostics;
+using Typotrainer.Core;
+using Typotrainer.Services; 
 
 namespace Typotrainer.Views;
 
@@ -44,7 +46,9 @@ public partial class PageOefening : ContentView
         _timer = Dispatcher.CreateTimer();
         _timer.Interval = TimeSpan.FromMilliseconds(100);
         _timer.Tick += Timer_Tick;
-    }
+
+		AccessibilitySettings.ColorBlindModeChanged += OnColorBlindModeChanged;
+	}
 
     private void InputEditor_TextChanged(object sender, TextChangedEventArgs e)
     {
@@ -135,33 +139,28 @@ public partial class PageOefening : ContentView
         // Update de vorige tekstlengte
         previousTextLength = typed.Length;
 
-        var formatted = new FormattedString();
 
         for (int i = 0; i < typed.Length; i++)
         {
             char typedChar = typed[i];
             bool correct = _typingService.IsCorrectLetter(correctZin, i, typedChar);
 
-            if (!correct && i < correctZin.Length)
-            {
-                if (!foutPosities.Contains(i))
-                {
-                    AantalFouten++;
-                    foutPosities.Add(i);
-                }
-            }
+			if (!correct && i < correctZin.Length && !foutPosities.Contains(i))
+			{
+				AantalFouten++;
+				foutPosities.Add(i);
+				FoutenCount.Text = $"Fouten: {AantalFouten}";
+			}
 
-            formatted.Spans.Add(new Span
-            {
-                Text = typedChar.ToString(),
-                TextColor = correct ? Colors.Green : Colors.Red
-            });
+            
         }
 
-        ColoredOutput.FormattedText = formatted;
+		RenderColoredOutput(typed);
 
-        // Update statistieken
-        UpdateStats();
+
+
+		// Update statistieken
+		UpdateStats();
 
         // Check of zin voltooid is (ongeacht of alles correct is)
         if (typed.Length >= correctZin.Length)
@@ -179,6 +178,8 @@ public partial class PageOefening : ContentView
                 return;
             }
 
+
+
             // Pak nieuwe zin
             correctZin = _sentenceService.GetRandomSentence(Difficulty.Easy);
             CorrectText.Text = correctZin;
@@ -194,8 +195,45 @@ public partial class PageOefening : ContentView
             UpdateStats();
         }
     }
+	private void RenderColoredOutput(string typed)
+	{
+		if (string.IsNullOrEmpty(typed) || string.IsNullOrEmpty(correctZin))
+		{
+			ColoredOutput.FormattedText = new FormattedString();
+			return;
+		}
 
-    private async void Startknop_Clicked(object sender, EventArgs e)
+		var formatted = new FormattedString();
+
+		for (int i = 0; i < typed.Length; i++)
+		{
+			char typedChar = typed[i];
+			bool correct = _typingService.IsCorrectLetter(correctZin, i, typedChar);
+
+			formatted.Spans.Add(new Span
+			{
+				Text = typedChar.ToString(),
+				TextColor = correct
+					? AccessibilitySettings.GetCorrectFeedbackColor()
+					: AccessibilitySettings.GetIncorrectFeedbackColor(),
+				TextDecorations = correct
+					? TextDecorations.None
+					: AccessibilitySettings.GetIncorrectTextDecoration(),
+				FontAttributes = correct
+					? FontAttributes.None
+					: AccessibilitySettings.GetIncorrectFontAttributes()
+			});
+		}
+
+		ColoredOutput.FormattedText = formatted;
+	}
+
+	private void OnColorBlindModeChanged(object? sender, bool isEnabled)
+	{
+		RenderColoredOutput(InputEditor.Text ?? string.Empty);
+	}
+
+	private async void Startknop_Clicked(object sender, EventArgs e)
     {
         // Check of we hervatten na pauze
         if (isPaused)
@@ -355,4 +393,13 @@ public partial class PageOefening : ContentView
         FoutenCount.Text = $"Fouten: {AantalFouten}";
         OefeningenCount.Text = $"Oefeningen: {voltooideOefeningen}/{maxOefeningen}";
     }
+	protected override void OnHandlerChanging(HandlerChangingEventArgs args)
+	{
+		if (args.NewHandler is null)
+		{
+			AccessibilitySettings.ColorBlindModeChanged -= OnColorBlindModeChanged;
+		}
+
+		base.OnHandlerChanging(args);
+	}
 }
