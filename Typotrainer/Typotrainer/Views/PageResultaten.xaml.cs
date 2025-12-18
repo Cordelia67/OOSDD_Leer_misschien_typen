@@ -20,16 +20,22 @@ public partial class PageResultaten : ContentView
 
         StatsGraph.Drawable = new StatsGraphDrawable(stats);
 
-
-        if (stats.Any())
+        if (!stats.Any())
         {
-            var last = stats.Last();
-            SummaryLabel.Text =
-                $"Laatste sessie:\n" +
-                $"WPM: {last.Wpm:0}\n" +
-                $"Nauwkeurigheid: {last.Accuracy:0.0}%\n" +
-                $"Tijd: {last.TotalTime:mm\\:ss}\n" +
-                $"Fouten: {last.Mistakes}";
+            BestWpmLabel.Text = "Beste WPM ooit: --";
+            SummaryLabel.Text = "Nog geen resultaten beschikbaar.";
+            return;
         }
+
+        double bestWpm = stats.Max(s => s.Wpm);
+        BestWpmLabel.Text = $"Beste WPM ooit: {bestWpm:0}";
+
+        var last = stats.Last();
+        SummaryLabel.Text =
+            $"Laatste sessie:\n" +
+            $"WPM: {last.Wpm:0}\n" +
+            $"Nauwkeurigheid: {last.Accuracy:0.0}%\n" +
+            $"Tijd: {last.TotalTime:mm\\:ss}\n" +
+            $"Fouten: {last.Mistakes}";
     }
 }
