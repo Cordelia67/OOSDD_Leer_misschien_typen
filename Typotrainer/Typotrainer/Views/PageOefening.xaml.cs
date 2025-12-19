@@ -22,6 +22,10 @@ public partial class PageOefening : ContentView
     private bool isPaused = false;
     private int previousTextLength = 0; // Bewaar de vorige tekstlengte
 
+    // Font size settings for accessibility
+    private const double DefaultSentenceFontSize = 18.0;
+    private const double ColorBlindSentenceFontSize = 26.0;
+
     // Timer velden
     private Stopwatch _stopwatch = new Stopwatch();
     private bool _timerRunning = false;
@@ -49,7 +53,9 @@ public partial class PageOefening : ContentView
         _timer.Interval = TimeSpan.FromMilliseconds(100);
         _timer.Tick += Timer_Tick;
 
+		// Subscribe to accessibility changes and apply initial sizes
 		AccessibilitySettings.ColorBlindModeChanged += OnColorBlindModeChanged;
+        ApplyAccessibilitySettings(AccessibilitySettings.IsColorBlindModeEnabled);
 	}
 
     private void InputEditor_TextChanged(object sender, TextChangedEventArgs e)
@@ -232,8 +238,26 @@ public partial class PageOefening : ContentView
 
 	private void OnColorBlindModeChanged(object? sender, bool isEnabled)
 	{
+        // Pas fontgroottes aan als kleurenblindmodus verandert
+        ApplyAccessibilitySettings(isEnabled);
+
 		RenderColoredOutput(InputEditor.Text ?? string.Empty);
 	}
+
+    private void ApplyAccessibilitySettings(bool colorBlindEnabled)
+    {
+        double size = colorBlindEnabled ? ColorBlindSentenceFontSize : DefaultSentenceFontSize;
+
+        // Pas de fontgrootte van de hoofdzinnen en de gekleurde output aan
+        if (CorrectText is not null)
+            CorrectText.FontSize = size;
+
+        if (ColoredOutput is not null)
+            ColoredOutput.FontSize = size;
+
+        // Indien nodig: her-render de gekleurde output zodat spans dezelfde grootte gebruiken
+        RenderColoredOutput(InputEditor.Text ?? string.Empty);
+    }
 
 	private async void Startknop_Clicked(object sender, EventArgs e)
     {
