@@ -236,13 +236,17 @@ public partial class PageOefening : ContentView
 		ColoredOutput.FormattedText = formatted;
 	}
 
-	private void OnColorBlindModeChanged(object? sender, bool isEnabled)
-	{
-        // Pas fontgroottes aan als kleurenblindmodus verandert
-        ApplyAccessibilitySettings(isEnabled);
+    private void OnColorBlindModeChanged(object? sender, bool isEnabled)
+    {
+        // Gebruik MainThread om te voorkomen dat de UI wordt geblokkeerd
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            // Pas fontgroottes aan als kleurenblindmodus verandert
+            ApplyAccessibilitySettings(isEnabled);
 
-		RenderColoredOutput(InputEditor.Text ?? string.Empty);
-	}
+            RenderColoredOutput(InputEditor.Text ?? string.Empty);
+        });
+    }
 
     private void ApplyAccessibilitySettings(bool colorBlindEnabled)
     {
