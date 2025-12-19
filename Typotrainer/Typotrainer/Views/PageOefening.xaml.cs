@@ -307,6 +307,10 @@ public partial class PageOefening : ContentView
         PauseButton.IsVisible = true;
         PauseButton.Text = "Pauzeer";
 
+        EasyButton.IsEnabled = false;
+        MediumButton.IsEnabled = false;
+        HardButton.IsEnabled = false;
+
         UpdateStats();
     }
 
