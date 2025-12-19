@@ -8,35 +8,60 @@
             <Frame>
                 <HorizontalStackLayout>
                     <Image Source="zap.png" Style="{StaticResource Icon}" />
-                    <Label Text="Snelheid: &#10;N/A"/> <!-- &#10; is een line break -->
+                    <Label x:Name="SnelheidLabel" Text="Snelheid:&#10;0 WPM"/>
+                    <!-- &#10; is een line break -->
                 </HorizontalStackLayout>
             </Frame>
             <Frame>
                 <HorizontalStackLayout>
                     <Image Source="target.png" Style="{StaticResource Icon}" />
-                    <Label Text="Nauwkeurigheid: &#10;N/A"/>
+                    <Label x:Name="NauwkeurigheidLabel" Text="Nauwkeurigheid:&#10;100.0%"/>
                 </HorizontalStackLayout>
             </Frame>
             <Frame>
                 <HorizontalStackLayout>
                     <Image Source="clock.png" Style="{StaticResource Icon}" />
-                    <Label x:Name="TimerLabel" Text="Tijd: N/A"/>
+                    <Label x:Name="TimerLabel" Text="Tijd:&#10;00:00"/>
                 </HorizontalStackLayout>
             </Frame>
         </HorizontalStackLayout>
         <Frame WidthRequest="500">
             <VerticalStackLayout Style="{StaticResource Oefening}">
-            <!-- De zin die getypt moet worden -->
-            <Label x:Name="CorrectText" Style="{StaticResource Text18}" />
+                <!-- De zin die getypt moet worden -->
+                <Label x:Name="CorrectText" Style="{StaticResource Text18}" />
 
-            <!-- Gekleurde output -->
-            <Label x:Name="ColoredOutput" Style="{StaticResource Text18}" />
+                <!-- Gekleurde output -->
+                <Label x:Name="ColoredOutput" Style="{StaticResource Text18}" />
 
-            <!-- Foutenteller -->
-            <Label x:Name="FoutenCount" Text="Fouten: 0" Style="{StaticResource Text18}"/>
+                <!-- Foutenteller en voortgang -->
+                <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                    <Label x:Name="FoutenCount" Text="Fouten: 0" Style="{StaticResource Text18}"/>
+                    <Label x:Name="OefeningenCount" Text="Oefeningen: 0/10" Style="{StaticResource Text18}"/>
+                </HorizontalStackLayout>
+                
+                <!-- MOEILIJKHEIDS KNOPPEN -->
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Button x:Name="EasyButton"
+                            Text="Makkelijk"
+                            Clicked="Easy_Clicked"
+                            Style="{StaticResource OefeningStart}" />
 
-            <!-- Start knop -->
-            <Button Text="Start oefening" Clicked="Startknop_Clicked" Style="{StaticResource OefeningStart}"/>
+                    <Button x:Name="MediumButton"
+                            Text="Gemiddeld"
+                            Clicked="Medium_Clicked"
+                            Style="{StaticResource OefeningStart}" />
+
+                    <Button x:Name="HardButton"
+                            Text="Moeilijk"
+                            Clicked="Hard_Clicked"
+                            Style="{StaticResource OefeningStart}" />
+                </HorizontalStackLayout>
+                
+                <!-- Start en Pauze knoppen -->
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Button x:Name="StartButton" Text="Start oefening" Clicked="Startknop_Clicked" Style="{StaticResource OefeningStart}"/>
+                    <Button x:Name="PauseButton" Text="Pauzeer" Clicked="Pauzeknop_Clicked" Style="{StaticResource OefeningStart}" IsVisible="False"/>
+                </HorizontalStackLayout>
             </VerticalStackLayout>
         </Frame>
         <!-- Onzichtbare editor die geen ruimte inneemt -->

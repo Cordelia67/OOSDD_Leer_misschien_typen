@@ -44,7 +44,6 @@ jobs:
       
       - name: Run tests
         run: dotnet test ${{ env.SOLUTION_PATH }} --configuration Release --no-build
-        continue-on-error: true
       
       # Artifacts alleen voor main
       - name: Upload artifacts
