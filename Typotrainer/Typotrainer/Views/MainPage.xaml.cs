@@ -26,12 +26,6 @@ public partial class MainPage : ContentPage
         HeaderTitel.Text = "Oefening";
     }
 
-    public void PageAdaptieveOefeningClicked(object sender, EventArgs e)
-    {
-        SubPage.Content = new PageAdaptieveOefening();
-        HeaderTitel.Text = "Adaptieve oefening";
-    }
-
     public void PageResultatenClicked(object sender, EventArgs e)
     {
         SubPage.Content = _serviceProvider.GetService<PageResultaten>();

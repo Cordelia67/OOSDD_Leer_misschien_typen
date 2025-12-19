@@ -17,11 +17,6 @@ public partial class PageDashboard : ContentView
         GetMainPage()?.PageResultatenClicked(sender, e);
     }
 
-    private void PageAdaptieveOefeningClicked(object sender, EventArgs e)
-    {
-        GetMainPage()?.PageAdaptieveOefeningClicked(sender, e);
-    }
-
     private void PageInstellingenClicked(object sender, EventArgs e)
     {
         GetMainPage()?.PageInstellingenClicked(sender, e);
