@@ -15,12 +15,13 @@
         </Grid.ColumnDefinitions>
 
         <!-- Linksboven: Oefening starten -->
-        <Frame Grid.Row="0" Grid.Column="0" Style="{StaticResource FrameGrid200}">
-            <VerticalStackLayout>
+        <Frame Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource FrameGrid}"
+        VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+            <VerticalStackLayout VerticalOptions="FillAndExpand">
                 <HorizontalStackLayout Style="{StaticResource DashHorizontal}">
                     <Image Source="square_play.png" Style="{StaticResource Icon}" />
                     <Button Text="Oefening starten" Style="{StaticResource DashKnop}"
-                            Clicked="PageOefeningClicked"/>
+                     Clicked="PageOefeningClicked"/>
                 </HorizontalStackLayout>
                 <Label Text="Begin met een standaard typ oefening." Style="{StaticResource DashUitleg}" />
             </VerticalStackLayout>
@@ -43,22 +44,7 @@
                 <TapGestureRecognizer Tapped="PageResultatenClicked"/>
             </Frame.GestureRecognizers>
         </Frame>
-
-        <!-- Linksonder: Adaptieve oefening -->
-        <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource FrameGrid200}">
-            <VerticalStackLayout>
-                <HorizontalStackLayout Style="{StaticResource DashHorizontal}">
-                    <Image Source="sparkles.png" Style="{StaticResource Icon}" />
-                    <Button Text="Adaptieve oefening" Style="{StaticResource DashKnop}"
-                            Clicked="PageAdaptieveOefeningClicked"/>
-                </HorizontalStackLayout>
-                <Label Text="Genereer een oefening op basis van je niveau." Style="{StaticResource DashUitleg}" />
-            </VerticalStackLayout>
-            <Frame.GestureRecognizers>
-                <TapGestureRecognizer Tapped="PageAdaptieveOefeningClicked"/>
-            </Frame.GestureRecognizers>
-        </Frame>
-
+        
         <!-- Rechtsonder: Instellingen -->
         <Frame Grid.Row="1" Grid.Column="1" Style="{StaticResource FrameGrid200}">
             <VerticalStackLayout>
